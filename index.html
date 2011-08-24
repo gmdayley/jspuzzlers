@@ -18,6 +18,7 @@
     <meta charset='utf-8'>
     <link rel="stylesheet" href="puzzlers.css"/>
     <script src='slides.js'></script>
+    <script src='puzzlers.js'></script>
 </head>
 
 <style>
@@ -48,11 +49,8 @@
 
     <article class="puzzle-tiger">
         <h3>Puzzle #1</h3>
-        <section>
-
-            <div>
-
-<pre id="code1">
+        <section id="code1">
+            <pre>
 if("1" == 1) {
     if("" == 0) {
         if("" == "0") { alert("A"); }
@@ -61,28 +59,18 @@ if("1" == 1) {
     else { alert("C"); }
 }
 else { alert("D"); }
-</pre>
+            </pre>
 
-            </div>
-
-            <div>
-                <ul id="code1-poll" class="poll">
-                    <li rel="A">prints "A"</li>
-                    <li rel="B">prints "B"</li>
-                    <li rel="C">throws an exception</li>
-                    <li rel="D">prints "D"</li>
-                </ul>
-                <button id="code1-button">Try It</button>
-            </div>
-
+            <ul class="poll">
+                <li rel="A">prints "A"</li>
+                <li rel="B">prints "B"</li>
+                <li rel="C">throws an exception</li>
+                <li rel="D">prints "D"</li>
+            </ul>
+            <button>Try It</button>
 
             <script>
-                document.getElementById("code1-button")
-                        .addEventListener('click', function() {
-                            var code = document.getElementById("code1").innerText;
-                            eval(code);
-                            document.querySelector("#code1-poll li[rel='B']").setAttribute("class", "correct");
-                        });
+                Puzzlers.bindPollQuestion("code1", "B");
             </script>
         </section>
     </article>
@@ -118,33 +106,24 @@ Number("5") === 5  // true
 
     <article class="puzzle-box">
         <h3>Puzzle #2</h3>
-    <pre id="code2">
+        <section id="code2">
+            <pre>
 var x = parseInt("5");
 var y = parseInt("05");
 var z = parseInt("08");
 
 alert((x + y) * z);
-    </pre>
-
-        <div>
-            <ul id="code2-poll" class="poll">
+            </pre>
+            <ul class="poll">
                 <li rel="A">prints 80</li>
                 <li rel="B">prints 18</li>
                 <li rel="C">prints 0</li>
                 <li rel="D">prints NaN</li>
             </ul>
-            <button id="code2-button">Try It</button>
-        </div>
+            <button>Try It</button>
 
-
-        <script>
-            document.getElementById("code2-button")
-                    .addEventListener('click', function() {
-                        var code = document.getElementById("code2").innerText;
-                        eval(code);
-                        document.querySelector("#code2-poll li[rel='C']").setAttribute("class", "correct");
-                    });
-        </script>
+            <script>Puzzlers.bindPollQuestion("code2", "C")</script>
+        </section>
     </article>
 
 
@@ -152,12 +131,12 @@ alert((x + y) * z);
         <h3>Lessons learned, Puzzle #2</h3>
 
         <ul class="build">
-            <li>parseInt() takes two parameters</li>
+            <li>parseInt() takes two parameters: number, base</li>
             <li>Omitting the second parameter assumes base-10 as the default</li>
-            <li>If the number begins with <strong>0x</strong>, then it assumes rad 16 (hex)</li>
-            <li>If the number begins with <strong>0</strong>, then it assumes rad 8 (oct)</li>
-            <li>There is no 8 (or 9) in octal so parseInt() just returns 0 </li>
-            <li>Specifying the intended base removes the ambiguity</li>
+            <li>Numbers starting with <strong>0x</strong> assumed as radix 16 (hex)</li>
+            <li>Numbers starting with <strong>0</strong>, assumed as radix 8 (oct)</li>
+            <li>There is no 8 (or 9) in octal so parseInt() just returns 0</li>
+            <li>Specifying the intended base as the second parameter removes the ambiguity</li>
             <pre>
 parseInt("08", 10) // 8
             </pre>
