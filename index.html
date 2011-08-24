@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+<head>
+    <title>JavaScript Puzzlers</title>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="puzzlers.css"/>
+    <script src='slides.js'></script>
+</head>
+
+<style>
+        /* Your individual styles here, or just use inline styles if that’s
+     what you want. */
+
+</style>
+
+<body style='display: none'>
+
+<section class='slides layout-regular template-default'>
+
+    <!-- Your slides (<article>s) go here. Delete or comment out the
+  slides below. -->
+
+    <article class="intro">
+        <h1>
+            JavaScript Puzzlers
+        </h1>
+
+        <p>
+            Gabriel Dayley, Tom Valletta & Mike Heath
+            <br>
+            December, 2011
+        </p>
+    </article>
+
+
+    <article class="puzzle-tiger">
+        <h3>Puzzle #1</h3>
+        <section>
+
+            <div>
+
+<pre id="code1">
+if("1" == 1) {
+    if("" == 0) {
+        if("" == "0") { alert("A"); }
+        else { alert("B"); }
+    }
+    else { alert("C"); }
+}
+else { alert("D"); }
+</pre>
+
+            </div>
+
+            <div>
+                <ul id="code1-poll" class="poll">
+                    <li rel="A">prints "A"</li>
+                    <li rel="B">prints "B"</li>
+                    <li rel="C">throws an exception</li>
+                    <li rel="D">prints "D"</li>
+                </ul>
+                <button id="code1-button">Try It</button>
+            </div>
+
+
+            <script>
+                document.getElementById("code1-button")
+                        .addEventListener('click', function() {
+                            var code = document.getElementById("code1").innerText;
+                            eval(code);
+                            document.querySelector("#code1-poll li[rel='B']").setAttribute("class", "correct");
+                        });
+            </script>
+        </section>
+    </article>
+
+    <article class="nobackground">
+        <h3>Lessons learned, Puzzle #1</h3>
+
+        <ul class="build">
+            <li>
+                The double equals (==) performs comparisons after type coercion. With the == operator you can
+                compare
+                objects of
+                different types.
+            </li>
+
+            <li>
+                This is often not what you intended and can lead to undesired results.
+            </li>
+
+            <li>
+                Instead you should make sure that your operands are of the right type before doing comparisons or
+                use the
+                triple
+                equals operator (===) to do the comparisons.
+            </li>
+                    <pre>
+"1" === 1 // false
+Number("5") === 5  // true
+</pre>
+        </ul>
+
+    </article>
+
+    <article class="puzzle-box">
+        <h3>Puzzle #2</h3>
+    <pre id="code2">
+var x = parseInt("5");
+var y = parseInt("05");
+var z = parseInt("08");
+
+alert((x + y) * z);
+    </pre>
+
+        <div>
+            <ul id="code2-poll" class="poll">
+                <li rel="A">prints 80</li>
+                <li rel="B">prints 18</li>
+                <li rel="C">prints 0</li>
+                <li rel="D">prints NaN</li>
+            </ul>
+            <button id="code2-button">Try It</button>
+        </div>
+
+
+        <script>
+            document.getElementById("code2-button")
+                    .addEventListener('click', function() {
+                        var code = document.getElementById("code2").innerText;
+                        eval(code);
+                        document.querySelector("#code2-poll li[rel='C']").setAttribute("class", "correct");
+                    });
+        </script>
+    </article>
+
+
+    <article class="nobackground">
+        <h3>Lessons learned, Puzzle #2</h3>
+
+        <ul class="build">
+            <li>parseInt() takes two parameters</li>
+            <li>Omitting the second parameter assumes base-10 as the default</li>
+            <li>If the number begins with <strong>0x</strong>, then it assumes rad 16 (hex)</li>
+            <li>If the number begins with <strong>0</strong>, then it assumes rad 8 (oct)</li>
+            <li>There is no 8 (or 9) in octal so parseInt() just returns 0 </li>
+            <li>Specifying the intended base removes the ambiguity</li>
+            <pre>
+parseInt("08", 10) // 8
+            </pre>
+        </ul>
+    </article>
+
+</section>
+
+</body>
+</html>
