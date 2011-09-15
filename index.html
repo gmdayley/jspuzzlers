@@ -10,6 +10,10 @@
            Charles Chen (ChromeVox support)
 
   URL: http://code.google.com/p/html5slides/
+
+
+  
+  http://www.codeproject.com/KB/scripting/javascript-gotchas.aspx
 -->
 
 <html>
@@ -139,7 +143,7 @@ alert((x + y) * z);
             <li>Specifying the intended base as the second parameter removes the ambiguity</li>
             <pre>
 parseInt("08", 10) // 8
-            </pre>
+</pre>
         </ul>
     </article>
 
@@ -160,7 +164,7 @@ else{ alert('Well duh, -0 is not the same as 0'); }
                 <li rel="A">prints "Of course! You can't defy the laws of mathematics"</li>
                 <li rel="B">prints "Well duh, -0 is not the same as 0"</li>
                 <li rel="C">throws an exception because -0 is NaN </li>
-                <li rel="D">prints "Einsten can't even explain this"</li>
+                <li rel="D">prints "Einstein can't even explain this"</li>
             </ul>
             <button>Try It</button>
 
@@ -177,6 +181,80 @@ else{ alert('Well duh, -0 is not the same as 0'); }
         </ul>
     </article>
 
+    <article>
+        <h3>Puzzle #4</h3>
+        <section id="code4">
+            <pre>
+var k = 0;
+var i, j = 10;
+for(var i=0; i<10; i++) {
+    for(var j=0; j<10; j++) {
+        var k = i * j;
+    }
+}
+alert(i + j + k);
+            </pre>
+            <ul class="poll">
+                <li rel="A">prints 0</li>
+                <li rel="B">prints 20</li>
+                <li rel="C">prints 81</li>
+                <li rel="D">prints 101</li>
+            </ul>
+            <button>Try It</button>
+
+            <script>Puzzlers.bindPollQuestion("code4", "C")</script>
+        </section>
+    </article>
+
+    <article>
+        <h3>Lessons learned, Puzzle #4</h3>
+        <ul>
+            <li>JavaScript has no concept of block scope</li>
+            <li>Instead only functional scoping</li>
+            <li>Therefore i, j, k remain in scope after the loop</li>
+            <li>You can use immediate functions to create block like scope</li>
+        </ul>
+        <pre>
+(function (){
+    for(var i=0; i<10; i++) {
+        console.log(i);
+    }
+}());
+console.log(i); // undefined
+        </pre>
+    </article>
+
+    <article>
+        <h3>Puzzle #5</h3>
+        <section id="code5">
+            <pre>
+var x = 2;
+var y = 3;
+(function (){
+    alert(x + y);
+    x = 0;
+    var y = 2;
+}());
+            </pre>
+            <ul class="poll">
+                <li rel="A">prints NaN</li>
+                <li rel="B">prints 5</li>
+                <li rel="C">prints 2</li>
+                <li rel="D">prints 0</li>
+            </ul>
+            <button>Try It</button>
+
+            <script>Puzzlers.bindPollQuestion("code5", "A")</script>
+        </section>
+    </article>
+
+    <article>
+        <h3>Lessons learned, Puzzle #5</h3>
+        <ul>
+            <li></li>
+            <li></li>
+        </ul>
+    </article>
 </section>
 
 </body>
