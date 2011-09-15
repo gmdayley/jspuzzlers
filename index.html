@@ -143,6 +143,31 @@ parseInt("08", 10) // 8
         </ul>
     </article>
 
+    <article>
+        <h3>Puzzle #3</h3>
+        <section id="code3">
+            <pre>
+var a = 0, b = 0 * -1;
+if(a === b){
+    if(1/a === 1/b){
+        alert("Impossible, you can't defy the laws of mathematics");
+    }
+    else{ alert("Einstein can't even explain this"); }
+}
+else{ alert('Well duh, -0 is not the same as 0'); }
+            </pre>
+            <ul class="poll">
+                <li rel="A">prints "Impossible, you can't defy the laws of mathematics"</li>
+                <li rel="B">prints "Well duh, -0 is not the same as 0"</li>
+                <li rel="C">throws exception because -0 is NaN </li>
+                <li rel="D">prints "Einsten can't even explain this"</li>
+            </ul>
+            <button>Try It</button>
+
+            <script>Puzzlers.bindPollQuestion("code3", "D")</script>
+        </section>
+    </article>
+
 </section>
 
 </body>
