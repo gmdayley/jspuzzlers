@@ -150,22 +150,31 @@ parseInt("08", 10) // 8
 var a = 0, b = 0 * -1;
 if(a === b){
     if(1/a === 1/b){
-        alert("Impossible, you can't defy the laws of mathematics");
+        alert("Of course! You can't defy the laws of mathematics");
     }
     else{ alert("Einstein can't even explain this"); }
 }
 else{ alert('Well duh, -0 is not the same as 0'); }
             </pre>
             <ul class="poll">
-                <li rel="A">prints "Impossible, you can't defy the laws of mathematics"</li>
+                <li rel="A">prints "Of course! You can't defy the laws of mathematics"</li>
                 <li rel="B">prints "Well duh, -0 is not the same as 0"</li>
-                <li rel="C">throws exception because -0 is NaN </li>
+                <li rel="C">throws an exception because -0 is NaN </li>
                 <li rel="D">prints "Einsten can't even explain this"</li>
             </ul>
             <button>Try It</button>
 
             <script>Puzzlers.bindPollQuestion("code3", "D")</script>
         </section>
+    </article>
+
+    <article>
+        <h3>Lessons learned, Puzzle #3</h3>
+        <ul class="build">
+            <li>Number allows for both positive and negative zero values</li>
+            <li>+0 equals -0</li>
+            <li>However +infinity does <strong>not</strong> equal -infinity</li>
+        </ul>
     </article>
 
 </section>
