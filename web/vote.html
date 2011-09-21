@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<script src="js/lib/socket.io/socket.io.min.js"></script>
     <script>
-        var conn;
+        var socket;
         var connect = function() {
-            conn = new WebSocket("ws://localhost:8000");
+            //conn = new WebSocket("ws://localhost:8000");
+			socket = io.connect('http://localhost:3000');
         };
 
         function send(answer) {
-            conn.send(JSON.stringify({answer: answer}));
+            //conn.send(JSON.stringify({answer: answer}));
+			socket.emit('vote', { answer: answer });
         }
         connect();
     </script>

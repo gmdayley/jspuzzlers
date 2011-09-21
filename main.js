@@ -10,6 +10,7 @@ io.sockets.on('connection', function (socket) {
 	socket.emit('ack', { message: 'You are connected.' });
 	socket.on('vote', function (data) {
     	console.log(data);
+		socket.broadcast.emit('vote', data);
 		socket.emit('ack', { message: 'Thank-you for your vote.' });
   	});
 });

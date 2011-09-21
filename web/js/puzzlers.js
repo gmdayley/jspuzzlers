@@ -72,15 +72,18 @@ var PUZZLERS = (function() {
     }
 }());
 
-var connect = function() {
-    conn = new WebSocket("ws://localhost:8000");
-    conn.onmessage = function(evt) {
-        console.log(evt);
-        var data = JSON.parse(evt.data);
-        PUZZLERS.vote(data.answer);
-    }
-};
 
+var connect = function() {
+	var socket = io.connect('http://localhost:3000');
+
+	socket.on('ack', function(data) {
+		console.log(data);
+	});
+
+	socket.on('vote', function(data) {
+		PUZZLERS.vote(data.answer);
+	});
+}
 connect();
 
 
