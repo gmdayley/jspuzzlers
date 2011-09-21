@@ -62,19 +62,28 @@ ul.poll li.correct[rel="D"]{
      background-color: rgb(255, 211, 25);
 }
 
+/*
+pre{
+    margin: 0 !important;
+}
+
+ul.poll{
+    margin:  0px;
+}
+*/
+
 /* Overide styles */
-.slides.template-default .puzzle-tiger {
-    background: url(images/puzzle-tiger.png) 665px 560px no-repeat;
-    background-color: white;
-}
+/*.slides.template-default .puzzle-tiger {*/
+    /*background: url(images/puzzle-tiger.png) 665px 560px no-repeat;*/
+    /*background-color: white;*/
+/*}*/
 
-.slides.template-default .puzzle-box {
-    background: url(images/puzzle-box.png) 675px 490px no-repeat;
-    background-color: white;
-}
+/*.slides.template-default .puzzle-box {*/
+    /*background: url(images/puzzle-box.png) 675px 490px no-repeat;*/
+    /*background-color: white;*/
+/*}*/
 
-
-.slides.template-default .intro {
-    background: url(images/puzzle.png) 634px 447px no-repeat;
-    background-color: white;
+/*.slides.template-default .intro {*/
+    /*background: url(images/puzzle.png) 634px 447px no-repeat;*/
+    /*background-color: white;*/
 }

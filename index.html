@@ -10,9 +10,6 @@
            Charles Chen (ChromeVox support)
 
   URL: http://code.google.com/p/html5slides/
-
-
-  
   http://www.codeproject.com/KB/scripting/javascript-gotchas.aspx
 -->
 
@@ -28,6 +25,30 @@
 <style>
         /* Your individual styles here, or just use inline styles if that’s
      what you want. */
+    
+    canvas.pie{
+        position: absolute;
+        right: 30px;
+        bottom: 30px;
+    }
+
+    pre{
+        margin: 10px 0 !important;
+    }
+
+    ul.poll li{
+        width : 600px;
+    }
+
+    ul.poll{
+        margin: 30px 0 10px 0;
+    }
+
+    strong{
+        font-weight: bold;
+        color: #333;
+    }
+
 
 </style>
 
@@ -35,25 +56,25 @@
 
 <section class='slides layout-regular template-default'>
 
-    <!-- Your slides (<article>s) go here. Delete or comment out the
-  slides below. -->
+<!-- Your slides (<article>s) go here. Delete or comment out the
+slides below. -->
 
-    <article class="intro">
-        <h1>
-            JavaScript Puzzlers
-        </h1>
+<article class="intro">
+    <h1>
+        JavaScript Puzzlers
+    </h1>
 
-        <p>
-            Gabriel Dayley, Tom Valletta & Mike Heath
-            <br>
-            December, 2011
-        </p>
-    </article>
+    <p>
+        Gabriel Dayley, Tom Valletta & Mike Heath
+        <br>
+        December, 2011
+    </p>
+</article>
 
 
-    <article class="puzzle-tiger">
-        <h3>Puzzle #1</h3>
-        <section id="code1">
+<article class="puzzle-tiger">
+    <h3>Puzzle #1</h3>
+    <section id="code1">
             <pre>
 if("1" == 1) {
     if("" == 0) {
@@ -63,93 +84,96 @@ if("1" == 1) {
     else { alert("C"); }
 }
 else { alert("D"); }
-            </pre>
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">prints "A"</li>
+            <li rel="B">prints "B"</li>
+            <li rel="C">throws an exception</li>
+            <li rel="D">prints "D"</li>
+        </ul>
+        <button>Try It</button>
 
-            <ul class="poll">
-                <li rel="A">prints "A"</li>
-                <li rel="B">prints "B"</li>
-                <li rel="C">throws an exception</li>
-                <li rel="D">prints "D"</li>
-            </ul>
-            <button>Try It</button>
+        <script>
+            PUZZLERS.bindQuestion("code1", "B");
+        </script>
+    </section>
+</article>
 
-            <script>
-                Puzzlers.bindPollQuestion("code1", "B");
-            </script>
-        </section>
-    </article>
 
-    <article class="nobackground">
-        <h3>Lessons learned, Puzzle #1</h3>
+<article class="nobackground">
+    <h3>Lessons learned, Puzzle #1</h3>
 
-        <ul class="build">
-            <li>
-                The double equals (==) performs comparisons after type coercion. With the == operator you can
-                compare
-                objects of
-                different types.
-            </li>
+    <ul class="build">
+        <li>
+            The double equals (==) performs comparisons after type coercion. With the == operator you can
+            compare
+            objects of
+            different types.
+        </li>
 
-            <li>
-                This is often not what you intended and can lead to undesired results.
-            </li>
+        <li>
+            This is often not what you intended and can lead to undesired results.
+        </li>
 
-            <li>
-                Instead you should make sure that your operands are of the right type before doing comparisons or
-                use the
-                triple
-                equals operator (===) to do the comparisons.
-            </li>
+        <li>
+            Instead you should make sure that your operands are of the right type before doing comparisons or
+            use the
+            triple
+            equals operator (===) to do the comparisons.
+        </li>
                     <pre>
 "1" === 1 // false
 Number("5") === 5  // true
 </pre>
-        </ul>
+    </ul>
+</article>
 
-    </article>
 
-    <article class="puzzle-box">
-        <h3>Puzzle #2</h3>
-        <section id="code2">
+<article class="puzzle-box">
+    <h3>Puzzle #2</h3>
+    <section id="code2">
             <pre>
 var x = parseInt("5");
 var y = parseInt("05");
 var z = parseInt("08");
 
 alert((x + y) * z);
-            </pre>
-            <ul class="poll">
-                <li rel="A">prints 80</li>
-                <li rel="B">prints 18</li>
-                <li rel="C">prints 0</li>
-                <li rel="D">prints NaN</li>
-            </ul>
-            <button>Try It</button>
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">prints 80</li>
+            <li rel="B">prints 18</li>
+            <li rel="C">prints 0</li>
+            <li rel="D">prints NaN</li>
+        </ul>
+        <button>Try It</button>
 
-            <script>Puzzlers.bindPollQuestion("code2", "C")</script>
-        </section>
-    </article>
+        <script>PUZZLERS.bindQuestion("code2", "C")</script>
+    </section>
+</article>
 
 
-    <article class="nobackground">
-        <h3>Lessons learned, Puzzle #2</h3>
+<article class="nobackground">
+    <h3>Lessons learned, Puzzle #2</h3>
 
-        <ul class="build">
-            <li>parseInt() takes two parameters: number, base</li>
-            <li>Omitting the second parameter assumes base-10 as the default</li>
-            <li>Numbers starting with <strong>0x</strong> assumed as radix 16 (hex)</li>
-            <li>Numbers starting with <strong>0</strong>, assumed as radix 8 (oct)</li>
-            <li>There is no 8 (or 9) in octal so parseInt() just returns 0</li>
-            <li>Specifying the intended base as the second parameter removes the ambiguity</li>
+    <ul class="build">
+        <li>parseInt() takes two parameters: number, base</li>
+        <li>Omitting the second parameter assumes base-10 as the default</li>
+        <li>Numbers starting with <strong>0x</strong> assumed as radix 16 (hex)</li>
+        <li>Numbers starting with <strong>0</strong>, assumed as radix 8 (oct)</li>
+        <li>There is no 8 (or 9) in octal so parseInt() just returns 0</li>
+        <li>Specifying the intended base as the second parameter removes the ambiguity</li>
             <pre>
 parseInt("08", 10) // 8
 </pre>
-        </ul>
-    </article>
+    </ul>
+</article>
 
-    <article>
-        <h3>Puzzle #3</h3>
-        <section id="code3">
+
+<article>
+    <h3>Puzzle #3</h3>
+    <section id="code3">
             <pre>
 var a = 0, b = 0 * -1;
 if(a === b){
@@ -159,61 +183,63 @@ if(a === b){
     else{ alert("Einstein can't even explain this"); }
 }
 else{ alert('Well duh, -0 is not the same as 0'); }
-            </pre>
-            <ul class="poll">
-                <li rel="A">prints "Of course! You can't defy the laws of mathematics"</li>
-                <li rel="B">prints "Well duh, -0 is not the same as 0"</li>
-                <li rel="C">throws an exception because -0 is NaN </li>
-                <li rel="D">prints "Einstein can't even explain this"</li>
-            </ul>
-            <button>Try It</button>
-
-            <script>Puzzlers.bindPollQuestion("code3", "D")</script>
-        </section>
-    </article>
-
-    <article>
-        <h3>Lessons learned, Puzzle #3</h3>
-        <ul class="build">
-            <li>Number allows for both positive and negative zero values</li>
-            <li>+0 equals -0</li>
-            <li>However +infinity does <strong>not</strong> equal -infinity</li>
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">prints "Of course! You can't defy the laws of mathematics"</li>
+            <li rel="B">prints "Well duh, -0 is not the same as 0"</li>
+            <li rel="C">throws an exception because -0 is NaN</li>
+            <li rel="D">prints "Einstein can't even explain this"</li>
         </ul>
-    </article>
+        <button>Try It</button>
+        <script>PUZZLERS.bindQuestion("code3", "D")</script>
+    </section>
+</article>
 
-    <article>
-        <h3>Puzzle #4</h3>
-        <section id="code4">
+<article>
+    <h3>Lessons learned, Puzzle #3</h3>
+    <ul class="build">
+        <li>Number allows for both positive and negative zero values</li>
+        <li>+0 equals -0</li>
+        <li>However +infinity does <strong>not</strong> equal -infinity</li>
+    </ul>
+</article>
+
+<article>
+    <h3>Puzzle #4</h3>
+    <section id="code4">
             <pre>
 var k = 0;
 var i, j = 10;
-for(var i=0; i<10; i++) {
-    for(var j=0; j<10; j++) {
+for(var i=0; i < 10; i++) {
+    for(var j=0; j < 10; j++) {
         var k = i * j;
     }
 }
-alert(i + j + k);
-            </pre>
-            <ul class="poll">
-                <li rel="A">prints 0</li>
-                <li rel="B">prints 20</li>
-                <li rel="C">prints 81</li>
-                <li rel="D">prints 101</li>
-            </ul>
-            <button>Try It</button>
+alert(i + j + k);</pre>
 
-            <script>Puzzlers.bindPollQuestion("code4", "C")</script>
-        </section>
-    </article>
+        <canvas width="200" height="200" class="pie"></canvas>
 
-    <article>
-        <h3>Lessons learned, Puzzle #4</h3>
-        <ul>
-            <li>JavaScript has no concept of block scope</li>
-            <li>Instead only functional scoping</li>
-            <li>Therefore i, j, k remain in scope after the loop</li>
-            <li>You can use immediate functions to create block like scope</li>
+        <ul class="poll">
+            <li rel="A"> prints 0</li>
+            <li rel="B"> prints 20</li>
+            <li rel="C"> prints 81</li>
+            <li rel="D"> prints 101</li>
         </ul>
+        <button>Try It</button>
+        <!--<canvas class="pollBar" style="outline: 1px solid red; width: 777px; height: 15px; margin: 0"></canvas>-->
+        <script>PUZZLERS.bindQuestion("code4", "D")</script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned, Puzzle #4</h3>
+    <ul>
+        <li>JavaScript has no concept of block scope</li>
+        <li>Instead only functional scoping</li>
+        <li>Therefore i, j, k remain in scope after the loop</li>
+        <li>You can use immediate functions to create block like scope</li>
+    </ul>
         <pre>
 (function (){
     for(var i=0; i<10; i++) {
@@ -222,11 +248,11 @@ alert(i + j + k);
 }());
 console.log(i); // undefined
         </pre>
-    </article>
+</article>
 
-    <article>
-        <h3>Puzzle #5</h3>
-        <section id="code5">
+<article>
+    <h3>Puzzle #5</h3>
+    <section id="code5">
             <pre>
 var x = 2;
 var y = 3;
@@ -235,27 +261,68 @@ var y = 3;
     x = 0;
     var y = 2;
 }());
-            </pre>
-            <ul class="poll">
-                <li rel="A">prints NaN</li>
-                <li rel="B">prints 5</li>
-                <li rel="C">prints 2</li>
-                <li rel="D">prints 0</li>
-            </ul>
-            <button>Try It</button>
-
-            <script>Puzzlers.bindPollQuestion("code5", "A")</script>
-        </section>
-    </article>
-
-    <article>
-        <h3>Lessons learned, Puzzle #5</h3>
-        <ul>
-            <li></li>
-            <li></li>
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">prints NaN</li>
+            <li rel="B">prints 5</li>
+            <li rel="C">prints 2</li>
+            <li rel="D">prints 0</li>
         </ul>
-    </article>
+        <button>Try It</button>
+
+        <script>PUZZLERS.bindQuestion("code5", "A")</script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned, Puzzle #5</h3>
+    <ul class="build">
+        <li>Re-declaring <strong>y</strong> inside the function causes unexpected behavior from the interpreter</li>
+        <li>The interpreter moves <strong>var</strong> statements to the beginning, causing <strong>y</strong> to be undefined:</li>
+            <pre>
+var x = 2;
+var y = 3;
+(function (){
+    var y;
+    alert(x + y);
+    x = 0;
+    y = 2;
+}());
+</pre>
+    </ul>
+
+</article>
+<article>
+    <h3>Puzzle #6</h3>
+    <section id="code6">
+        <pre>
+var background = function()
+{
+    return
+    {
+        color : '#bada55'
+    };
+}
+alert(background().color);
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">prints #bada55</li>
+            <li rel="B">prints undefined</li>
+            <li rel="C">throws TypeError</li>
+            <li rel="D">prints Object</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>PUZZLERS.bindQuestion("code6", "C")</script>
+    </section>
+
+
+        
+</article>
 </section>
+
 
 </body>
 </html>

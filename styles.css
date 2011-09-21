@@ -100,7 +100,7 @@ body {
 
 .slides.template-default > article:not(.nobackground):not(.biglogo):not(.puzzle-tiger):not(.intro):not(.puzzle-box) {
     /*background: url(images/google-logo-small.png) 710px 625px no-repeat;*/
-    background: url(images/puzzle.png) 710px 625px no-repeat;
+    /*background: url(images/puzzle.png) 710px 625px no-repeat;*/
     /*background: url(images/puzzle.png) no-repeat;*/
 
     background-color: white;
