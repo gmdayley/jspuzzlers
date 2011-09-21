@@ -14,46 +14,50 @@
         connect();
     </script>
     <style>
-        body{
+        body {
             background: #666;
         }
 
-        button {
+        .button.green {
+            background-color: rgb(0, 138, 53);
+        }
+
+        .button.blue {
+            background-color: rgb(0, 102, 204);
+        }
+
+        .button.red {
+            background-color: rgb(255, 0, 0);
+        }
+
+        .button.yellow {
+            background-color: rgb(255, 211, 25);
+        }
+
+        .button {
+            display: inline-block;
             padding: 25px 35px;
             font-size: 22px;
             border-radius: 5px;
             color: white;
-            text-shadow: 1px 1px 0 #333;
-            border:  3px solid #333;
-            -webkit-box-reflect:below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.65, transparent), to(white));
-            
+            text-shadow: -1px 1px 0px #333;
+            border: 3px solid #333;
+            -webkit-box-reflect: below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.70, transparent), to(white));
+            text-decoration: none;
+            font-family: 'Droid Sans Mono', sans-serif;
         }
 
-        button:active{
-            background-color: white;
-        }
-
-        button.green{
-            background-color: rgb(0, 138, 53);
-        }
-
-        button.blue {
-            background-color: rgb(0, 102, 204);
-        }
-
-        button.red {
-            background-color: rgb(255, 0, 0);
-        }
-
-        button.yellow {
-            background-color: rgb(255, 211, 25);
+        .button:active{
+            box-shadow: inset 0px 0px 15px white;
+            border:  3px solid white;
         }
     </style>
 </head>
 <body>
-<button class="green" onclick="send('A')">A</button>
-<button class="blue" onclick="send('B')">B</button>
-<button class="red" onclick="send('C')">C</button>
-<button class="yellow" onclick="send('D')">D</button>
+
+<a href="#" class="button green">A</a>
+<a href="#" class="button blue">B</a>
+<a href="#" class="button red">C</a>
+<a href="#" class="button yellow">D</a>
 </body>
 </html>
