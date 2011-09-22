@@ -29,8 +29,8 @@
     
     canvas.pie{
         position: absolute;
-        right: 30px;
-        bottom: 30px;
+        right: 10px;
+        bottom: 10px;
     }
 
     pre{
@@ -50,6 +50,17 @@
         color: #333;
     }
 
+    .poll li strong{
+        /*color: #8b008b;*/
+        color: inherit;
+        font-weight: bold;
+        /*font-style: italic;*/
+        /*text-shadow: 0 0 5px #777;*/
+    }
+
+    /*.poll li strong:before, .poll li strong:after{*/
+        /*content: '\'';*/
+    /*}*/
 
 </style>
 
@@ -79,7 +90,9 @@ slides below. -->
             <pre>
 if("1" == 1) {
     if("" == 0) {
-        if("" == "0") { alert("A"); }
+        if("" == "0") {
+            alert("A");
+        }
         else { alert("B"); }
     }
     else { alert("C"); }
@@ -88,10 +101,10 @@ else { alert("D"); }
 </pre>
         <canvas width="200" height="200" class="pie"></canvas>
         <ul class="poll">
-            <li rel="A">prints "A"</li>
-            <li rel="B">prints "B"</li>
-            <li rel="C">throws an exception</li>
-            <li rel="D">prints "D"</li>
+            <li rel="A">alerts: <strong>A</strong></li>
+            <li rel="B">alerts: <strong>B</strong></li>
+            <li rel="C">alerts: <strong>C</strong></li>
+            <li rel="D">alerts: <strong>D</strong></li>
         </ul>
         <button>Try It</button>
 
@@ -143,10 +156,10 @@ alert((x + y) * z);
 </pre>
         <canvas width="200" height="200" class="pie"></canvas>
         <ul class="poll">
-            <li rel="A">prints 80</li>
-            <li rel="B">prints 18</li>
-            <li rel="C">prints 0</li>
-            <li rel="D">prints NaN</li>
+            <li rel="A">alerts: <strong>80</strong></li>
+            <li rel="B">alerts: <strong>18</strong></li>
+            <li rel="C">alerts: <strong>0</strong></li>
+            <li rel="D">alerts: <strong>NaN</strong></li>
         </ul>
         <button>Try It</button>
 
@@ -176,7 +189,9 @@ parseInt("08", 10) // 8
     <h3>Puzzle #3</h3>
     <section id="code3">
             <pre>
-var a = 0, b = 0 * -1;
+var a = 0;
+var b = 0 * -1;
+                
 if(a === b){
     if(1/a === 1/b){
         alert("Of course! You can't defy the laws of mathematics");
@@ -187,10 +202,10 @@ else{ alert('Well duh, -0 is not the same as 0'); }
 </pre>
         <canvas width="200" height="200" class="pie"></canvas>
         <ul class="poll">
-            <li rel="A">prints "Of course! You can't defy the laws of mathematics"</li>
-            <li rel="B">prints "Well duh, -0 is not the same as 0"</li>
-            <li rel="C">throws an exception because -0 is NaN</li>
-            <li rel="D">prints "Einstein can't even explain this"</li>
+            <li rel="A">alerts: <strong>Of course! You can't defy the laws of mathematics</strong></li>
+            <li rel="B">alerts: <strong>Well duh, -0 is not the same as 0</strong></li>
+            <li rel="C">throws an error because -0 is NaN</li>
+            <li rel="D">alerts: <strong>Einstein can't even explain this</strong></li>
         </ul>
         <button>Try It</button>
         <script>PUZZLERS.bindQuestion("code3", "D")</script>
@@ -210,11 +225,11 @@ else{ alert('Well duh, -0 is not the same as 0'); }
     <h3>Puzzle #4</h3>
     <section id="code4">
             <pre>
-var k = 0;
-var i, j = 10;
-for(var i=0; i < 10; i++) {
-    for(var j=0; j < 10; j++) {
-        var k = i * j;
+var i, j, k = 0;
+
+for(var i=0; i<3; i++) {
+    for(var j=0; j<3; j++) {
+        k = i * j;
     }
 }
 alert(i + j + k);</pre>
@@ -222,10 +237,10 @@ alert(i + j + k);</pre>
         <canvas width="200" height="200" class="pie"></canvas>
 
         <ul class="poll">
-            <li rel="A"> prints 0</li>
-            <li rel="B"> prints 20</li>
-            <li rel="C"> prints 81</li>
-            <li rel="D"> prints 101</li>
+            <li rel="A">alerts: <strong>0</strong></li>
+            <li rel="B">alerts: <strong>4</strong></li>
+            <li rel="C">alerts: <strong>8</strong></li>
+            <li rel="D">alerts: <strong>10</strong></li>
         </ul>
         <button>Try It</button>
         <!--<canvas class="pollBar" style="outline: 1px solid red; width: 777px; height: 15px; margin: 0"></canvas>-->
@@ -265,10 +280,10 @@ var y = 3;
 </pre>
         <canvas width="200" height="200" class="pie"></canvas>
         <ul class="poll">
-            <li rel="A">prints NaN</li>
-            <li rel="B">prints 5</li>
-            <li rel="C">prints 2</li>
-            <li rel="D">prints 0</li>
+            <li rel="A">alerts: <strong>NaN</strong></li>
+            <li rel="B">alerts: 5</li>
+            <li rel="C">alerts: 2</li>
+            <li rel="D">alerts: 0</li>
         </ul>
         <button>Try It</button>
 
@@ -294,6 +309,8 @@ var y = 3;
     </ul>
 
 </article>
+
+
 <article>
     <h3>Puzzle #6</h3>
     <section id="code6">
@@ -302,28 +319,44 @@ var background = function()
 {
     return
     {
-        color : '#bada55'
+        color : 'blue'
     };
 }
 alert(background().color);
 </pre>
         <canvas width="200" height="200" class="pie"></canvas>
         <ul class="poll">
-            <li rel="A">prints #bada55</li>
-            <li rel="B">prints undefined</li>
-            <li rel="C">throws TypeError</li>
-            <li rel="D">prints Object</li>
+            <li rel="A">alerts: <strong>blue</strong></li>
+            <li rel="B">alerts: <strong>undefined</strong></li>
+            <li rel="C">throws a TypeError</li>
+            <li rel="D">alerts: <strong>[Object]</strong></li>
         </ul>
         <button>Try It</button>
 
         <script>PUZZLERS.bindQuestion("code6", "C")</script>
     </section>
-
-
-        
 </article>
+
+<article>
+    <h4>Lessons learned, Puzzle #6</h4>
+    <ul class="build">
+        <li>Semicolon's in JavaScript are optional</li>
+        <li>The interpreter tries to guess where there should go</li>
+        <li>This causes undesired results:</li>
+        <pre>
+var background = function()
+{
+    return; //Thanks, but no thanks!
+    {
+        color : 'blue'
+    };
+}</pre>
+        <li>So, instead of returning the object, undefined is returned, causing a TypeError to be thrown</li>
+    </ul>
+</article>
+
+
+
 </section>
-
-
 </body>
 </html>
