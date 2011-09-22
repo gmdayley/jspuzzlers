@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="js/lib/socket.io/socket.io.min.js"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/socket.io/socket.io.min.js"></script>
     <script>
         var socket;
         var connect = function() {
-            //conn = new WebSocket("ws://localhost:8000");
-			socket = io.connect('http://localhost:3000');
+            socket = io.connect('http://localhost:3000');
+
+            socket.on('ack', function(data) {
+                $("#container").removeClass("notconnected");
+            });
+
+
+            socket.on('setenabled', function(enable) {
+                console.log(enable);
+                setEnabled(enable);
+            });
+
+
+//            socket.on('right', function(msg){
+//                console.log(msg);
+//            });
         };
 
         function send(answer) {
-            //conn.send(JSON.stringify({answer: answer}));
-			socket.emit('vote', { answer: answer });
+            socket.emit('vote', { answer: answer });
         }
         connect();
+
+        function setEnabled(en) {
+            if (en) {
+                $("#mask").css('z-index', "-1");
+            }
+            else {
+                $("#mask").css('z-index', "10");
+            }
+        }
     </script>
     <style>
         body {
             background: #666;
+        }
+
+        #container{
+            position: relative;
+            margin: 0 auto;
+            width: 380px
         }
 
         .button.green {
@@ -49,17 +78,43 @@
             font-family: 'Droid Sans Mono', sans-serif;
         }
 
-        .button:active{
+        .button:active {
             box-shadow: inset 0px 0px 15px white;
-            border:  3px solid white;
+            border: 3px solid white;
         }
+
+        .button.disabled {
+            opacity: .2;
+        }
+
+        #mask {
+            z-index: 5;
+            opacity: .7;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #777;
+        }
+
+
+         #container.notconnected .button{
+            background: gray;
+        }
+
     </style>
 </head>
 <body>
+<div id="mask"></div>
+<div id="container" class="notconnected">
+    <a href="#" class="button green" onclick="send('A')">A</a>
+    <a href="#" class="button blue" onclick="send('B')">B</a>
+    <a href="#" class="button red" onclick="send('C')">C</a>
+    <a href="#" class="button yellow" onclick="send('D')">D</a>
+</div>
 
-<a href="#" class="button green" onclick="send('A')">A</a>
-<a href="#" class="button blue" onclick="send('B')">B</a>
-<a href="#" class="button red" onclick="send('C')">C</a>
-<a href="#" class="button yellow" onclick="send('D')">D</a>
+
+<script>setEnabled(false);</script>
 </body>
 </html>

@@ -34,6 +34,8 @@ body {
     background: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
 
+    background: url('../images/17876-puzzle-pieces.jpg');
+
     -webkit-font-smoothing: antialiased;
 }
 
@@ -189,6 +191,11 @@ body {
     -o-transform: translate(-2040px);
     -moz-transform: translate(-2040px);
     -webkit-transform: translate3d(-2040px, 0, 0);
+
+
+    /* --- */
+    -webkit-transition: opacity ease-in .2s;
+    opacity: .4;
 }
 
 .slides > article.past {
@@ -197,6 +204,10 @@ body {
     -o-transform: translate(-1020px);
     -moz-transform: translate(-1020px);
     -webkit-transform: translate3d(-1020px, 0, 0);
+
+    /* --- */
+    -webkit-transition: opacity ease-in .2s;
+    opacity: .6;
 }
 
 .slides > article.current {
@@ -205,6 +216,11 @@ body {
     -o-transform: translate(0);
     -moz-transform: translate(0);
     -webkit-transform: translate3d(0, 0, 0);
+
+
+    /* --- */
+    -webkit-transition: opacity ease-in .2s;
+    box-shadow: 0 0 200px #333;
 }
 
 .slides > article.next {
@@ -213,6 +229,10 @@ body {
     -o-transform: translate(1020px);
     -moz-transform: translate(1020px);
     -webkit-transform: translate3d(1020px, 0, 0);
+
+    /* --- */
+    -webkit-transition: opacity ease-in .2s;
+    opacity: .6;
 }
 
 .slides > article.far-next {
@@ -221,6 +241,10 @@ body {
     -o-transform: translate(2040px);
     -moz-transform: translate(2040px);
     -webkit-transform: translate3d(2040px, 0, 0);
+
+    /* --- */
+    -webkit-transition: opacity ease-in .2s;
+    opacity: .4;
 }
 
 .slides.layout-widescreen > article.far-past,
