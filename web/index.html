@@ -355,6 +355,131 @@ var background = function()
     </ul>
 </article>
 
+<!-- - -TV- - -->
+
+<article>
+    <h3>Puzzle #7: Loopy Performance</h3>
+    <section id="code7">
+<pre style="line-height: 23px;">
+A.	$('*').each(function(i){
+	 e = $(this);
+	});
+	
+B. 	var len = a.length;
+	for (var i = 0; i < len; i++) {
+	 e = $(a[i]);
+	};
+	
+C. 	var i = a.length;
+	while (i--) {
+	 e = $(a[i]);
+	}
+	
+D. 	for (var i in a) {
+	 e = $(a[i]);
+	};
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">A is the fastest</li>
+            <li rel="B">B is the fastest</li>
+            <li rel="C">C is the fastest</li>
+            <li rel="D">D is the fastest</li>
+        </ul>
+
+        <script>PUZZLERS.bindQuestion("code7", "C")</script>
+    </section>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #7: Loopy Performance</h4>
+    <img src='images/loopy-performance.png'/>
+</article>
+
+<article>
+    <h3>Puzzle #8: JS++</h3>
+    <section id="code8">
+<pre>
++[]+ +'0XE'+ +true+ +'1E1'
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">NaN</li>
+            <li rel="B">"14110"</li>
+            <li rel="C">90210</li>
+            <li rel="D">25</li>
+        </ul>
+
+        <script>PUZZLERS.bindQuestion("code8", "D")</script>
+    </section>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #8: JS++</h4>
+    <ul class='build'>
+		<li>"Unary + is the fastest and preferred way of converting something into a number, because it does not perform any other operations on the number." -MDN</li>
+		<li><code>toNumber(getValue(expr))</code></li>
+		<li><code>+[] &nbsp;&nbsp; == 0</code></li>
+		<li><code>+'0xE' == 14</code></li>
+		<li><code>+true&nbsp; == 1</code></li>
+		<li><code>+'1e1' == 10</code></li>
+	</ul>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #8: JS++ (cont.)</h4>
+    <ul class='build'>
+		<li>A. NaN</li>
+		<li>B. "14110" &nbsp;<code>[]+ +'0XE'+ +true+ +'1E1'</code></li>
+		<li>C. 25 &nbsp; &nbsp;	&nbsp; &nbsp; &nbsp;<code>+[]+ +'0XE'+ +true+ +'1E1'</code></li>
+		<li>D. 90210 &nbsp; <code>+[]+ +'OXD1'+ +true+ +'9E4'</code></li>
+	</ul>
+</article>
+
+<article>
+    <h3>Puzzle #9: Thinking Inside the Box</h3>
+    <section id="code9">
+<pre>
+++[[]][+[]]+[+[]]
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">NaN</li>
+            <li rel="B">"10"</li>
+            <li rel="C">"0+0+0"</li>
+            <li rel="D">Don't be ridiculous.  That will not evaluate!</li>
+        </ul>
+
+        <script>PUZZLERS.bindQuestion("code9", "D")</script>
+    </section>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #9: Thinking Inside the Box</h4>
+    <ul class='build'>
+		<li>Unary + operator</li>
+		<li><code>ToPrimitive()</code> converts empty array to empty string</li>
+		<li><code>ToNumber()</code> converts empty array to 0</li>
+		<li><code>++[[]][+[]]+[+[]] => ++[[]][0]+[0]</code></li>
+	</ul>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #9: Thinking Inside the Box (cont.)</h4>
+    <ul class='build'>
+		<li><code>ToPrimitive()</code> converts empty array to empty string</li>
+		<li><code>++[[]][0]+[0] => ++[""][0]+[0]</code></li>
+		<li><code>++</code> increments and stores</li>
+		<li><code>++[""][0]+[0] => 1+[0]</code></li>
+		<li><code>ToPrimitive()</code> converts 0 array to "0" string</li>
+		<li><code>1+[0] => 1+"0" => "10"</code></li>
+	</ul>
+</article>
+
+
+
+
+
 
 
 </section>
