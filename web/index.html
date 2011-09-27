@@ -85,7 +85,7 @@ slides below. -->
 
 
 <article class="puzzle-tiger">
-    <h3>Puzzle #1</h3>
+    <h3>Puzzle #1: Double agent</h3>
     <section id="code1">
             <pre>
 if("1" == 1) {
@@ -144,8 +144,49 @@ Number("5") === 5  // true
 </article>
 
 
+<article>
+    <h3>Puzzle #??: You just aren't my type</h3>
+    <section id="code13">
+        <pre>
+if(typeof null === 'undefined'){
+    if(typeof {} === 'object'){
+        if(typeof "" === 'string'){
+            if(typeof [] === 'array'){
+                alert('A');
+            } else{ alert('B'); }
+        }
+    }
+} else{
+    alert('C');
+}
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">alerts: <strong>A</strong></li>
+            <li rel="B">alerts: <strong>B</strong></li>
+            <li rel="C">alerts: <strong>C</strong></li>
+            <li rel="D">No output</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>PUZZLERS.bindQuestion("code13", "C")</script>
+
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned, Puzzle #??</h3>
+    <ul class="build">
+        <li><strong>typeof</strong> returns the fundamental type of an instance</li>
+        <li>Non-fundamental types return "object"</li>
+        <li><strong>typeof null</strong> returns "object"</li>
+        <li>Array is not actually a fundamental type, therefore returns "object"</li>
+    </ul>
+</article>
+
+
 <article class="puzzle-box">
-    <h3>Puzzle #2</h3>
+    <h3>Puzzle #2: Basically wrong</h3>
     <section id="code2">
             <pre>
 var x = parseInt("5");
@@ -168,6 +209,7 @@ alert((x + y) * z);
 </article>
 
 
+
 <article class="nobackground">
     <h3>Lessons learned, Puzzle #2</h3>
 
@@ -186,7 +228,7 @@ parseInt("08", 10) // 8
 
 
 <article>
-    <h3>Puzzle #3</h3>
+    <h3>Puzzle #3: To infinity and beyond</h3>
     <section id="code3">
             <pre>
 var a = 0;
@@ -222,7 +264,50 @@ else{ alert('Well duh, -0 is not the same as 0'); }
 </article>
 
 <article>
-    <h3>Puzzle #4</h3>
+    <h3>Puzzle #??: Who do we appreciate?</h3>
+    <section id="code14">
+        <pre>
+var $2 = 0.2;
+var $4 = $2 + $2;
+var $6 = $4 + $2;
+var $8 = $6 + $2;
+
+//Who do we appreciate?
+if($4 !== .4){ alert("Mike!"); }
+else if($6 !== .6) { alert("Tom!"); }
+else if($8 !== .8) { alert("Gabriel!"); }
+else { alert("Sponge Bob!"); }
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+
+        <ul class="poll">
+            <li rel="A">alerts: <strong>Mike!</strong></li>
+            <li rel="B">alerts: <strong>Tom!</strong></li>
+            <li rel="C">alerts: <strong>Gabriel!</strong></li>
+            <li rel="D">alerts: <strong>Sponge Bob!</strong></li>
+        </ul>
+        <button>Try It</button>
+        <!--<canvas class="pollBar" style="outline: 1px solid red; width: 777px; height: 15px; margin: 0"></canvas>-->
+        <script>PUZZLERS.bindQuestion("code14", "B")</script>
+
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned, Puzzle #??</h3>
+    <ul class="build">
+        <li>Number is the only numerical type in JavaScript</li>
+        <li>Number is an IEEE floating point with double precision, and therefore exhibits the floating point rounding error</li>
+        <li>Because there is no Integer type in JavaScript, numerical calculations can be slow</li>
+        <li>As a side effect:</li>
+        <pre>
+0.0 === 0;  //TRUE, unlike Java or C#
+        </pre>
+    </ul>
+</article>
+
+<article>
+    <h3>Puzzle #4, A-for-scope-ic surgery</h3>
     <section id="code4">
             <pre>
 var i, j, k = 0;
@@ -267,7 +352,7 @@ console.log(i); // undefined
 </article>
 
 <article>
-    <h3>Puzzle #5</h3>
+    <h3>Puzzle #5, Malpractice</h3>
     <section id="code5">
             <pre>
 var x = 2;
@@ -312,7 +397,7 @@ var y = 3;
 
 
 <article>
-    <h3>Puzzle #6</h3>
+    <h3>Puzzle #6, Colonoscopy</h3>
     <section id="code6">
         <pre>
 var background = function()
@@ -321,7 +406,7 @@ var background = function()
     {
         color : 'blue'
     };
-}
+};
 alert(background().color);
 </pre>
         <canvas width="200" height="200" class="pie"></canvas>
