@@ -446,34 +446,79 @@ var background = function()
     <h3>Puzzle #7: Loopy Performance</h3>
     <section id="code7">
 <pre style="line-height: 23px;">
-A.	$('*').each(function(i){
+A.	$('*').each(function(i){            // jQuery each
 	 e = $(this);
 	});
 	
 B. 	var len = a.length;
-	for (var i = 0; i < len; i++) {
+	for (var i = 0; i < len; i++) {     // For
 	 e = $(a[i]);
 	};
 	
-C. 	var i = a.length;
+C. 	var i = a.length;                   // While
 	while (i--) {
 	 e = $(a[i]);
 	}
 	
-D. 	for (var i in a) {
+D. 	for (var i in a) {                  // For each
 	 e = $(a[i]);
 	};
 </pre>
         <canvas width="200" height="200" class="pie"></canvas>
         <ul class="poll">
-            <li rel="A">A is the fastest</li>
-            <li rel="B">B is the fastest</li>
-            <li rel="C">C is the fastest</li>
-            <li rel="D">D is the fastest</li>
+            <li rel="A">A is the slowest</li>
+            <li rel="B">B is the slowest</li>
+            <li rel="C">C is the slowest</li>
+            <li rel="D">D is the slowest</li>
         </ul>
 
-        <script>PUZZLERS.bindQuestion("code7", "C")</script>
+        <script>PUZZLERS.bindQuestion("code7", "D")</script>
     </section>
+</article>
+
+<article>
+	<h3>Puzzle #7: Loopy Performance Race</h3>
+	<canvas id='race' width='760' height='560'></canvas>
+	<script>
+		puzzlersRace.bindCanvas(document.getElementById('race'));
+		puzzlersRace.fixRaces([
+			{
+				color: 'rgb(0, 138, 53)',
+				img: images.horse.green,
+				label: "jQuery each",
+				value: 3644
+			}, {
+				color: 'rgb(0, 102, 204)',
+				img: images.horse.blue,
+				label: "For",
+				value: 3990
+			}, {
+				color: 'rgb(255, 0, 0)',
+				img: images.horse.red,
+				label: "While",
+				value: 3993
+			}, {
+				color: 'rgb(255, 211, 25)',
+				img: images.horse.yellow,
+				label: "For each",
+				value: 2934
+			}
+		], 
+		10000, 
+		function() {
+			setTimeout(function() {
+				puzzlersRace.set();
+			}, 500);
+			document.getElementById('race').addEventListener('click', function() {
+				if (puzzlersRace.done()) {
+					puzzlersRace.reset();
+				}
+				else {
+					puzzlersRace.go();
+				}
+			});
+		});
+	</script>
 </article>
 
 <article class='fill'>
