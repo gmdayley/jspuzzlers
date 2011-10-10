@@ -73,22 +73,22 @@ var PUZZLERS = (function() {
     }
 }());
 
-var puzzlersRace = (function() {
-	this.canvas = null;
-	this.ctx = null;
-	this.height = null;
-	this.width = null;
-	this.races = null;
-	this.reset = null;
-	this.time = null;
-	this.loop = null;
-	this.frame = 0;
-	this.frames = 0;
-	this.maxVal = 0;
-	this.imagesLoaded = 0;
-	this.done = false;
+var puzzlersRace = function() {
+	var canvas = null,
+		ctx = null,
+		height = null,
+		width = null,
+		races = null,
+		reset = null,
+		time = null,
+		loop = null,
+		frame = 0,
+		frames = 0,
+		maxVal = 0,
+		imagesLoaded = 0,
+		done = false;
 		
-	this.init = function(callback) {
+	var init = function(callback) {
 		ctx = canvas.getContext("2d");
 		frames = time / 30; 
 		
@@ -128,7 +128,7 @@ var puzzlersRace = (function() {
 		//ctx.restore();
 	}
 	
-	this.reinit = function() {
+	var reinit = function() {
 		races = JSON.parse(reset);
 		loop = null;
 		frame = 1;
@@ -142,7 +142,7 @@ var puzzlersRace = (function() {
 		});
 	}
 	
-	this.startLoop = function() {
+	var startLoop = function() {
 		loop = setInterval(function() {
 			draw(frame++);
 			if (frame >= frames) {
@@ -153,7 +153,7 @@ var puzzlersRace = (function() {
 		}, 30);
 	}
 	
-	this.reposition = function(frame) {
+	var reposition = function(frame) {
 		var cnt = races.length,
 			framePos = frame / frames;
 			
@@ -165,7 +165,7 @@ var puzzlersRace = (function() {
 		}
 	}	
 	
-	this.draw = function(frame) {
+	var draw = function(frame) {
 		var cnt = races.length;
 		for (var i = 0; i < cnt; i++) {
 			var race = races[i];
@@ -185,7 +185,7 @@ var puzzlersRace = (function() {
 		}
 	}
 	
-	this.drawValues = function() {
+	var drawValues = function() {
 		var cnt = races.length,
 			lane = (height / cnt);
 			
@@ -205,32 +205,35 @@ var puzzlersRace = (function() {
 		ctx.restore();
 	}
 	
-	return {
-		bindCanvas: function(c) {
-			canvas = c;
-			height = c.height;
-			width = c.width;
-		},
-		fixRaces: function(r, t, callback) {
-			reset = JSON.stringify(r)
-			races = r;
-			time = t;
-			init(callback);
-		},
-		set: function() {
-			draw(1);
-		},
-		go: function() {
-			startLoop();
-		},
-		done: function() {
-			return done;
-		},
-		reset: function() {
-			reinit();
-		}
+	this.bindCanvas = function(c) {
+		canvas = c;
+		height = c.height;
+		width = c.width;
 	}
-}());
+	
+	this.fixRaces = function(r, t, callback) {
+		reset = JSON.stringify(r)
+		races = r;
+		time = t;
+		init(callback);
+	}
+	
+	this.set = function() {
+		draw(1);
+	}
+		
+	this.go = function() {
+		startLoop();
+	}
+		
+	this.done = function() {
+		return done;
+	}
+	
+	this.reset = function() {
+		reinit();
+	}
+};
 
 var socket;
 var connect = function() {

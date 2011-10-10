@@ -480,8 +480,9 @@ D. 	for (var i in a) {                  // For each
 	<h3>Puzzle #7: Loopy Performance Race</h3>
 	<canvas id='race' width='760' height='560'></canvas>
 	<script>
-		puzzlersRace.bindCanvas(document.getElementById('race'));
-		puzzlersRace.fixRaces([
+		var perfRace = new puzzlersRace();
+		perfRace.bindCanvas(document.getElementById('race'));
+		perfRace.fixRaces([
 			{
 				color: 'rgb(0, 138, 53)',
 				img: images.horse.green,
@@ -507,14 +508,14 @@ D. 	for (var i in a) {                  // For each
 		10000, 
 		function() {
 			setTimeout(function() {
-				puzzlersRace.set();
+				perfRace.set();
 			}, 500);
 			document.getElementById('race').addEventListener('click', function() {
-				if (puzzlersRace.done()) {
-					puzzlersRace.reset();
+				if (perfRace.done()) {
+					perfRace.reset();
 				}
 				else {
-					puzzlersRace.go();
+					perfRace.go();
 				}
 			});
 		});
@@ -524,6 +525,168 @@ D. 	for (var i in a) {                  // For each
 <article class='fill'>
     <h4>Lessons learned, Puzzle #7: Loopy Performance</h4>
     <img src='images/loopy-performance.png'/>
+</article>
+
+<article>
+    <h3>Puzzle #?: A round-about way to round</h3>
+    <section id="code?tv1">
+<pre style="line-height: 23px;">
+// Math.round()
+A.	var rounded = Math.round(num);
+
+// Double tilde round hack
+B. 	var rounded = ~~ (0.5 + num);
+	
+// Safe double tilde round hack
+C. 	var rounded = ~~ (num + (num > 0 ? .5 : -.5));
+
+// Shift round hack
+D. 	rounded = (0.5 + somenum) << 0;
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">A is the slowest</li>
+            <li rel="B">B is the slowest</li>
+            <li rel="C">C is the slowest</li>
+            <li rel="D">D is the slowest</li>
+        </ul>
+
+        <script>PUZZLERS.bindQuestion("code?tv1", "A")</script>
+    </section>
+</article>
+
+<article>
+	<h3>Puzzle #?: A round-about way to round</h3>
+	<canvas id='roundRace' width='760' height='560'></canvas>
+	<script>
+		var roundRace = new puzzlersRace();
+		roundRace.bindCanvas(document.getElementById('roundRace'));
+		roundRace.fixRaces([
+			{
+				color: 'rgb(0, 138, 53)',
+				img: images.horse.green,
+				label: "Math.round()",
+				value: 2267
+			}, {
+				color: 'rgb(0, 102, 204)',
+				img: images.horse.blue,
+				label: "Double tilde",
+				value: 3621
+			}, {
+				color: 'rgb(255, 0, 0)',
+				img: images.horse.red,
+				label: "Safe tilde",
+				value: 2844
+			}, {
+				color: 'rgb(255, 211, 25)',
+				img: images.horse.yellow,
+				label: "Shift hack",
+				value: 3888
+			}
+		], 
+		10000, 
+		function() {
+			setTimeout(function() {
+				roundRace.set();
+			}, 500);
+			document.getElementById('roundRace').addEventListener('click', function() {
+				if (roundRace.done()) {
+					roundRace.reset();
+				}
+				else {
+					roundRace.go();
+				}
+			});
+		});
+	</script>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #?: A round-about way to round</h4>
+    <img src='images/round-about.png'/>
+</article>
+
+<article>
+    <h3>Puzzle #?: Caching array lengths in loop</h3>
+    <section id="code?tv2">
+<pre style="line-height: 23px;">
+A.	for (var i = 0; i < myArray.length; i++) {
+		// For loop
+	}
+
+B. 	for (var i = 0, len = myArray.length; i < len; i++) {
+		// Cached
+	}
+	
+C. 	for (var i = myArray.length; i--;) {
+		// Decrement
+	}
+
+D. 	for (var i = 0; myArray[i++];) {
+		// For index
+	}
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">A is the slowest</li>
+            <li rel="B">B is the slowest</li>
+            <li rel="C">C is the slowest</li>
+            <li rel="D">D is the slowest</li>
+        </ul>
+
+        <script>PUZZLERS.bindQuestion("code?tv2", "D")</script>
+    </section>
+</article>
+
+<article>
+	<h3>Puzzle #?: Caching array lengths in loop</h3>
+	<canvas id='cacheRace' width='760' height='560'></canvas>
+	<script>
+		var cacheRace = new puzzlersRace();
+		cacheRace.bindCanvas(document.getElementById('cacheRace'));
+		cacheRace.fixRaces([
+			{
+				color: 'rgb(0, 138, 53)',
+				img: images.horse.green,
+				label: "For loop",
+				value: 2689
+			}, {
+				color: 'rgb(0, 102, 204)',
+				img: images.horse.blue,
+				label: "Cached",
+				value: 3948
+			}, {
+				color: 'rgb(255, 0, 0)',
+				img: images.horse.red,
+				label: "Decrement",
+				value: 3282
+			}, {
+				color: 'rgb(255, 211, 25)',
+				img: images.horse.yellow,
+				label: "For index",
+				value: 1581
+			}
+		], 
+		10000, 
+		function() {
+			setTimeout(function() {
+				cacheRace.set();
+			}, 500);
+			document.getElementById('cacheRace').addEventListener('click', function() {
+				if (cacheRace.done()) {
+					cacheRace.reset();
+				}
+				else {
+					cacheRace.go();
+				}
+			});
+		});
+	</script>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #?: Caching array lengths in loop</h4>
+    <img src='images/array-cache.png'/>
 </article>
 
 <article>
@@ -557,12 +720,21 @@ alert(+[]+ +'0XE'+ +true+ +'1E1');
 </article>
 
 <article class='fill'>
+    <h4>Lessons learned, Puzzle #8: JS++ Extra Credit</h4>
+	<pre>+new Date</pre>
+    <ul class='build'>
+		<li><code>getValue() => getTime()</code></li>
+		<li><code>1317653638027</code></li>
+	</ul>
+</article>
+
+<article class='fill'>
     <h4>Lessons learned, Puzzle #8: JS++ (cont.)</h4>
     <ul class='build'>
 		<li>A. NaN</li>
 		<li>B. "14110" &nbsp;<code>[]+ +'0XE'+ +true+ +'1E1'</code></li>
-		<li>C. 25 &nbsp; &nbsp;	&nbsp; &nbsp; &nbsp;<code>+[]+ +'0XE'+ +true+ +'1E1'</code></li>
-		<li>D. 90210 &nbsp; <code>+[]+ +'OXD1'+ +true+ +'9E4'</code></li>
+		<li>C. 90210 &nbsp; <code>+[]+ +'OXD1'+ +true+ +'9E4'</code></li>
+		<li>D. 25 &nbsp; &nbsp;	&nbsp; &nbsp; &nbsp;<code>+[]+ +'0XE'+ +true+ +'1E1'</code></li>
 	</ul>
 </article>
 
@@ -591,7 +763,7 @@ alert(++[[]][+[]]+[+[]]);
 </pre>
     <ul class='build'>
 		<li>Unary + operator</li>
-		<li><code>ToPrimitive()</code> converts empty array to empty string</li>
+		<li><code>ToValue()</code> converts empty array to empty string</li>
 		<li><code>ToNumber()</code> converts empty array to 0</li>
 		<li><code>++[[]][+[]]+[+[]] => ++[[]][0]+[0]</code></li>
 	</ul>
@@ -603,11 +775,11 @@ alert(++[[]][+[]]+[+[]]);
 alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);
 </pre>
     <ul class='build'>
-		<li><code>ToPrimitive()</code> converts empty array to empty string</li>
+		<li><code>ToValue()</code> converts empty array to empty string</li>
 		<li><code>++[[]][0]+[0] => ++[""][0]+[0]</code></li>
 		<li><code>++</code> increments and stores</li>
 		<li><code>++[""][0]+[0] => 1+[0]</code></li>
-		<li><code>ToPrimitive()</code> converts 0 array to "0" string</li>
+		<li><code>ToValue()</code> converts 0 array to "0" string</li>
 		<li><code>1+[0] => 1+"0" => "10"</code></li>
 	</ul>
 </article>
@@ -800,7 +972,7 @@ fn();</pre>
             <li rel="A">alerts: globalX:globalY</li>
             <li rel="B">alerts: globalX:funcY</li>
             <li rel="C">alerts: funcX:globalY</li>
-            <li rel="D">alerts: funcX:globalY</li>
+            <li rel="D">alerts: funcX:funcY</li>
         </ul>
 		<button>Try It</button>
         <script>PUZZLERS.bindQuestion("code12", "B")</script>
@@ -825,6 +997,59 @@ fn();</pre>
 		<li>Scope of <code>fn() => inner()</code> is DOMWindow</li>
 		<li>There is no way to reach this.x from fn()</li>
 		<li><code>var instance = this; ... instance.x</code></li>
+	</ul>
+</article>
+
+
+<article>
+    <h3>Puzzle #?: You're not my type.</h3>
+    <section id="code?tv4">
+<pre>
+alert([
+	typeof(NaN), 
+	typeof(Number(123)), 
+	typeof(null), 
+	typeof([1,2,3])
+].join());
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">alerts: undefined, object, undefined, array</li>
+            <li rel="B">alerts: undefined, number, object, array</li>
+            <li rel="C">alerts: number, number, object, object</li>
+            <li rel="D">alerts: number, object, undefined, object</li>
+        </ul>
+		<button>Try It</button>
+        <script>PUZZLERS.bindQuestion("code?tv4", "C")</script>
+    </section>
+</article>
+
+<article class='fill'>
+    <h4>Lessons learned, Puzzle #?: You're not my type.</h4>
+    <ul class='build'>
+		<li><code>typeof</code> is not very helpful</li>
+		<li>Use: <pre>
+var toType = function(obj) {
+  return ({}).toString.call(obj)
+	.match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+}</pre></li>
+		<li><code>toType({a: 4});				//"object"</code></li>
+		<li><code>toType([1, 2, 3]); 			//"array"</code></li>
+		<li><code>toType(arguments); 			//arguments</code></li>
+		<li><code>toType(new ReferenceError); 	//"error"</code></li>
+		<li><code>toType(new Date); 			//"date"</code></li>
+	</ul>
+</article>
+
+<article>
+	<h4>Lessons learned, Puzzle #?: You're not my type.</h4>
+	<ul class='build'>
+		<li><code>toType(/a-z/); 				//"regexp"</code></li>
+		<li><code>toType(Math); 				//"math"</code></li>
+		<li><code>toType(JSON); 				//"json"</code></li>
+		<li><code>toType(new Number(4)); 		//"number"</code></li>
+		<li><code>toType(new String("abc")); 	//"string"</code></li>
+		<li><code>toType(new Boolean(true)); 	//"boolean"</code></li>
 	</ul>
 </article>
 
