@@ -237,7 +237,9 @@ var puzzlersRace = function() {
 
 var socket;
 var connect = function() {
+//	socket = io.connect('http://localhost:3000');
 	socket = io.connect('http://localhost:3000');
+	socket = io.connect('http://10.0.0.99:3000');
 
 	socket.on('ack', function(data) {
 		console.log(data);
@@ -251,21 +253,22 @@ var connect = function() {
 };
 connect();
 
-
 document.addEventListener("slideleave", function(evt) {
     PUZZLERS.reset();
+    socket.emit('openpoll', false);
 });
 
-document.addEventListener("slideenter", function(evt){
-    var poll = document.querySelector('.current .poll');
-    console.log(poll);
-    if(poll){
-        socket.emit('openpoll', true);
-    }
-    else{
-        socket.emit('openpoll', false);
-    }
-});
+//
+//document.addEventListener("slideenter", function(evt){
+//    var poll = document.querySelector('.current .poll');
+//    console.log(poll);
+//    if(poll){
+//        socket.emit('openpoll', true);
+//    }
+//    else{
+//        socket.emit('openpoll', false);
+//    }
+//});
 
 var images = {
 	horse: {
@@ -334,4 +337,18 @@ Kl1s3p0lq0/b9OzSrlm5B53+k4qlifLINoDJ2jEqaoDrW88Pc+FeBwBSjik0vP5ELunhphGCtpXFzsrq
 Nsu2AJLo5HC/ttvFOK8fv9cpk1WI98bgZSRRVLj/fp3FRIyMOvPvLGTlu9CO14CwVbKqWBo4H+d/y7g+JBRWLkXjPM+GEmiG/yGyNp2OJEoBmnAaEEw8vDokae/PGC34N7rMNTR6W4eHft7twE+nGo1OnPtrABe46k9Vq3Hi/xeLbGYaGhCS5InYcZ2zAZJw9PJlYkGK+AUin+5Hwve0uJ0po7iIteyCbnnHfMy/Tn39LSj8TDS8WKPeNs4orOPwGJhnL8PBfs7mex6gj0ss7SffHblx4+sDazV5ey6fob3wjcQD9+W1yU9e+stu+ZwueO1D+k44FaZpyz7O6+w80WMMcGEyE31obhGW6jm3Ob5z/Pjy//JpPcuvtB/nt+IZwh+8BluGem8+E18SjYuaAhuqJwC0xIF9OgG8Q3l7Kqy5jfppy2+1YvYZt0sTfEyzD1prRh8LdyenAnJ498ZSdORT7BuHiZn9tWQM0z+e381s3+91WJOHs3nNvsAyLG/xGsAS6l7C4c9C/h2vP27dv1tOPxlOwc7D9ZgruobyW604uv90OC39WQziH7xEWtIAI90eobPQQXE92erkTRp9cvtE6HCgWL45oCHsx0L/dweU6uAxBQGmR/jZkeYRtIx64d1iGrYF72ef1b7pGE9dFkhA62MeSxeKdTU1N7RS7QYhkn6243edZ+rMUFXEPsaAV9/jtnWo9svFmAepg23jrWhASq1gcOICljnt4huLhtkpnCCfkO3WxiXpOfL9+ytNPb9w45iedne9TDLczviaiyU98aaadoTw1mytsnOYbIB3+9xjL+2cqt2795GtdvBoNgz8rBYtOO+Ny4nBxkcB5excS30BmufOPupwYLK9yZ/DUorpPvra0KyQFpB36mnVjftZ02wJZ/PpmigGa4XuMJQLqGwW8/OW3GiYMF2o55/sevbM3eWYKfsRq8F5jGaYAKT3JUf/9Vu/HW/8Onpc+c2d6yOYVK4cg8p5jmc\
 MwMG/3yTlfUzh4R1RRx9/v6C0OAHr5eYL0u+dY/orqrFpz7DemFoOoYst9/Y7eoh2AsjKQPnzPsQwPwL5DIt036450QEy5s4FqJ27vkEd/BFjE+srSzIPfMo7gElPuTJPMxOPmCXnO4jsfzpMvvfFtitE6o/0OP4HbeeeqcoKx7NXXPvjtZf6dPss2wLjKfxxYfoAju/O7nf//BRgAwaLec114cIEAAAAASUVORK5CYII='
 	}
+}
+
+
+
+document.addEventListener('keydown', handleVoteKey, false);
+
+function handleVoteKey(evt){
+    switch (event.keyCode){
+        case 86:
+            console.log('open voting');
+            PUZZLERS.reset();
+            socket.emit('openpoll', true);
+            break;
+    }
 }

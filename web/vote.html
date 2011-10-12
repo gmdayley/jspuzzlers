@@ -6,7 +6,9 @@
     <script>
         var socket;
         var connect = function() {
-            socket = io.connect('http://10.109.37.189:3000');
+//            socket = io.connect('http://10.109.37.189:3000');
+//            socket = io.connect('http://localhost:3000');
+            socket = io.connect('http://10.0.0.99:3000');
 
             socket.on('ack', function(data) {
                 $("#container").removeClass("notconnected");
@@ -73,7 +75,7 @@
             color: white;
             text-shadow: -1px 1px 0px #333;
             border: 3px solid #333;
-            -webkit-box-reflect: below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.70, transparent), to(white));
+            /*-webkit-box-reflect: below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.70, transparent), to(white));*/
             text-decoration: none;
             font-family: 'Droid Sans Mono', sans-serif;
         }
