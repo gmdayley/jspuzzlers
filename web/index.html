@@ -85,7 +85,7 @@ slides below. -->
 
 
 <article class="puzzle-tiger">
-    <h3>Puzzle #1: Double agent</h3>
+    <h3>Double Agent</h3>
     <section id="code1">
             <pre>
 if("1" == 1) {
@@ -116,7 +116,7 @@ else { alert("D"); }
 
 
 <article class="nobackground">
-    <h3>Lessons learned, Puzzle #1</h3>
+    <h3>Lessons learned: Double Agent</h3>
 
     <ul class="build">
         <li>
@@ -145,7 +145,7 @@ Number("5") === 5  // true
 
 
 <article>
-    <h3>Puzzle #??: You just aren't my type</h3>
+    <h3>You just aren't my type</h3>
     <section id="code13">
         <pre>
 if(typeof null === 'undefined'){
@@ -175,7 +175,7 @@ if(typeof null === 'undefined'){
 </article>
 
 <article>
-    <h3>Lessons learned, Puzzle #??</h3>
+    <h3>Lessons learned: You just aren't my type</h3>
     <ul class="build">
         <li><strong>typeof</strong> returns the fundamental type of an instance</li>
         <li>Non-fundamental types return "object"</li>
@@ -186,7 +186,7 @@ if(typeof null === 'undefined'){
 
 
 <article class="puzzle-box">
-    <h3>Puzzle #2: Basically wrong</h3>
+    <h3>Basically wrong</h3>
     <section id="code2">
             <pre>
 var x = parseInt("5");
@@ -211,7 +211,7 @@ alert((x + y) * z);
 
 
 <article class="nobackground">
-    <h3>Lessons learned, Puzzle #2</h3>
+    <h3>Lessons learned: Basically wrong</h3>
 
     <ul class="build">
         <li>parseInt() takes two parameters: number, base</li>
@@ -228,7 +228,7 @@ parseInt("08", 10) // 8
 
 
 <article>
-    <h3>Puzzle #3: To infinity and beyond</h3>
+    <h3>To infinity and beyond</h3>
     <section id="code3">
             <pre>
 var a = 0;
@@ -255,7 +255,7 @@ else{ alert('Well duh, -0 is not the same as 0'); }
 </article>
 
 <article>
-    <h3>Lessons learned, Puzzle #3</h3>
+    <h3>Lessons learned: To infinity and beyond</h3>
     <ul class="build">
         <li>Number allows for both positive and negative zero values</li>
         <li>+0 equals -0</li>
@@ -264,7 +264,7 @@ else{ alert('Well duh, -0 is not the same as 0'); }
 </article>
 
 <article>
-    <h3>Puzzle #??: Who do we appreciate?</h3>
+    <h3>Who do we appreciate?</h3>
     <section id="code14">
         <pre>
 var $2 = 0.2;
@@ -294,7 +294,7 @@ else { alert("Sponge Bob!"); }
 </article>
 
 <article>
-    <h3>Lessons learned, Puzzle #??</h3>
+    <h3>Lessons learned: Who do we appreciate?</h3>
     <ul class="build">
         <li>Number is the only numerical type in JavaScript</li>
         <li>Number is an IEEE floating point with double precision, and therefore exhibits the floating point rounding error</li>
@@ -307,7 +307,7 @@ else { alert("Sponge Bob!"); }
 </article>
 
 <article>
-    <h3>Puzzle #4, A-for-scope-ic surgery</h3>
+    <h3>A-for-scope-ic surgery</h3>
     <section id="code4">
             <pre>
 var i, j, k = 0;
@@ -334,7 +334,7 @@ alert(i + j + k);</pre>
 </article>
 
 <article>
-    <h3>Lessons learned, Puzzle #4</h3>
+    <h3>Lessons learned: A-for-scope-ic surgery</h3>
     <ul>
         <li>JavaScript has no concept of block scope</li>
         <li>Instead only functional scoping</li>
@@ -352,7 +352,7 @@ console.log(i); // undefined
 </article>
 
 <article>
-    <h3>Puzzle #5, Malpractice</h3>
+    <h3>Malpractice</h3>
     <section id="code5">
             <pre>
 var x = 2;
@@ -377,7 +377,7 @@ var y = 3;
 </article>
 
 <article>
-    <h3>Lessons learned, Puzzle #5</h3>
+    <h3>Lessons learned: Malpractice</h3>
     <ul class="build">
         <li>Re-declaring <strong>y</strong> inside the function causes unexpected behavior from the interpreter</li>
         <li>The interpreter moves <strong>var</strong> statements to the beginning, causing <strong>y</strong> to be undefined:</li>
@@ -397,7 +397,7 @@ var y = 3;
 
 
 <article>
-    <h3>Puzzle #6, Colonoscopy</h3>
+    <h3>Colonoscopy</h3>
     <section id="code6">
         <pre>
 var background = function()
@@ -423,7 +423,7 @@ alert(background().color);
 </article>
 
 <article>
-    <h4>Lessons learned, Puzzle #6</h4>
+    <h3>Lessons learned: Colonoscopy</h3>
     <ul class="build">
         <li>Semicolon's in JavaScript are optional</li>
         <li>The interpreter tries to guess where there should go</li>
@@ -443,7 +443,7 @@ var background = function()
 <!-- - -TV- - -->
 
 <article>
-    <h3>Puzzle #7: Loopy Performance</h3>
+    <h3>Loopy Performance</h3>
     <section id="code7">
 <pre style="line-height: 23px;">
 A.	$('*').each(function(i){            // jQuery each
@@ -477,7 +477,7 @@ D. 	for (var i in a) {                  // For each
 </article>
 
 <article>
-	<h3>Puzzle #7: Loopy Performance Race</h3>
+	<h3>Loopy Performance Race</h3>
 	<canvas id='race' width='760' height='560'></canvas>
 	<script>
 		var perfRace = new puzzlersRace();
@@ -523,12 +523,12 @@ D. 	for (var i in a) {                  // For each
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #7: Loopy Performance</h4>
+    <h3>Lessons learned: Loopy Performance</h3>
     <img src='images/loopy-performance.png'/>
 </article>
 
 <article>
-    <h3>Puzzle #?: A round-about way to round</h3>
+    <h3>A round-about way to round</h3>
     <section id="code?tv1">
 <pre style="line-height: 23px;">
 // Math.round()
@@ -556,7 +556,7 @@ D. 	rounded = (0.5 + somenum) << 0;
 </article>
 
 <article>
-	<h3>Puzzle #?: A round-about way to round</h3>
+	<h3>A round-about way to round</h3>
 	<canvas id='roundRace' width='760' height='560'></canvas>
 	<script>
 		var roundRace = new puzzlersRace();
@@ -602,12 +602,12 @@ D. 	rounded = (0.5 + somenum) << 0;
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #?: A round-about way to round</h4>
+    <h3>Lessons learned: A round-about way to round</h3>
     <img src='images/round-about.png'/>
 </article>
 
 <article>
-    <h3>Puzzle #?: Caching array lengths in loop</h3>
+    <h3>Caching array lengths in loop</h3>
     <section id="code?tv2">
 <pre style="line-height: 23px;">
 A.	for (var i = 0; i < myArray.length; i++) {
@@ -639,7 +639,7 @@ D. 	for (var i = 0; myArray[i++];) {
 </article>
 
 <article>
-	<h3>Puzzle #?: Caching array lengths in loop</h3>
+	<h3>Caching array lengths in loop Race</h3>
 	<canvas id='cacheRace' width='760' height='560'></canvas>
 	<script>
 		var cacheRace = new puzzlersRace();
@@ -685,12 +685,12 @@ D. 	for (var i = 0; myArray[i++];) {
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #?: Caching array lengths in loop</h4>
+    <h3>Lessons learned: Caching array lengths in loop</h3>
     <img src='images/array-cache.png'/>
 </article>
 
 <article>
-    <h3>Puzzle #8: JS++</h3>
+    <h3>JS++</h3>
     <section id="code8">
 <pre>
 alert(+[]+ +'0XE'+ +true+ +'1E1');
@@ -708,7 +708,7 @@ alert(+[]+ +'0XE'+ +true+ +'1E1');
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #8: JS++</h4>
+    <h3>Lessons learned: JS++</h3>
     <ul class='build'>
 		<li>"Unary + is the fastest and preferred way of converting something into a number, because it does not perform any other operations on the number." -MDN</li>
 		<li><code>toNumber(getValue(expr))</code></li>
@@ -720,7 +720,7 @@ alert(+[]+ +'0XE'+ +true+ +'1E1');
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #8: JS++ Extra Credit</h4>
+    <h3>Lessons learned: JS++ Extra Credit</h3>
 	<pre>+new Date</pre>
     <ul class='build'>
 		<li><code>getValue() => getTime()</code></li>
@@ -729,7 +729,7 @@ alert(+[]+ +'0XE'+ +true+ +'1E1');
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #8: JS++ (cont.)</h4>
+    <h3>Lessons learned: JS++ (cont.)</h3>
     <ul class='build'>
 		<li>A. NaN</li>
 		<li>B. "14110" &nbsp;<code>[]+ +'0XE'+ +true+ +'1E1'</code></li>
@@ -739,7 +739,7 @@ alert(+[]+ +'0XE'+ +true+ +'1E1');
 </article>
 
 <article>
-    <h3>Puzzle #9: Thinking Inside the Box</h3>
+    <h3>Thinking Inside the Box</h3>
     <section id="code9">
 <pre>
 alert(++[[]][+[]]+[+[]]);
@@ -757,7 +757,7 @@ alert(++[[]][+[]]+[+[]]);
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #9: Thinking Inside the Box</h4>
+    <h3>Lessons learned: Thinking Inside the Box</h3>
 <pre>
 alert(++[[]][+[]]+[+[]]);
 </pre>
@@ -770,7 +770,7 @@ alert(++[[]][+[]]+[+[]]);
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #9: Thinking Inside the Box (cont.)</h4>
+    <h3>Lessons learned: Thinking Inside the Box (cont.)</h3>
 <pre>
 alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);
 </pre>
@@ -785,7 +785,7 @@ alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);
 </article>
 
 <article>
-    <h3>Puzzle #10: Great lengths</h3>
+    <h3>Great Lengths</h3>
     <section id="code10">
 <pre>
 function fn(l, w) {
@@ -807,7 +807,7 @@ alert(fn.length + new fn(3, 4).length);</pre>
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #10: Great Lengths</h4>
+    <h3>Lessons learned: Great Lengths</h3>
 	<pre>
 function fn(l, w) {
 	this.length = l;
@@ -823,7 +823,7 @@ alert(fn.length + new fn(3, 4).length);</pre>
 </article>
 
 <article>
-    <h3>Puzzle #11: Part A: Defunct-ion</h3>
+    <h3>Defunct-ion, Part A</h3>
     <section id="code11a">
 <pre>
 var user = {
@@ -846,7 +846,7 @@ user.hello('World');</pre>
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #11: Part A: Defunct-ion</h4>
+    <h3>Lessons learned: Defunct-ion, Part A</h3>
 	<pre>
 var user = {
   name: 'Mike',
@@ -864,7 +864,7 @@ user.hello('World');</pre>
 
 
 <article>
-    <h3>Puzzle #11: Part B: Defunct-ion</h3>
+    <h3>Defunct-ion, Part B</h3>
     <section id="code11b">
 <pre>
 var user = {
@@ -890,7 +890,7 @@ pass(user.hello);</pre>
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #11: Part B: Defunct-ion</h4>
+    <h3>Lessons learned: Defunct-ion, Part B</h3>
 	<pre>
 var user = {
   name: 'Mike',
@@ -911,7 +911,7 @@ pass(user.hello);</pre>
 
 
 <article>
-    <h3>Puzzle #11: Part C: Defunct-ion</h3>
+    <h3>Defunct-ion, Part C</h3>
     <section id="code11c">
 <pre>
 var user = {
@@ -934,7 +934,7 @@ user.hello.call('World');</pre>
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #11: Part C: Defunct-ion</h4>
+    <h3>Lessons learned: Defunct-ion, Part C</h3>
 <pre>
 var user = {
   name: 'Mike',
@@ -953,7 +953,7 @@ user.hello.call('World');</pre>
 
 
 <article>
-    <h3>Puzzle #12: Getting Closure</h3>
+    <h3>Getting Closure</h3>
     <section id="code12">
 <pre>
 var fn = null, x = 'globalX', y = 'globalY';
@@ -980,7 +980,7 @@ fn();</pre>
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #12: Getting Closure</h4>
+    <h3>Lessons learned: Getting Closure</h3>
 <pre>
 var fn = null, x = 'globalX', y = 'globalY';
 function outer() {
@@ -1002,7 +1002,7 @@ fn();</pre>
 
 
 <article>
-    <h3>Puzzle #?: You're not my type.</h3>
+    <h3>You're not my type</h3>
     <section id="code?tv4">
 <pre>
 alert([
@@ -1025,7 +1025,7 @@ alert([
 </article>
 
 <article class='fill'>
-    <h4>Lessons learned, Puzzle #?: You're not my type.</h4>
+    <h3>Lessons learned: You're not my type</h3>
     <ul class='build'>
 		<li><code>typeof</code> is not very helpful</li>
 		<li>Use: <pre>
@@ -1042,7 +1042,7 @@ var toType = function(obj) {
 </article>
 
 <article>
-	<h4>Lessons learned, Puzzle #?: You're not my type.</h4>
+	<h3>Lessons learned: You're not my type</h3>
 	<ul class='build'>
 		<li><code>toType(/a-z/); 				//"regexp"</code></li>
 		<li><code>toType(Math); 				//"math"</code></li>
