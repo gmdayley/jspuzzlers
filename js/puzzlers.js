@@ -22,6 +22,8 @@ var PUZZLERS = (function() {
         }
 
         for (var ans in results) {
+            document.querySelector(".current div.results span[rel=" + ans +"]").innerText = results[ans];
+
             ctx.save();
             ctx.beginPath();
             ctx.moveTo(100, 100);
@@ -126,7 +128,7 @@ var puzzlersRace = function() {
 			maxVal = Math.max(maxVal, race.value);
 		}
 		//ctx.restore();
-	}
+	};
 	
 	var reinit = function() {
 		races = JSON.parse(reset);
@@ -140,7 +142,7 @@ var puzzlersRace = function() {
 				draw(1);
 			}, 200);
 		});
-	}
+	};
 	
 	var startLoop = function() {
 		loop = setInterval(function() {
@@ -151,7 +153,7 @@ var puzzlersRace = function() {
 				done = true;
 			}
 		}, 30);
-	}
+	};
 	
 	var reposition = function(frame) {
 		var cnt = races.length,
@@ -163,7 +165,7 @@ var puzzlersRace = function() {
 				finishPos = race.value / maxVal;
 			race.position.left = framePos * finishPos * pixels + 10;
 		}
-	}	
+	};
 	
 	var draw = function(frame) {
 		var cnt = races.length;
@@ -183,7 +185,7 @@ var puzzlersRace = function() {
 			var pos = race.position;
 			ctx.drawImage(race.image, pos.left, pos.top, race.imgW, race.imgH);
 		}
-	}
+	};
 	
 	var drawValues = function() {
 		var cnt = races.length,
@@ -203,32 +205,32 @@ var puzzlersRace = function() {
 			ctx.fillText(race.value, 30, race.position.top);
 		}
 		ctx.restore();
-	}
+	};
 	
 	this.bindCanvas = function(c) {
 		canvas = c;
 		height = c.height;
 		width = c.width;
-	}
+	};
 	
 	this.fixRaces = function(r, t, callback) {
 		reset = JSON.stringify(r)
 		races = r;
 		time = t;
 		init(callback);
-	}
+	};
 	
 	this.set = function() {
 		draw(1);
-	}
+	};
 		
 	this.go = function() {
 		startLoop();
-	}
+	};
 		
 	this.done = function() {
 		return done;
-	}
+	};
 	
 	this.reset = function() {
 		reinit();
@@ -238,11 +240,10 @@ var puzzlersRace = function() {
 var socket;
 var connect = function() {
 //	socket = io.connect('http://localhost:3000');
-	socket = io.connect('http://localhost:3000');
 	socket = io.connect('http://10.0.0.99:3000');
 
 	socket.on('ack', function(data) {
-		console.log(data);
+//		console.log(data);
 	});
 
 	socket.on('vote', function(data, clientId) {
@@ -346,7 +347,7 @@ document.addEventListener('keydown', handleVoteKey, false);
 function handleVoteKey(evt){
     switch (event.keyCode){
         case 86:
-            console.log('open voting');
+//            console.log('open voting');
             PUZZLERS.reset();
             socket.emit('openpoll', true);
             break;

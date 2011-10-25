@@ -5,11 +5,11 @@
 /* Poll */
 ul.poll {
     font-size: .8em;
-    width: 500px;
+    width: 400px;
 }
 
 ul.poll li {
-    margin: 0 0 0 1.2em;
+    margin: 3px 0 0 1.2em;
     padding: 0;
     padding-left: 5px;
 }
@@ -62,6 +62,11 @@ ul.poll li.correct[rel="D"]{
      background-color: rgb(255, 211, 25);
 }
 
+
+
+
+
+
 /*
 pre{
     margin: 0 !important;
@@ -86,4 +91,3 @@ ul.poll{
 /*.slides.template-default .intro {*/
     /*background: url(images/puzzle.png) 634px 447px no-repeat;*/
     /*background-color: white;*/
-}
