@@ -240,7 +240,9 @@ var puzzlersRace = function() {
 var socket;
 var connect = function() {
 //	socket = io.connect('http://localhost:3000');
-	socket = io.connect('http://10.0.0.99:3000');
+//	socket = io.connect('http://10.0.0.99:3000');
+	socket = io.connect('http://rwx.yelyad.com:3000');
+
 
 	socket.on('ack', function(data) {
 //		console.log(data);
