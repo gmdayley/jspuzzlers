@@ -1124,6 +1124,137 @@ var x = new Array(3);
 </article>
 
 
+<!--Never judge a book by it's cover-->
+<article>
+    <h3>Never Judge a Book by it's Cover</h3>
+    <section id="abc">
+
+<pre>
+function Book(title){
+    this.title = title;
+    return { title: 'JavaScript: The Good Parts'};
+}
+function ZipCode(zip){
+    this.zip = zip;
+    return 84043;
+}
+var book = new Book('Twilight'), zip = new ZipCode(07849);
+
+if(book instanceof Book){ alert('Book')};
+if(zip instanceof ZipCode){ alert('ZipCode')};
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>Book</strong> and <strong>ZipCode</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>Book</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>ZipCode</strong></li>
+            <li rel="D"><span class="count"></span>Does not alert anything</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("abc", "C");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
+
+    <ul class='build'>
+        <li>Return values in constructor functions can be overridden</li>
+        <li>Unless...you return a primative type: string, number, date</li>
+        <li>Returning a primative is ignored and the original initialized object is returned</li>
+    </ul>
+</article>
+
+<article>
+    <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
+
+    <ul class='build'>
+        <li>This is often done when using the Module pattern to implement private and public members:</li>
+        <pre>
+function Foo() {
+    var privateVar = 'World';
+
+    function privateMethod() {}
+
+    return {
+        publicVar : 'Hello',
+
+        getString : function() {
+            return publicVar + ' ' + privateVar;
+        }
+    };
+}</pre>
+        <li>However, you can not use <strong>instanceof</strong> to check if its of type Foo</li>
+    </ul>
+</article>
+
+
+
+<!--Sound advice-->
+<article>
+    <h3>Sound Advice</h3>
+    <section id="def">
+
+<pre>
+function Game (){ this.sounds = [];}
+Game.prototype.createSound = function(soundName, url) {
+    this.sounds[soundName] = { name: soundName, url: url};
+}
+Game.prototype.displaySounds = function(){
+    alert(this.sounds.join(','));
+}
+var g = new Game();
+g.createSound('join', 'http://sounds.com/join.mp3');
+g.createSound('exit', 'http://sounds.com/exit.mp3');
+g.displaySounds();
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>Throws a TypeError</li>
+            <li rel="B"><span class="count"></span>alerts: <strong>join,exit</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>exit,join</strong></li>
+            <li rel="D"><span class="count"></span>alerts: <strong>join</strong></li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("def", "A");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Sound Advice</h3>
+
+    <ul class='build'>
+        <li>Return values in constructor functions can be overridden</li>
+        <li>Unless...you return a primative type: string, number, date</li>
+        <li>Returning a primative is ignored and the original initialized object is returned</li>
+    </ul>
+</article>
+
+
+
+
 
 <!--
 <article>
