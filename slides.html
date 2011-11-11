@@ -122,7 +122,7 @@
     <p>
         Gabriel Dayley, Tom Valletta & Some Lucky Person
         <br>
-        October 20, 2011
+        December, 2011
     </p>
 </article>
 
@@ -403,6 +403,61 @@ D. 	var rounded = (0.5 + somenum) << 0;
     <img src='images/round-about.png'/>
 </article>
 
+<!--Maxed out-->
+<article class="puzzle-tiger">
+    <h3>Maxed out</h3>
+    <section id="maxedOut">
+
+<pre>
+if(Math.min() < Math.max()){
+    alert('Of course');
+}
+else{
+    alert('Yikes');
+}
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>Of course</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>Yikes</strong></li>
+            <li rel="C"><span class="count"></span>Throws error</li>
+            <li rel="D"><span class="count"></span>None of the above</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("maxedOut", "B");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Maxed out</h3>
+
+    <ul class='build'>
+        <li><code>Math.min()</code> & <code>Math.max()</code> takes a list of numbers to compare</li>
+        <li><code>Math.min()</code> === -Infinity</li>
+        <li><code>Math.max()</code> === Infinity</li>
+<pre>
+//One way to find it
+var x = Math.pow(2, 53) //9007199254740092
+x === x + 1 //true
+
+//Better way
+Number.MAX_VALUE;
+Number.MIN_VALUE;
+        </pre>
+    </ul>
+</article>
+
 
 <!--A-for-scope-ic-->
 <article>
@@ -667,7 +722,7 @@ alert(fn.length + new fn(3, 4).length);</pre>
     </ul>
 </article>
 
-<!--Sem-colonoscopy-->
+<!--Semi-colonoscopy-->
 <article>
     <h3>Semi-colonoscopy</h3>
     <section id="code6">
@@ -720,6 +775,68 @@ var background = function()
         <li>So, instead of returning the object, undefined is returned, causing a TypeError to be thrown</li>
     </ul>
 </article>
+
+<!--Join with me-->
+<article class="puzzle-tiger">
+    <h3>Come Join With Me</h3>
+    <section id="joinWithMe">
+
+<pre>
+var a = new Array(1, 2, 3);
+var b = new Array(4, 5);
+var c = new Array(6);
+var d = a.concat(b, c);
+
+alert(d.toString());
+
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>1,2,3</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>1,2,3,4,5</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>1,2,3,4,5,6</strong></li>
+            <li rel="D"><span class="count"></span>None of the above</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("joinWithMe", "D");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Come Join With Me</h3>
+
+    <ul class='build'>
+        <li>Calling <code>new Array()</code> with multiple arguments, interprets them as members of the Array</li>
+        <li>Calling <code>new Array()</code> with a single Integer argument(n) initializes an array with n undefined items</li>
+<pre>
+var x = new Array(3);
+
+//Produces this
+[undefined, undefined, undefined].join();
+
+//Which looks like this
+"" + String(undefined) + "," + String(undefined) + "," + String(undefined);
+
+//Resulting in
+',,' === x;  //true
+        </pre>
+    </ul>
+</article>
+
+
+
+
 
 
 <!-- JS++ -->
@@ -826,559 +943,6 @@ else{ alert('Well duh, -0 is not the same as 0'); }
         <li>+0 equals -0</li>
         <li>However +infinity does <strong>not</strong> equal -infinity</li>
     </ul>
-</article>
-
-
-<!--Inside the box-->
-<article>
-    <h3>Thinking Inside the Box</h3>
-    <section id="code9">
-<pre>
-alert(++[[]][+[]]+[+[]]);
-</pre>
-        <div class="results">
-            <span rel="A"></span>
-            <span rel="B"></span>
-            <span rel="C"></span>
-            <span rel="D"></span>
-        </div>
-
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A"><span class="count"></span>alerts: NaN</li>
-            <li rel="B"><span class="count"></span>alerts: "10"</li>
-            <li rel="C"><span class="count"></span>alerts: "0+0+0"</li>
-            <li rel="D"><span class="count"></span>Don't be ridiculous. That will not evaluate!</li>
-        </ul>
-        <button>Try It</button>
-        <script>PUZZLERS.bindQuestion("code9", "B")</script>
-    </section>
-</article>
-
-<article class='fill'>
-    <h3>Lessons learned: Thinking Inside the Box</h3>
-<pre>
-alert(++[[]][+[]]+[+[]]);
-</pre>
-    <ul class='build'>
-        <li>Unary + operator</li>
-        <li><code>ToValue()</code> converts empty array to empty string</li>
-        <li><code>ToNumber()</code> converts empty array to 0</li>
-        <li><code>++[[]][+[]]+[+[]] => ++[[]][0]+[0]</code></li>
-    </ul>
-</article>
-
-<article class='fill'>
-    <h3>Lessons learned: Thinking Inside the Box (cont.)</h3>
-<pre>
-alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);
-</pre>
-    <ul class='build'>
-        <li><code>ToValue()</code> converts empty array to empty string</li>
-        <li><code>++[[]][0]+[0] => ++[""][0]+[0]</code></li>
-        <li><code>++</code> increments and stores</li>
-        <li><code>++[""][0]+[0] => 1+[0]</code></li>
-        <li><code>ToValue()</code> converts 0 array to "0" string</li>
-        <li><code>1+[0] => 1+"0" => "10"</code></li>
-    </ul>
-</article>
-
-
-<!--Double Agent-->
-<article class="puzzle-tiger">
-    <h3>Double Agent</h3>
-    <section id="code1">
-            <pre>
-if("1" == 1) {
-    if("" == 0) {
-        if("" == "0") {
-            alert("A");
-        }
-        else { alert("B"); }
-    }
-    else { alert("C"); }
-}
-else { alert("D"); }
-</pre>
-
-        <div class="results">
-            <span rel="A"></span>
-            <span rel="B"></span>
-            <span rel="C"></span>
-            <span rel="D"></span>
-        </div>
-
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A"><span class="count"></span>alerts: <strong>A</strong></li>
-            <li rel="B"><span class="count"></span>alerts: <strong>B</strong></li>
-            <li rel="C"><span class="count"></span>alerts: <strong>C</strong></li>
-            <li rel="D"><span class="count"></span>alerts: <strong>D</strong></li>
-        </ul>
-        <button>Try It</button>
-
-        <script>
-            PUZZLERS.bindQuestion("code1", "B");
-        </script>
-    </section>
-</article>
-
-
-<article class="nobackground">
-    <h3>Lessons learned: Double Agent</h3>
-
-    <ul class="build">
-        <li>
-            The double equals (==) performs comparisons after type coercion. With the == operator you can
-            compare
-            objects of
-            different types.
-        </li>
-
-        <li>
-            This is often not what you intended and can lead to undesired results.
-        </li>
-
-        <li>
-            Instead you should make sure that your operands are of the right type before doing comparisons or
-            use the
-            triple
-            equals operator (===) to do the comparisons.
-        </li>
-                    <pre>
-"1" === 1 // false
-Number("5") === 5  // true
-</pre>
-    </ul>
-</article>
-
-<!--Getting Closure-->
-<article>
-    <h3>Getting Closure</h3>
-    <section id="code12">
-<pre>
-var fn = null, x = 'globalX', y = 'globalY';
-function outer() {
-  this.x = 'funcX';
-  var y = 'funcY';
-  function inner() {
-    alert(x + ":" + y);
-  }
-  fn = inner;
-}
-new outer();
-fn();</pre>
-        <div class="results">
-            <span rel="A"></span>
-            <span rel="B"></span>
-            <span rel="C"></span>
-            <span rel="D"></span>
-        </div>
-
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A"><span class="count"></span>alerts: globalX:globalY</li>
-            <li rel="B"><span class="count"></span>alerts: globalX:funcY</li>
-            <li rel="C"><span class="count"></span>alerts: funcX:globalY</li>
-            <li rel="D"><span class="count"></span>alerts: funcX:funcY</li>
-        </ul>
-        <button>Try It</button>
-        <script>PUZZLERS.bindQuestion("code12", "B")</script>
-    </section>
-</article>
-
-<article class='fill'>
-    <h3>Lessons learned: Getting Closure</h3>
-<pre>
-var fn = null, x = 'globalX', y = 'globalY';
-function outer() {
-  this.x = 'funcX';
-  var y = 'funcY';
-  function inner() {
-    alert(x + ":" + y);
-  }
-  fn = inner;
-}
-outer();
-fn();</pre>
-    <ul class='build'>
-        <li>Scope of <code>fn() => inner()</code> is DOMWindow</li>
-        <li>There is no way to reach this.x from fn()</li>
-        <li><code>var instance = this; ... instance.x</code></li>
-    </ul>
-</article>
-
-
-<!--Maxed out-->
-<article class="puzzle-tiger">
-    <h3>Maxed out</h3>
-    <section id="maxedOut">
-
-<pre>
-if(Math.min() < Math.max()){
-    alert('Of course');
-}
-else{
-    alert('Yikes');
-}
-</pre>
-
-        <div class="results">
-            <span rel="A"></span>
-            <span rel="B"></span>
-            <span rel="C"></span>
-            <span rel="D"></span>
-        </div>
-
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A"><span class="count"></span>alerts: <strong>Of course</strong></li>
-            <li rel="B"><span class="count"></span>alerts: <strong>Yikes</strong></li>
-            <li rel="C"><span class="count"></span>Throws error</li>
-            <li rel="D"><span class="count"></span>None of the above</li>
-        </ul>
-        <button>Try It</button>
-
-        <script>
-            PUZZLERS.bindQuestion("maxedOut", "B");
-        </script>
-    </section>
-</article>
-
-<article>
-    <h3>Lessons learned: Maxed out</h3>
-
-    <ul class='build'>
-        <li><code>Math.min()</code> & <code>Math.max()</code> takes a list of numbers to compare</li>
-        <li><code>Math.min()</code> === -Infinity</li>
-        <li><code>Math.max()</code> === Infinity</li>
-<pre>
-//One way to find it
-var x = Math.pow(2, 53) //9007199254740092
-x === x + 1 //true
-
-//Better way
-Number.MAX_VALUE;
-Number.MIN_VALUE;
-        </pre>
-    </ul>
-</article>
-
-
-<!--Join with me-->
-<article class="puzzle-tiger">
-    <h3>Come Join With Me</h3>
-    <section id="joinWithMe">
-
-<pre>
-var a = new Array(1, 2, 3);
-var b = new Array(4, 5);
-var c = new Array(6);
-var d = a.concat(b, c);
-
-alert(d.toString());
-
-</pre>
-
-        <div class="results">
-            <span rel="A"></span>
-            <span rel="B"></span>
-            <span rel="C"></span>
-            <span rel="D"></span>
-        </div>
-
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A"><span class="count"></span>alerts: <strong>1,2,3</strong></li>
-            <li rel="B"><span class="count"></span>alerts: <strong>1,2,3,4,5</strong></li>
-            <li rel="C"><span class="count"></span>alerts: <strong>1,2,3,4,5,6</strong></li>
-            <li rel="D"><span class="count"></span>None of the above</li>
-        </ul>
-        <button>Try It</button>
-
-        <script>
-            PUZZLERS.bindQuestion("joinWithMe", "D");
-        </script>
-    </section>
-</article>
-
-<article>
-    <h3>Lessons learned: Come Join With Me</h3>
-
-    <ul class='build'>
-        <li>Calling <code>new Array()</code> with multiple arguments, interprets them as members of the Array</li>
-        <li>Calling <code>new Array()</code> with a single Integer argument(n) initializes an array with n undefined items</li>
-<pre>
-var x = new Array(3);
-
-//Produces this
-[undefined, undefined, undefined].join();
-
-//Which looks like this
-"" + String(undefined) + "," + String(undefined) + "," + String(undefined);
-
-//Resulting in
-',,' === x;  //true
-        </pre>
-    </ul>
-</article>
-
-
-<!--Never judge a book by it's cover-->
-<article>
-    <h3>Never Judge a Book by it's Cover</h3>
-    <section id="abc">
-
-<pre>
-function Book(title){
-    this.title = title;
-    return { title: 'JavaScript: The Good Parts'};
-}
-function ZipCode(zip){
-    this.zip = zip;
-    return 84043;
-}
-var book = new Book('Twilight'), zip = new ZipCode(07849);
-
-if(book instanceof Book){ alert('Book')};
-if(zip instanceof ZipCode){ alert('ZipCode')};
-</pre>
-
-        <div class="results">
-            <span rel="A"></span>
-            <span rel="B"></span>
-            <span rel="C"></span>
-            <span rel="D"></span>
-        </div>
-
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A"><span class="count"></span>alerts: <strong>Book</strong> and <strong>ZipCode</strong></li>
-            <li rel="B"><span class="count"></span>alerts: <strong>Book</strong></li>
-            <li rel="C"><span class="count"></span>alerts: <strong>ZipCode</strong></li>
-            <li rel="D"><span class="count"></span>Does not alert anything</li>
-        </ul>
-        <button>Try It</button>
-
-        <script>
-            PUZZLERS.bindQuestion("abc", "C");
-        </script>
-    </section>
-</article>
-
-<article>
-    <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
-
-    <ul class='build'>
-        <li>Return values in constructor functions can be overridden</li>
-        <li>Unless...you return a primative type: string, number, date</li>
-        <li>Returning a primative is ignored and the original initialized object is returned</li>
-    </ul>
-</article>
-
-<article>
-    <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
-
-    <ul class='build'>
-        <li>This is often done when using the Module pattern to implement private and public members:</li>
-        <pre>
-function Foo() {
-    var privateVar = 'World';
-
-    function privateMethod() {}
-
-    return {
-        publicVar : 'Hello',
-
-        getString : function() {
-            return publicVar + ' ' + privateVar;
-        }
-    };
-}</pre>
-        <li>However, you can not use <strong>instanceof</strong> to check if its of type Foo</li>
-    </ul>
-</article>
-
-
-
-<!--Sound advice-->
-<article>
-    <h3>Sound Advice</h3>
-    <section id="def">
-
-<pre>
-function Game (){ this.sounds = [];}
-Game.prototype.createSound = function(soundName, url) {
-    this.sounds[soundName] = { name: soundName, url: url};
-}
-Game.prototype.displaySounds = function(){
-    alert(this.sounds.join(','));
-}
-var g = new Game();
-g.createSound('join', 'http://sounds.com/join.mp3');
-g.createSound('exit', 'http://sounds.com/exit.mp3');
-g.displaySounds();
-</pre>
-
-        <div class="results">
-            <span rel="A"></span>
-            <span rel="B"></span>
-            <span rel="C"></span>
-            <span rel="D"></span>
-        </div>
-
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A"><span class="count"></span>Throws a TypeError</li>
-            <li rel="B"><span class="count"></span>alerts: <strong>join,exit</strong></li>
-            <li rel="C"><span class="count"></span>alerts: <strong>exit,join</strong></li>
-            <li rel="D"><span class="count"></span>alerts: <strong>join</strong></li>
-        </ul>
-        <button>Try It</button>
-
-        <script>
-            PUZZLERS.bindQuestion("def", "A");
-        </script>
-    </section>
-</article>
-
-<article>
-    <h3>Lessons learned: Sound Advice</h3>
-
-    <ul class='build'>
-        <li>Return values in constructor functions can be overridden</li>
-        <li>Unless...you return a primative type: string, number, date</li>
-        <li>Returning a primative is ignored and the original initialized object is returned</li>
-    </ul>
-</article>
-
-
-
-
-
-<!--
-<article>
-    <h3>You just aren't my type</h3>
-    <section id="code13">
-        <pre>
-if(typeof null === 'undefined'){
-    if(typeof {} === 'object'){
-        if(typeof "" === 'string'){
-            if(typeof [] === 'array'){
-                alert('A');
-            } else{ alert('B'); }
-        }
-    }
-} else{
-    alert('C');
-}
-</pre>
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A">alerts: <strong>A</strong></li>
-            <li rel="B">alerts: <strong>B</strong></li>
-            <li rel="C">alerts: <strong>C</strong></li>
-            <li rel="D">No output</li>
-        </ul>
-        <button>Try It</button>
-
-        <script>PUZZLERS.bindQuestion("code13", "C")</script>
-
-    </section>
-</article>
-
-<article>
-    <h3>Lessons learned: You just aren't my type</h3>
-    <ul class="build">
-        <li><strong>typeof</strong> returns the fundamental type of an instance</li>
-        <li>Non-fundamental types return "object"</li>
-        <li><strong>typeof null</strong> returns "object"</li>
-        <li>Array is not actually a fundamental type, therefore returns "object"</li>
-    </ul>
-</article>
-
-
-<article>
-    <h3>Caching array lengths in loop</h3>
-    <section id="code?tv2">
-<pre style="line-height: 23px;">
-A.	for (var i = 0; i < myArray.length; i++) {
-        // For loop
-    }
-
-B. 	for (var i = 0, len = myArray.length; i < len; i++) {
-        // Cached
-    }
-
-C. 	for (var i = myArray.length; i--;) {
-        // Decrement
-    }
-
-D. 	for (var i = 0; myArray[i++];) {
-        // For index
-    }
-</pre>
-        <canvas width="200" height="200" class="pie"></canvas>
-        <ul class="poll">
-            <li rel="A">A is the slowest</li>
-            <li rel="B">B is the slowest</li>
-            <li rel="C">C is the slowest</li>
-            <li rel="D">D is the slowest</li>
-        </ul>
-
-        <script>PUZZLERS.bindQuestion("code?tv2", "D")</script>
-    </section>
-</article>
-
-<article>
-    <h3>Caching array lengths in loop Race</h3>
-    <canvas id='cacheRace' width='760' height='560'></canvas>
-    <script>
-        var cacheRace = new puzzlersRace();
-        cacheRace.bindCanvas(document.getElementById('cacheRace'));
-        cacheRace.fixRaces([
-            {
-                color: 'rgb(0, 138, 53)',
-                img: images.horse.green,
-                label: "For loop",
-                value: 2689
-            }, {
-                color: 'rgb(0, 102, 204)',
-                img: images.horse.blue,
-                label: "Cached",
-                value: 3948
-            }, {
-                color: 'rgb(255, 0, 0)',
-                img: images.horse.red,
-                label: "Decrement",
-                value: 3282
-            }, {
-                color: 'rgb(255, 211, 25)',
-                img: images.horse.yellow,
-                label: "For index",
-                value: 1581
-            }
-        ],
-        10000,
-        function() {
-            setTimeout(function() {
-                cacheRace.set();
-            }, 500);
-            document.getElementById('cacheRace').addEventListener('click', function() {
-                if (cacheRace.done()) {
-                    cacheRace.reset();
-                }
-                else {
-                    cacheRace.go();
-                }
-            });
-        });
-    </script>
-</article>
-
-<article class='fill'>
-    <h3>Lessons learned: Caching array lengths in loop</h3>
-    <img src='images/array-cache.png'/>
 </article>
 
 
@@ -1510,7 +1074,463 @@ user.hello.call('World');</pre>
         <li>Mike says hello World</li>
     </ul>
 </article>
+
+<!--Guilt by Association-->
+<article>
+    <h3>Guilty by Association</h3>
+    <section>
+
+<pre>
+function Playlist(name) {
+    this.name = name;
+    this.songs = [];
+    this.addSong = function(id, song) {
+        this.songs[id] = song;
+    }
+    this.showPlaylist = function() {
+        alert(this.songs.join(','));
+    }
+}
+</pre>
+    </section>
+</article>
+
+<article>
+    <h3>Guilty by Association</h3>
+    <section id="def">
+
+<pre>
+var plist = new Playlist("90s");
+
+plist.addSong('311', 'Beautiful Disaster');
+plist.addSong('join', 'Scratch');
+plist.addSong('U2', 'Numb');
+
+plist.showPlaylist();
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>Throws a TypeError</li>
+            <li rel="B"><span class="count"></span>alerts: <strong>Beautiful Disaster, Scratch, Numb</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>Numb, Scratch, Beautiful Disaster</strong></li>
+            <li rel="D"><span class="count"></span>alerts: <strong>311, join, U2</strong></li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("def", "A");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Guilty by Association</h3>
+
+    <ul class='build'>
+        <li>The problem is <code>songs</code> is an associative array</li>
+        <li>When we used 'join' as one of the keys, we effectively modified the built-in join method of Array</li>
+        <li>Don't use arrays in these situations, instead use an object:</li>
+        <pre>
+this.songs = {};
+</pre>
+    </ul>
+</article>
+
+
+
+
+<!--Inside the box-->
+<article>
+    <h3>Thinking Inside the Box</h3>
+    <section id="code9">
+<pre>
+alert(++[[]][+[]]+[+[]]);
+</pre>
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: NaN</li>
+            <li rel="B"><span class="count"></span>alerts: "10"</li>
+            <li rel="C"><span class="count"></span>alerts: "0+0+0"</li>
+            <li rel="D"><span class="count"></span>Don't be ridiculous. That will not evaluate!</li>
+        </ul>
+        <button>Try It</button>
+        <script>PUZZLERS.bindQuestion("code9", "B")</script>
+    </section>
+</article>
+
+<article class='fill'>
+    <h3>Lessons learned: Thinking Inside the Box</h3>
+<pre>
+alert(++[[]][+[]]+[+[]]);
+</pre>
+    <ul class='build'>
+        <li>Unary + operator</li>
+        <li><code>ToValue()</code> converts empty array to empty string</li>
+        <li><code>ToNumber()</code> converts empty array to 0</li>
+        <li><code>++[[]][+[]]+[+[]] => ++[[]][0]+[0]</code></li>
+    </ul>
+</article>
+
+<article class='fill'>
+    <h3>Lessons learned: Thinking Inside the Box (cont.)</h3>
+<pre>
+alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);
+</pre>
+    <ul class='build'>
+        <li><code>ToValue()</code> converts empty array to empty string</li>
+        <li><code>++[[]][0]+[0] => ++[""][0]+[0]</code></li>
+        <li><code>++</code> increments and stores</li>
+        <li><code>++[""][0]+[0] => 1+[0]</code></li>
+        <li><code>ToValue()</code> converts 0 array to "0" string</li>
+        <li><code>1+[0] => 1+"0" => "10"</code></li>
+    </ul>
+</article>
+
+<!--Never judge a book by it's cover-->
+<article>
+    <h3>Never Judge a Book by it's Cover</h3>
+    <section id="abc">
+
+<pre>
+function Book(title){
+    this.title = title;
+    return { title: 'JavaScript: The Good Parts'};
+}
+function ZipCode(zip){
+    this.zip = zip;
+    return 84043;
+}
+var book = new Book('Twilight'), zip = new ZipCode(07849);
+
+if(book instanceof Book){ alert('Book')};
+if(zip instanceof ZipCode){ alert('ZipCode')};
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>Book</strong> and <strong>ZipCode</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>Book</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>ZipCode</strong></li>
+            <li rel="D"><span class="count"></span>Does not alert anything</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("abc", "C");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
+
+    <ul class='build'>
+        <li>Return values in constructor functions can be overridden</li>
+        <li>Unless...you return a primative type: string, number, date</li>
+        <li>Returning a primative is ignored and the original initialized object is returned</li>
+    </ul>
+</article>
+
+<article>
+    <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
+
+    <ul class='build'>
+        <li>This is often done when using the Module pattern to implement private and public members:</li>
+        <pre>
+function Foo() {
+    var privateVar = 'World';
+
+    function privateMethod() {}
+
+    return {
+        publicVar : 'Hello',
+
+        getString : function() {
+            return publicVar + ' ' + privateVar;
+        }
+    };
+}</pre>
+        <li>However, you can not use <strong>instanceof</strong> to check if its of type Foo</li>
+    </ul>
+</article>
+
+
+<!--Double Agent-->
+<article class="puzzle-tiger">
+    <h3>Double Agent</h3>
+    <section id="code1">
+            <pre>
+if("1" == 1) {
+    if("" == 0) {
+        if("" == "0") {
+            alert("A");
+        }
+        else { alert("B"); }
+    }
+    else { alert("C"); }
+}
+else { alert("D"); }
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>A</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>B</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>C</strong></li>
+            <li rel="D"><span class="count"></span>alerts: <strong>D</strong></li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("code1", "B");
+        </script>
+    </section>
+</article>
+
+
+<article class="nobackground">
+    <h3>Lessons learned: Double Agent</h3>
+
+    <ul class="build">
+        <li>
+            The double equals (==) performs comparisons after type coercion. With the == operator you can
+            compare
+            objects of
+            different types.
+        </li>
+
+        <li>
+            This is often not what you intended and can lead to undesired results.
+        </li>
+
+        <li>
+            Instead you should make sure that your operands are of the right type before doing comparisons or
+            use the
+            triple
+            equals operator (===) to do the comparisons.
+        </li>
+                    <pre>
+"1" === 1 // false
+Number("5") === 5  // true
+</pre>
+    </ul>
+</article>
+
+<!--Getting Closure-->
+<article>
+    <h3>Getting Closure</h3>
+    <section id="code12">
+<pre>
+var fn = null, x = 'globalX', y = 'globalY';
+function outer() {
+  this.x = 'funcX';
+  var y = 'funcY';
+  function inner() {
+    alert(x + ":" + y);
+  }
+  fn = inner;
+}
+new outer();
+fn();</pre>
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: globalX:globalY</li>
+            <li rel="B"><span class="count"></span>alerts: globalX:funcY</li>
+            <li rel="C"><span class="count"></span>alerts: funcX:globalY</li>
+            <li rel="D"><span class="count"></span>alerts: funcX:funcY</li>
+        </ul>
+        <button>Try It</button>
+        <script>PUZZLERS.bindQuestion("code12", "B")</script>
+    </section>
+</article>
+
+<article class='fill'>
+    <h3>Lessons learned: Getting Closure</h3>
+<pre>
+var fn = null, x = 'globalX', y = 'globalY';
+function outer() {
+  this.x = 'funcX';
+  var y = 'funcY';
+  function inner() {
+    alert(x + ":" + y);
+  }
+  fn = inner;
+}
+outer();
+fn();</pre>
+    <ul class='build'>
+        <li>Scope of <code>fn() => inner()</code> is DOMWindow</li>
+        <li>There is no way to reach this.x from fn()</li>
+        <li><code>var instance = this; ... instance.x</code></li>
+    </ul>
+</article>
+
+
+
+
+
+<!--
+<article>
+    <h3>You just aren't my type</h3>
+    <section id="code13">
+        <pre>
+if(typeof null === 'undefined'){
+    if(typeof {} === 'object'){
+        if(typeof "" === 'string'){
+            if(typeof [] === 'array'){
+                alert('A');
+            } else{ alert('B'); }
+        }
+    }
+} else{
+    alert('C');
+}
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">alerts: <strong>A</strong></li>
+            <li rel="B">alerts: <strong>B</strong></li>
+            <li rel="C">alerts: <strong>C</strong></li>
+            <li rel="D">No output</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>PUZZLERS.bindQuestion("code13", "C")</script>
+
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: You just aren't my type</h3>
+    <ul class="build">
+        <li><strong>typeof</strong> returns the fundamental type of an instance</li>
+        <li>Non-fundamental types return "object"</li>
+        <li><strong>typeof null</strong> returns "object"</li>
+        <li>Array is not actually a fundamental type, therefore returns "object"</li>
+    </ul>
+</article>
+
+
+<article>
+    <h3>Caching array lengths in loop</h3>
+    <section id="code?tv2">
+<pre style="line-height: 23px;">
+A.	for (var i = 0; i < myArray.length; i++) {
+        // For loop
+    }
+
+B. 	for (var i = 0, len = myArray.length; i < len; i++) {
+        // Cached
+    }
+
+C. 	for (var i = myArray.length; i--;) {
+        // Decrement
+    }
+
+D. 	for (var i = 0; myArray[i++];) {
+        // For index
+    }
+</pre>
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A">A is the slowest</li>
+            <li rel="B">B is the slowest</li>
+            <li rel="C">C is the slowest</li>
+            <li rel="D">D is the slowest</li>
+        </ul>
+
+        <script>PUZZLERS.bindQuestion("code?tv2", "D")</script>
+    </section>
+</article>
+
+<article>
+    <h3>Caching array lengths in loop Race</h3>
+    <canvas id='cacheRace' width='760' height='560'></canvas>
+    <script>
+        var cacheRace = new puzzlersRace();
+        cacheRace.bindCanvas(document.getElementById('cacheRace'));
+        cacheRace.fixRaces([
+            {
+                color: 'rgb(0, 138, 53)',
+                img: images.horse.green,
+                label: "For loop",
+                value: 2689
+            }, {
+                color: 'rgb(0, 102, 204)',
+                img: images.horse.blue,
+                label: "Cached",
+                value: 3948
+            }, {
+                color: 'rgb(255, 0, 0)',
+                img: images.horse.red,
+                label: "Decrement",
+                value: 3282
+            }, {
+                color: 'rgb(255, 211, 25)',
+                img: images.horse.yellow,
+                label: "For index",
+                value: 1581
+            }
+        ],
+        10000,
+        function() {
+            setTimeout(function() {
+                cacheRace.set();
+            }, 500);
+            document.getElementById('cacheRace').addEventListener('click', function() {
+                if (cacheRace.done()) {
+                    cacheRace.reset();
+                }
+                else {
+                    cacheRace.go();
+                }
+            });
+        });
+    </script>
+</article>
+
+<article class='fill'>
+    <h3>Lessons learned: Caching array lengths in loop</h3>
+    <img src='images/array-cache.png'/>
+</article>
 -->
+
 
 
 </section>
