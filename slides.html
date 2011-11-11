@@ -1009,6 +1009,122 @@ fn();</pre>
 </article>
 
 
+<!--Maxed out-->
+<article class="puzzle-tiger">
+    <h3>Maxed out</h3>
+    <section id="maxedOut">
+
+<pre>
+if(Math.min() < Math.max()){
+    alert('Of course');
+}
+else{
+    alert('Yikes');
+}
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>Of course</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>Yikes</strong></li>
+            <li rel="C"><span class="count"></span>Throws error</li>
+            <li rel="D"><span class="count"></span>None of the above</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("maxedOut", "B");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Maxed out</h3>
+
+    <ul class='build'>
+        <li><code>Math.min()</code> & <code>Math.max()</code> takes a list of numbers to compare</li>
+        <li><code>Math.min()</code> === -Infinity</li>
+        <li><code>Math.max()</code> === Infinity</li>
+<pre>
+//One way to find it
+var x = Math.pow(2, 53) //9007199254740092
+x === x + 1 //true
+
+//Better way
+Number.MAX_VALUE;
+Number.MIN_VALUE;
+        </pre>
+    </ul>
+</article>
+
+
+<!--Join with me-->
+<article class="puzzle-tiger">
+    <h3>Come Join With Me</h3>
+    <section id="joinWithMe">
+
+<pre>
+var a = new Array(1, 2, 3);
+var b = new Array(4, 5);
+var c = new Array(6);
+var d = a.concat(b, c);
+
+alert(d.toString());
+
+</pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>1,2,3</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>1,2,3,4,5</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>1,2,3,4,5,6</strong></li>
+            <li rel="D"><span class="count"></span>None of the above</li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("joinWithMe", "D");
+        </script>
+    </section>
+</article>
+
+<article>
+    <h3>Lessons learned: Come Join With Me</h3>
+
+    <ul class='build'>
+        <li>Calling <code>new Array()</code> with multiple arguments, interprets them as members of the Array</li>
+        <li>Calling <code>new Array()</code> with a single Integer argument(n) initializes an array with n undefined items</li>
+<pre>
+var x = new Array(3);
+
+//Produces this
+[undefined, undefined, undefined].join();
+
+//Which looks like this
+"" + String(undefined) + "," + String(undefined) + "," + String(undefined);
+
+//Resulting in
+',,' === x;  //true
+        </pre>
+    </ul>
+</article>
+
+
+
 <!--
 <article>
     <h3>You just aren't my type</h3>

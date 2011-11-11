@@ -14,7 +14,6 @@ ul.poll li {
     padding-left: 5px;
 }
 
-
 ul.poll li::before{
     width: 1.3em;
     margin-left: -1.3em;
