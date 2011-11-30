@@ -21,6 +21,9 @@
     <script src="js/lib/socket.io/socket.io.min.js"></script>
     <script src='js/slides.js'></script>
     <script src='js/puzzlers.js'></script>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery.qrcode.min.js"></script>
 </head>
 
 <style>
@@ -124,6 +127,40 @@
         <br>
         December, 2011
     </p>
+</article>
+
+<article>
+    <input id="ip" type="text" value="http://10.0.0.99/jspuzzlers"
+            style="width: 775px;
+            height: 45px;
+            font-size: 32px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            line-height: 45px;
+            background: black;
+            color: white;">
+
+    <div id="qr" class="centered" style="left: 50%; top: 50px; position: relative; margin-left: -256px;"></div>
+
+
+    <script>
+        $(function(){
+            var ip = document.getElementById('ip');
+            ip.addEventListener('keydown', function(e){
+                e.stopPropagation();
+            });
+            ip.addEventListener('keyup', function(){
+                generateQR(ip.value);
+            });
+            var generateQR = function(text){
+                var qr = $("#qr");
+                qr.empty();
+                qr.qrcode({width: 512,height: 512,text: text});
+            };
+
+            generateQR(ip.value);
+        });
+    </script>
 </article>
 
 <article>
@@ -270,7 +307,7 @@ var $6 = $4 + $2;
 var $8 = $6 + $2;
 
 //Who do we appreciate?
-if($4 !== .4){ alert("UJUG!"); }
+if($4 !== .4){ alert("Justin Bieber!"); }
 else if($6 !== .6) { alert("Tom!"); }
 else if($8 !== .8) { alert("Gabriel!"); }
 else { alert("Sponge Bob!"); }
@@ -285,7 +322,7 @@ else { alert("Sponge Bob!"); }
         <canvas width="200" height="200" class="pie"></canvas>
 
         <ul class="poll">
-            <li rel="A"><span class="count"></span>alerts: <strong>Java Stack Team!</strong></li>
+            <li rel="A"><span class="count"></span>alerts: <strong>Justin Bieber!</strong></li>
             <li rel="B"><span class="count"></span>alerts: <strong>Tom!</strong></li>
             <li rel="C"><span class="count"></span>alerts: <strong>Gabriel!</strong></li>
             <li rel="D"><span class="count"></span>alerts: <strong>Sponge Bob!</strong></li>
@@ -1257,7 +1294,7 @@ if(zip instanceof ZipCode){ alert('ZipCode')};
     <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
 
     <ul class='build'>
-        <li>This is often done when using the Module pattern to implement private and public members:</li>
+        <li>This is often used to implement private and public members:</li>
         <pre>
 function Foo() {
     var privateVar = 'World';
@@ -1399,6 +1436,37 @@ fn();</pre>
         <li>There is no way to reach this.x from fn()</li>
         <li><code>var instance = this; ... instance.x</code></li>
     </ul>
+</article>
+
+<!--Double Agent-->
+<article class="puzzle-tiger">
+    <h3>And Finally</h3>
+    <section id="finally">
+            <pre>
+var bestSessionToGoToNext = "Mobile Web Workshop";
+alert(bestSessionToGoToNext);
+            </pre>
+
+        <div class="results">
+            <span rel="A"></span>
+            <span rel="B"></span>
+            <span rel="C"></span>
+            <span rel="D"></span>
+        </div>
+
+        <canvas width="200" height="200" class="pie"></canvas>
+        <ul class="poll">
+            <li rel="A"><span class="count"></span>alerts: <strong>Mobile Web Workshop</strong></li>
+            <li rel="B"><span class="count"></span>alerts: <strong>The Beach</strong></li>
+            <li rel="C"><span class="count"></span>alerts: <strong>Behavior Driven Infrastructure</strong></li>
+            <li rel="D"><span class="count"></span>alerts: <strong>Optimizing For Mobile Performance</strong></li>
+        </ul>
+        <button>Try It</button>
+
+        <script>
+            PUZZLERS.bindQuestion("finally", "A");
+        </script>
+    </section>
 </article>
 
 
