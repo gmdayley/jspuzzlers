@@ -1,0 +1,68 @@
+@import url(http://fonts.googleapis.com/css?family=Nunito);
+
+div[poll] {
+    text-align: left;
+}
+
+div[poll] ul {
+    font-family: 'Nunito';
+    list-style-type: none;
+    margin: 0px;
+    padding: 0;
+
+}
+
+
+div[poll] ul > li {
+    margin-bottom: 5px;
+    padding:3px;
+    transition: opacity .3s ease-out;
+}
+
+div[poll] ul > li > div {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: rgba(0,255,0,1);
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.5em;
+    text-align: center;
+    color: white;
+    font-size: .8em;
+    margin-right: 10px;
+
+}
+
+div[poll] ul > li > span {
+    line-height: 1.3em;
+    text-align: center;
+    font-size: 1.0em;
+}
+
+div[poll] ul > li:nth-child(1n) > div {
+    background-color: rgba(136,168,37,1);
+}
+
+div[poll] ul > li:nth-child(2n) > div {
+    background-color: rgba(53,32,59,1);
+}
+
+div[poll] ul > li:nth-child(3n) > div {
+    background-color: rgba(145,17,70,1);
+}
+
+div[poll] ul > li:nth-child(4n) > div {
+    background-color: rgba(207,74,48,1);
+}
+
+div[poll] ul > li:nth-child(5n) > div {
+    background-color: rgba(237,140,43,1);
+}
+
+div[poll] div.poll-results {
+    float:right;
+    /*outline: 1px solid red;*/
+    /*background: green;*/
+    display: inline-block;
+    margin-right: 20px;
+}

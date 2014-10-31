@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="current-poll">
+<button onclick="vote('A')">A</button>
+<button onclick="vote('B')">B</button>
+<button onclick="vote('C')">C</button>
+<button onclick="vote('D')">D</button>
+<button onclick="vote('E')">D</button>
+<button onclick="vote('F')">D</button>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+//    var socketId = '{{socketId}}';
+    var socket = io.connect(window.location.origin);
+
+
+
+    socket.on('slidedata', function(data) {
+        // ignore data from sockets that aren't ours
+//        if (data.socketId !== socketId) { return; }
+
+
+
+        if (data.markdown) {
+            notes.innerHTML = marked(data.notes);
+        }
+        else {
+            notes.innerHTML = data.notes;
+        }
+
+        currentSlide.contentWindow.Reveal.slide(data.indexh, data.indexv);
+        nextSlide.contentWindow.Reveal.slide(data.nextindexh, data.nextindexv);
+    });
+    socket.on('fragmentdata', function(data) {
+        // ignore data from sockets that aren't ours
+        if (data.socketId !== socketId) { return; }
+
+        if (data.fragment === 'next') {
+            currentSlide.contentWindow.Reveal.nextFragment();
+        }
+        else if (data.fragment === 'previous') {
+            currentSlide.contentWindow.Reveal.prevFragment();
+        }
+    });
+
+    function vote(option) {
+        socket.emit('vote', { pollId: 'test1', option: option});
+    }
+</script>
+
+</body>
+</html>
