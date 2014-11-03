@@ -5,13 +5,22 @@ var Poller = (function () {
   var pollData = {};
   var socket;
 
-  var chartConfig = {
-    height: 250,
-    width: 250,
-    radius: Math.min(this.width, this.height) / 2
-  };
 
-  var color = d3.scale.ordinal().range(["#88A825", "#35203B", "#911146", "#CF4A30", "#ED8C2B", "#CD8C2B", "#ED8D2B" ]);
+  var width = 300,
+    height = 300,
+    radius = Math.min(width, height) / 2;
+
+  var color = d3.scale.ordinal().range(["#88A825", "#35203B", "#911146", "#CF4A30", "#ED8C2B", "#CD8C2B","#ED8D2B" ]);
+
+  var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) {
+      return d.total;
+    });
+
+  var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(radius - 70);
 
 
   function keyboardListener() {
@@ -39,22 +48,63 @@ var Poller = (function () {
 
   function vote(vote) {
     var poll = pollData[vote.pollId];
+
     if(!poll){
       console.log('Unknown poll: ' + vote.pollId);
     } else {
-      var option = poll[vote.option];
+      var option = _.find(pollData[vote.pollId], function(option) {
+        return option.option === vote.option;
+      });
+
       if(option == undefined) {
         console.log('Unknow option: ' + vote.option, ', poll: ' + vote.pollId);
       } else {
-        pollData[vote.pollId][vote.option]++;
+        option.total++;
+        console.log(option);
         updateChart(vote.pollId);
       }
     }
   }
 
+  function buildPieChart(container, pollId) {
+    var svg = d3.select(container).append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("id", "pieChart")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    var path = svg.selectAll("path")
+      .data(pie(pollData[pollId]))
+      .enter()
+      .append("path");
+
+    path.transition()
+      .duration(500)
+      .attr("fill", function(d, i) {
+        return color(d.data.option);
+      })
+      .attr("d", arc)
+      .each(function(d) {
+        this._current = d;
+      }); // store the initial angles
+  }
+
   function updateChart(pollId) {
-    var g = d3.select('div poll[' + pollId + '] div.poll-results > svg > g');
-    console.log(g);
+    var svg = d3.select('div[poll=' + pollId + '] > div.poll-results > svg > g');
+
+    var data = pollData[pollId];
+    console.log(data);
+    var path = svg.selectAll('path')
+      .data(pie(data));
+
+    path.transition().duration(750).attrTween("d", function(a) {
+      var i = d3.interpolate(this._current, a);
+      this._current = i(0);
+      return function(t) {
+        return arc(i(t));
+      };
+    }); // redraw the arcs
   }
 
   function buildPolls() {
@@ -65,15 +115,18 @@ var Poller = (function () {
       var pollId = poll.getAttribute("poll");
       var options = poll.querySelectorAll('li[option]');
 
-      pollData[pollId] = {
-        options: {}
-      };
+      pollData[pollId] = [];
 
       for (var j = 0; j < options.length; ++j) {
         var li = options[j];
         var div = document.createElement('div');
         var option = options[j].getAttribute('option');
-        pollData[pollId][option] = 0;
+
+        pollData[pollId].push({
+          option: option,
+          total: 1
+        });
+
         div.innerText = option;
         div.classList.add('option' + j);
 
@@ -88,6 +141,8 @@ var Poller = (function () {
       var results = document.createElement('div');
       results.classList.add('poll-results');
       poll.appendChild(results);
+
+      buildPieChart(results, pollId)
     }
 
     console.log(pollData);

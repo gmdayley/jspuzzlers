@@ -105,9 +105,15 @@ parseInt("08", 10) // 8
 var a = 1 + 2;
 alert(a);
                     </code></pre>
-				    <div poll>
-                        hello
-				    </div>
+
+                    <div poll="test2">
+                        <h4>What will this alert?</h4>
+                        <ul>
+                            <li option="A">A</li>
+                            <li option="B" answer>B</li>
+                            <li option="C">undefined</li>
+                        </ul>
+                    </div>
 
                 </section>
 
@@ -158,6 +164,7 @@ alert(a);
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
+		<script src="lib/js/lodash.min.js"></script>
 
 		<script>
 
@@ -176,8 +183,8 @@ alert(a);
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
 				// parallaxBackgroundSize: '2100px 900px',
-//                parallaxBackgroundImage: 'img/saturn.jpg',
-//                parallaxBackgroundSize: '3000px 1300px',
+                parallaxBackgroundImage: 'img/saturn.jpg',
+                parallaxBackgroundSize: '3000px 1300px',
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
