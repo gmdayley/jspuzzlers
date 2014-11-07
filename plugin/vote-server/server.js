@@ -14,7 +14,6 @@ var opts = {
   baseDir :   __dirname + '/../../'
 };
 
-
 io.sockets.on('connection', function(socket) {
   console.log('incoming connection');
 
@@ -24,15 +23,14 @@ io.sockets.on('connection', function(socket) {
   });
 
   socket.on('vote', function(vote) {
+    console.log('SOCKET: ', socket.id);
+    vote.client = socket.id;
     socket.broadcast.emit('vote', vote);
   });
 
-//  socket.on('fragmentchanged', function(fragmentData) {
-//    socket.broadcast.emit('fragmentdata', fragmentData);
-//  });
-
-
-
+  socket.on('polldata', function(data) {
+    socket.broadcast.emit('polldata', data);
+  });
 });
 
 app.configure(function() {
@@ -40,6 +38,7 @@ app.configure(function() {
     app.use('/' + dir, staticDir(opts.baseDir + dir));
   });
 });
+
 
 app.get("/", function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});

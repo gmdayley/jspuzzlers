@@ -4,17 +4,17 @@ var Poller = (function () {
 
   var pollData = {};
   var socket;
-
+  var allowVotes = false;
 
   var width = 300,
     height = 300,
     radius = Math.min(width, height) / 2;
 
-  var color = d3.scale.ordinal().range(["#88A825", "#35203B", "#911146", "#CF4A30", "#ED8C2B", "#CD8C2B","#ED8D2B" ]);
+  var color = d3.scale.ordinal().range(["#88A825", "#35203B", "#911146", "#CF4A30", "#ED8C2B", "#CD8C2B", "#ED8D2B"]);
 
   var pie = d3.layout.pie()
     .sort(null)
-    .value(function(d) {
+    .value(function (d) {
       return d.total;
     });
 
@@ -22,42 +22,63 @@ var Poller = (function () {
     .outerRadius(radius - 10)
     .innerRadius(radius - 70);
 
+  function slideListener() {
+    // TODO - could use data-state
+    // i.e <section data-state=poll>
+    // addListener('poll')
+
+    Reveal.addEventListener('slidechanged', function (event) {
+      emitCurrentPoll();
+    });
+  }
+
+  function emitCurrentPoll() {
+    var currentPoll = getCurrentPoll();
+    if (currentPoll) {
+
+      var pollId = currentPoll.getAttribute('poll');
+      var currentPollData = pollData[pollId];
+
+      socket.emit('polldata', {
+        pollId: pollId,
+        data: currentPollData
+      });
+    }
+  }
 
   function keyboardListener() {
-    // Open the notes when the 'v' key is hit
     document.addEventListener('keydown', function (event) {
-      // Disregard the event if the target is editable or a
-      // modifier is present
       if (document.querySelector(':focus') !== null || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey) return;
-
-      if (event.keyCode === 86) {
-        event.preventDefault();
-        console.log('OPEN POLL');
+      if (event.keyCode === 86) { // 'v' key
+        allowVotes = !allowVotes;
+        emitCurrentPoll();
       }
     }, false);
-
   }
 
   function socketListener() {
     socket = io.connect(window.location.origin);
     socket.on('vote', function (v) {
-//      console.log(v);
       vote(v);
     });
   }
 
   function vote(vote) {
+    if(!allowVotes) return;
+
+    // TODO - check vote.client to see it it has already voted
+
     var poll = pollData[vote.pollId];
 
-    if(!poll){
+    if (!poll) {
       console.log('Unknown poll: ' + vote.pollId);
     } else {
-      var option = _.find(pollData[vote.pollId], function(option) {
+      var option = _.find(pollData[vote.pollId], function (option) {
         return option.option === vote.option;
       });
 
-      if(option == undefined) {
-        console.log('Unknow option: ' + vote.option, ', poll: ' + vote.pollId);
+      if (option == undefined) {
+        console.log('Unknown option: ' + vote.option, ', poll: ' + vote.pollId);
       } else {
         option.total++;
         console.log(option);
@@ -81,11 +102,11 @@ var Poller = (function () {
 
     path.transition()
       .duration(500)
-      .attr("fill", function(d, i) {
+      .attr("fill", function (d, i) {
         return color(d.data.option);
       })
       .attr("d", arc)
-      .each(function(d) {
+      .each(function (d) {
         this._current = d;
       }); // store the initial angles
   }
@@ -98,14 +119,15 @@ var Poller = (function () {
     var path = svg.selectAll('path')
       .data(pie(data));
 
-    path.transition().duration(750).attrTween("d", function(a) {
+    path.transition().duration(750).attrTween("d", function (a) {
       var i = d3.interpolate(this._current, a);
       this._current = i(0);
-      return function(t) {
+      return function (t) {
         return arc(i(t));
       };
     }); // redraw the arcs
   }
+
 
   function buildPolls() {
     var polls = document.querySelectorAll('div[poll]');
@@ -124,6 +146,7 @@ var Poller = (function () {
 
         pollData[pollId].push({
           option: option,
+          text: li.innerText,
           total: 1
         });
 
@@ -144,13 +167,12 @@ var Poller = (function () {
 
       buildPieChart(results, pollId)
     }
-
-    console.log(pollData);
   }
 
   function init() {
     // Setup socket listeners
     socketListener();
+    slideListener();
     keyboardListener();
     buildPolls();
   }
@@ -160,38 +182,14 @@ var Poller = (function () {
     return pollData;
   }
 
+  function getCurrentPoll() {
+    return Reveal.getCurrentSlide().querySelector('div[poll]');
+  }
+
   return {
     init: init,
     getPollData: getPollData
   }
 })();
-
-//
-//var _data1 = [
-//  {option: 'A', total: 1},
-//  {option: 'B', total: 1},
-//  {option: 'C', total: 1},
-//  {option: 'D', total: 1},
-//  {option: 'E', total: 1}
-//];
-//
-//var _data2 = [
-//  {option: 'A', total: 1000},
-//  {option: 'B', total: 333},
-//  {option: 'C', total: 2000},
-//  {option: 'D', total: 2000},
-//  {option: 'D', total: 2000},
-//  {option: 'D', total: 2000},
-//  {option: 'D', total: 2000},
-//  {option: 'E', total: 3000}
-//];
-//
-//var _data3 = [
-//  {option: 'A', total: 500},
-//  {option: 'B', total: 33},
-//  {option: 'C', total: 1000},
-//  {option: 'D', total: 5000}
-//];
-
 
 
