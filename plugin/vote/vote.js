@@ -6,8 +6,8 @@ var Poller = (function () {
   var socket;
   var allowVotes = false;
 
-  var width = 300,
-    height = 300,
+  var width = 250,
+    height = 250,
     radius = Math.min(width, height) / 2;
 
   var color = d3.scale.ordinal().range(["#88A825", "#35203B", "#911146", "#CF4A30", "#ED8C2B", "#CD8C2B", "#ED8D2B"]);
@@ -20,7 +20,7 @@ var Poller = (function () {
 
   var arc = d3.svg.arc()
     .outerRadius(radius - 10)
-    .innerRadius(radius - 70);
+    .innerRadius(radius - 60);
 
   function slideListener() {
     // TODO - could use data-state
@@ -49,9 +49,13 @@ var Poller = (function () {
   function keyboardListener() {
     document.addEventListener('keydown', function (event) {
       if (document.querySelector(':focus') !== null || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey) return;
-      if (event.keyCode === 86) { // 'v' key
-        allowVotes = !allowVotes;
+      console.log(event.keyCode);
+      if (event.keyCode === 86) { // 'v'
+        allowVotes = true;
         emitCurrentPoll();
+      } else if (event.keyCode == 67) { // 'c'
+        console.log('closed');
+        allowVotes = false;
       }
     }, false);
   }

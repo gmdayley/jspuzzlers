@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <title></title>
 
     <link rel="stylesheet" href="/css/vote.css">
@@ -72,78 +73,6 @@
             #poll { width: 440px;}
         }
 
-
-        @-webkit-keyframes wave{
-            0%{ -webkit-transform: scale(1); }
-            10%{ -webkit-transform: scale(1.1); }
-            20%{ -webkit-transform: scale(1); }
-            100%{ -webkit-transform: scale(1); }
-        }
-
-        #waiting {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -200px;
-            margin-top: -200px;
-            background: white;
-            transition: opacity .2s ease-in;
-            /*z-index: -1;*/
-        }
-
-        .bounce{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform-origin: center center;
-            -webkit-animation: wave 2.5s .3s linear infinite;
-        }
-
-        #first{
-            width: 70px;
-            height: 70px;
-            margin-left: 165px;
-            margin-top: 165px;
-            border-radius: 50%;
-            background: rgba(136,168,37,1);
-        }
-        #second{
-            width: 80px;
-            height: 80px;
-            margin-left: 130px;
-            margin-top: 130px;
-            border-radius: 50%;
-            border: 30px solid rgba(53,32,59,1);
-            -webkit-animation-delay: .1s;
-        }
-        #third{
-            width: 150px;
-            height: 150px;
-            margin-left: 95px;
-            margin-top: 95px;
-            border-radius: 50%;
-            border: 30px solid rgba(145,17,70,1);
-            -webkit-animation-delay: .2s;
-        }
-        #fourth{
-            width: 220px;
-            height: 220px;
-            margin-left: 60px;
-            margin-top: 60px;
-            border-radius: 50%;
-            border: 30px solid rgba(207,74,48,1);
-            -webkit-animation-delay: .3s;
-        }
-        #fifth{
-            width: 290px;
-            height: 290px;
-            margin-left: 25px;
-            margin-top: 25px;
-            border-radius: 50%;
-            border: 30px solid rgba(237,140,43,1);
-            -webkit-animation-delay: .4s;
-        }
-
         #poll.show {
             opacity: 1;
         }
@@ -154,17 +83,8 @@
     </style>
 </head>
 <body>
-<!--
-<div id="waiting">
-    <div class="bounce" id="first"></div>
-    <div class="bounce" id="second"></div>
-    <div class="bounce" id="third"></div>
-    <div class="bounce" id="fourth"></div>
-    <div class="bounce" id="fifth"></div>
-</div>
--->
-<div id="poll" poll></div>
 
+<div id="poll" poll></div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -172,8 +92,6 @@
     var socket = io.connect(window.location.origin);
 
     socket.on('polldata', function(data) {
-//        console.log(data);
-//        document.getElementById('waiting').classList.add('fade');
         buildPoll(data);
     });
 

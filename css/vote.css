@@ -14,8 +14,7 @@ div[poll] ul {
 }
 
 div[poll] ul > li {
-    margin-bottom: 5px;
-    padding:3px;
+    margin-bottom: 10px;
     transition: opacity .3s ease-out;
 }
 
@@ -23,20 +22,21 @@ div[poll] ul > li > div {
     display: inline-block;
     border-radius: 50%;
     background-color: rgba(0,255,0,1);
-    width: 1.4em;
-    height: 1.4em;
-    line-height: 1.5em;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
     text-align: center;
     color: white;
-    font-size: .8em;
+    font-size: 30px;
     margin-right: 10px;
+    padding:0
 
 }
 
 div[poll] ul > li > span {
-    line-height: 1.3em;
+    line-height: 60px;
     text-align: center;
-    font-size: 1.0em;
+    font-size: 30px;
 }
 
 div[poll] ul > li:nth-child(1n) > div {
@@ -60,9 +60,8 @@ div[poll] ul > li:nth-child(5n) > div {
 }
 
 div[poll] div.poll-results {
-    float:right;
-    /*outline: 1px solid red;*/
-    /*background: green;*/
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
     display: inline-block;
-    margin-right: 20px;
 }
