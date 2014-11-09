@@ -41,7 +41,7 @@ var Poller = (function () {
 
       socket.emit('polldata', {
         pollId: pollId,
-        data: currentPollData
+        data: currentPollData.options
       });
     }
   }
@@ -49,12 +49,10 @@ var Poller = (function () {
   function keyboardListener() {
     document.addEventListener('keydown', function (event) {
       if (document.querySelector(':focus') !== null || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey) return;
-      console.log(event.keyCode);
       if (event.keyCode === 86) { // 'v'
         allowVotes = true;
         emitCurrentPoll();
       } else if (event.keyCode == 67) { // 'c'
-        console.log('closed');
         allowVotes = false;
       }
     }, false);
@@ -68,6 +66,7 @@ var Poller = (function () {
   }
 
   function vote(vote) {
+    //console.log('Incoming vote: ', vote);
     if(!allowVotes) return;
 
     // TODO - check vote.client to see it it has already voted
@@ -77,16 +76,20 @@ var Poller = (function () {
     if (!poll) {
       console.log('Unknown poll: ' + vote.pollId);
     } else {
-      var option = _.find(pollData[vote.pollId], function (option) {
+      var option = _.find(pollData[vote.pollId].options, function (option) {
         return option.option === vote.option;
       });
 
       if (option == undefined) {
         console.log('Unknown option: ' + vote.option, ', poll: ' + vote.pollId);
       } else {
-        option.total++;
-        console.log(option);
-        updateChart(vote.pollId);
+        var alreadyVoted = _.contains(poll.voters, vote.client);
+        if(!alreadyVoted) {
+          console.log('Incoming vote: ', vote);
+          option.total++;
+          poll.voters.push(vote.client);
+          updateChart(vote.pollId);
+        }
       }
     }
   }
@@ -100,7 +103,7 @@ var Poller = (function () {
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     var path = svg.selectAll("path")
-      .data(pie(pollData[pollId]))
+      .data(pie(pollData[pollId].options))
       .enter()
       .append("path");
 
@@ -118,8 +121,7 @@ var Poller = (function () {
   function updateChart(pollId) {
     var svg = d3.select('div[poll=' + pollId + '] > div.poll-results > svg > g');
 
-    var data = pollData[pollId];
-    console.log(data);
+    var data = pollData[pollId].options;
     var path = svg.selectAll('path')
       .data(pie(data));
 
@@ -141,14 +143,17 @@ var Poller = (function () {
       var pollId = poll.getAttribute("poll");
       var options = poll.querySelectorAll('li[option]');
 
-      pollData[pollId] = [];
+      pollData[pollId] = {
+        voters: [],
+        options: []
+      };
 
       for (var j = 0; j < options.length; ++j) {
         var li = options[j];
         var div = document.createElement('div');
         var option = options[j].getAttribute('option');
 
-        pollData[pollId].push({
+        pollData[pollId].options.push({
           option: option,
           text: li.innerText,
           total: 1
