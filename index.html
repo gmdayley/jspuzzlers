@@ -1,59 +1,96 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+    <title>reveal.js - The HTML Presentation Framework</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
         <link rel="stylesheet" href="css/vote.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<!--<link rel="stylesheet" href="lib/css/zenburn.css">-->
+    <!-- For syntax highlighting -->
+    <!--<link rel="stylesheet" href="lib/css/zenburn.css">-->
 
         <link href="css/prism.css" rel="stylesheet" />
 
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script src="js/puzzlers.js"></script>
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <style>
+      .block-right {
+        display: block;
+        float: right;
+        text-align: right;
+        width: 230px;
+      }
+      .lessons-learned {
+        background-color:rgba(0, 0, 0, 0.5); 
+        padding: 15px; 
+        border-radius: 5px; 
+        color: #ffffff;
+      }
+    </style>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>JS Puzzlers</h1>
-					<h3>How well do you know JavaScript?</h3>
-					<!--<p>-->
-						<!--<small>Created by <a href="http://hakim.se">Gabriel Dayley & Thomas Valletta</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>-->
-					<!--</p>-->
-				</section>
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>JS Puzzlers</h1>
+          <h3>How well do you know JavaScript?</h3>
+          <!--<p>-->
+            <!--<small>Created by <a href="http://hakim.se">Gabriel Dayley & Thomas Valletta</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>-->
+          <!--</p>-->
+        </section>
 
-				<section>
+        <section>
+          <section>
+            <h3>Test, Test 123</h3>
+
+            <pre><code class="language-javascript" data-trim>
+              alert("A");
+            </code></pre>
+
+            <div poll="test1">
+              <h4>What will this alert?</h4>
+              <ul>
+                <li option="A" class="answer">A</li>
+                <li option="B">B</li>
+                <li option="C">C</li>
+                <li option="D">D</li>
+                <li option="E">Not quite sure what is going on.</li>
+              </ul>
+            </div>
+
+          </section>
+        </section>
+
+        <section>
                     <section>
                     <h3>Basically Wrong</h3>
                     <pre><code class="language-javascript" data-trim>
@@ -65,7 +102,7 @@ alert((x + y) * z);
                     </code></pre>
 
 
-                        <div poll="test1">
+                        <div poll="basically_wrong">
                             <h4>What will this alert?</h4>
                             <ul>
                                 <li option="A">80</li>
@@ -79,7 +116,7 @@ alert((x + y) * z);
 
                     </section>
 
-                    <section style="background-color:rgba(0, 0, 0, 0.5); padding: 15px; border-radius: 5px; color: #ffffff">
+                    <section class="lessons-learned">
                         <h3>Lessons learned: Basically wrong</h3>
 
                         <ul>
@@ -95,12 +132,482 @@ parseInt("08", 10) // 8
                         </ul>
 
                     </section>
-				</section>
+        </section>
 
+        <!-- You're not my type-->
+        <section>
+          <section>
+            <h3>Not my type</h3>
+            <pre><code class="language-javascript" data-trim>
+              alert([
+                typeof(NaN),
+                typeof(Number(123)),
+                typeof(null),
+                typeof([1,2,3])
+              ].join());
+            </code></pre>
+            <div poll="not_my_type">
+              <h4>What will this alert?</h4>
+              <ul>
+                <li option="A">undefined, object, undefined, array</li>
+                <li option="B">undefined, number, object, array</li>
+                <li option="C" class="answer">number, number, object, object</li>
+                <li option="D">number, object, undefined, object</li>
+                <li option="E">huh</li>
+              </ul>
+            </div>
+          </section>
+  
+          <section class="lessons-learned">
+            <h3>Lessons learned: You're not my type</h3>
+            <ul class='build'>
+              <li><code>typeof</code> is not very helpful</li>
+              <li>Use:
+                <pre><code class="language-javascript" data-trim>
+                  var toType = function(obj) {
+                    return ({}).toString.call(obj)
+                    .match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+                  }
+                </code></pre>
+              </li>
+              <li>
+                <code class="block-right">"object"</code>
+                <code>toType({a: 4});</code>
+              </li>
+              <li>
+                <code class="block-right">"array"</code>
+                <code>toType([1, 2, 3]);</code>
+              </li>
+              <li>
+                <code class="block-right">"arguments"</code>
+                <code>toType(arguments);</code>
+              </li>
+              <li>
+                <code class="block-right">"error"</code>
+                <code>toType(new ReferenceError);</code>
+              </li>
+              <li>
+                <code class="block-right">"date"</code>
+                <code>toType(new Date);</code>
+              </li>
+            </ul>
+          </section>
+        </section>
 
+        <!-- Who do we appreciate-->
+        <section>
+          <section id="code14">
+            <h3>Who do we appreciate?</h3>
+            <pre><code class="language-javascript" data-trim>
+              var $2 = 0.2;
+              var $4 = $2 + $2;
+              var $6 = $4 + $2;
+              var $8 = $6 + $2;
+              
+              if      ($4 !== .4) { alert("A"); }
+              else if ($6 !== .6) { alert("B"); }
+              else if ($8 !== .8) { alert("C"); }
+              else                { alert("D"); }
+            </code></pre>
+            <div poll="appreciate">
+              <h4>What will this alert?</h4>
+              <ul>
+                <li option="A" class="answer">A</li>
+                <li option="B">B</li>
+                <li option="C">C</li>
+                <li option="D">D</li>
+              </ul>
+            </div>
+          </section>
+  
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul>
+              <li>Number is the only numerical type</li>
+              <li class="fragment">Number is an IEEE floating point with double precision</li>
+              <li class="fragment">As a result:
+                <pre><code class="language-javascript">
+                  0.0 === 0;  //TRUE, unlike Java or C#
+                </code></pre>
+              </li>
+              <li class="fragment">Number exhibits the floating point rounding error</li>
+              <li class="fragment">Numerical calculations can be slow (no integer)</li>
+            </ul>
+          </section>
+        </section>
 
+        <section>
+          <section id="round">
+            <h3>A round-about<br/>way to round</h3>
+            <pre style="line-height: 23px;"><code class="language-javascript">
+              A.  var rounded = Math.round(num);
+              B.  var rounded = ~~ (0.5 + num);
+              C.  var rounded = ~~ (num + (num > 0 ? .5 : -.5));
+              D.  var rounded = (0.5 + num) << 0;
+            </code></pre>
 
-                <section>
+            <div poll="round">
+              <h4>Which is the fastest?</h4>
+              <ul class="poll">
+                <li option="A" class="answer">A</li>
+                <li option="B" class="answer">B</li>
+                <li option="C">C</li>
+                <li option="D">D</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h3>A round-about<br/>way to round</h3>
+            <canvas id='roundRaceOld' width='760' height='560'></canvas>
+            <script>
+              var $elOld = document.getElementById('roundRaceOld');
+              var roundRaceOld = new puzzlersRace();
+              roundRaceOld.bindCanvas($elOld);
+              roundRaceOld.fixRaces([
+                    {
+                      color: 'rgb(0, 138, 53)',
+                      img: images.horse.green,
+                      label: "Math.round()",
+                      value: 23
+                    },
+                    {
+                      color: 'rgb(0, 102, 204)',
+                      img: images.horse.blue,
+                      label: "Double tilde",
+                      value: 49
+                    },
+                    {
+                      color: 'rgb(255, 0, 0)',
+                      img: images.horse.red,
+                      label: "Safe tilde",
+                      value: 43
+                    },
+                    {
+                      color: 'rgb(255, 211, 25)',
+                      img: images.horse.yellow,
+                      label: "Shift hack",
+                      value: 48
+                    }
+                  ],
+                  5000,
+                  function() {
+                    setTimeout(function() {
+                      roundRaceOld.set();
+                    }, 500);
+                    $elOld.addEventListener('click', function() {
+                      if (roundRaceOld.done()) {
+                        roundRaceOld.reset();
+                      }
+                      else {
+                        roundRaceOld.go();
+                      }
+                    });
+                  });
+            </script>
+          </section>
+          
+          <section>
+            <h3>A round-about<br/>way to round</h3>
+            <canvas id='roundRace' width='760' height='560'></canvas>
+            <script>
+              var $el = document.getElementById('roundRace');
+              var roundRace = new puzzlersRace();
+              roundRace.bindCanvas($el);
+              roundRace.fixRaces([
+                    {
+                      color: 'rgb(0, 138, 53)',
+                      img: images.horse.green,
+                      label: "Math.round()",
+                      value: 1250
+                    },
+                    {
+                      color: 'rgb(0, 102, 204)',
+                      img: images.horse.blue,
+                      label: "Double tilde",
+                      value: 1250
+                    },
+                    {
+                      color: 'rgb(255, 0, 0)',
+                      img: images.horse.red,
+                      label: "Safe tilde",
+                      value: 665
+                    },
+                    {
+                      color: 'rgb(255, 211, 25)',
+                      img: images.horse.yellow,
+                      label: "Shift hack",
+                      value: 1248
+                    }
+                  ],
+                  5000,
+                  function() {
+                    setTimeout(function() {
+                      roundRace.set();
+                    }, 500);
+                    $el.addEventListener('click', function() {
+                      if (roundRace.done()) {
+                        roundRace.reset();
+                      }
+                      else {
+                        roundRace.go();
+                      }
+                    });
+                  });
+            </script>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul>
+              <li>Don't use dumb performance tricks in production</li>
+              <li class="fragment">Math.round() is more than 50 times faster<br />than it was four years ago</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <!-- Loopy Eventing -->
+        <section>
+          <section id="eventing">
+            <h3>Loopy Eventing</h3>
+            <pre style="line-height: 23px;"><code class="language-javascript">
+              var ee = new (require('events').EventEmitter);
+              var die = false;
+
+              ee.on('die', function() { die = true; });
+              setTimeout(function() { ee.emit('die'); }, 100);
+
+              while (!die) {}
+              console.log('done');
+            </code></pre>
+            <div poll="eventing">
+              <h4>Which is the outcome?</h4>
+              <ul class="poll">
+                <li option="A">Constructor Error on line 1</li>
+                <li option="B">TypeError on line 4</li>
+                <li option="C" class="answer">No output. No exit.</li>
+                <li option="D">Wait 100ms, then log 'done';</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul>
+              <li>The JavaScript Event Loop does not yield</li>
+              <li class="fragment">New events go to the end of the queue</li>
+              <li class="fragment">
+                Three ways to add events to the queue:
+                <ul>
+                  <li>setTimeout(fn, ms) / setInterval(fn, ms)</li>
+                  <li>process.nextTick(fn)  (node only)</li>
+                  <li>setImmediate(fn)</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <!--Maxed out-->
+        <section>
+          <section id="maxedOut">
+            <h3>Maxed out</h3>
+            
+            <pre><code class="language-javascript" data-trim>
+              if (Math.min() < Math.max()) {
+                alert('Of course');
+              }
+              else {
+                alert('Yikes');
+              }
+            </code></pre>
+            <div poll="maxed-out">
+              <h4>Which is the outcome?</h4>
+              <ul class="poll">
+                <li option="A">alerts: <strong>Of course</strong></li>
+                <li option="B" class="answer">alerts: <strong>Yikes</strong></li>
+                <li option="C">Throws error</li>
+                <li option="D">None of the above</li>
+              </ul>
+            </div>
+          </section>
+            
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+  
+            <ul class='build'>
+              <li><code>Math.min()</code> & <code>Math.max()</code> takes a list of numbers to compare</li>
+              <li><code>Math.min()</code> === -Infinity</li>
+              <li><code>Math.max()</code> === Infinity</li>
+              <pre><code class="language-javascript" data-trim>
+                //One way to find it
+                var x = Math.pow(2, 53) //9007199254740092
+                x === x + 1 //true
+                
+                //Better way
+                Number.MAX_VALUE;
+                Number.MIN_VALUE;
+              </code></pre>
+            </ul>
+          </section>
+        </section>
+
+        <!--A-for-scope-ic-->
+        <section>
+          <section id="code4">
+            <h3>A-for-scope-ic surgery</h3>
+            <pre><code class="language-javascript" data-trim>
+              for(var i = 0; i < 3; i++) {
+                setTimeout(function() {
+                  console.log(i);
+                }, 0);
+              }
+            </code></pre>
+
+            <div poll="maxed-out">
+              <h4>Which is output in the console?</h4>
+              <ul class="poll">
+                <li option="A">0, 1, 2</li>
+                <li option="B">1, 2, 3</li>
+                <li option="C">2, 2, 2</li>
+                <li option="D">3, 3, 3</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul class="build">
+              <li>JavaScript has only function scope</li>
+              <li class="fragment">
+                Self executing functions can create scope
+                <pre><code class="language-javascript" data-trim>
+      for(var i = 0; i < 3; i++) {
+        (function(x) {
+          setTimeout(function() {
+            console.log(x);
+          }, 0);
+        })(i);
+      }
+                </code></pre>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- Loopy Performance -->
+        <section>
+          <section id="loopy-performance">
+            <h3>Loopy Performance</h3>
+            <pre><code class="language-javascript" data-trim>
+              var a = [...];
+              
+              A.  for (var i = 0; i < a.len; i++) { ... };
+              B.  var i = a.length; while (i--) { ... };
+              C.  for (var i in a) { ... };
+              D.  a.forEach(function(i) { ... });
+            </code></pre>
+            <div poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">A. Uncached for loop</li>
+                <li option="B">B. Decrementing while loop</li>
+                <li option="C">C. For in loop</li>
+                <li option="D">D. For each loop</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h3>Loopy Performance Race</h3>
+            <canvas id='race' width='760' height='560'></canvas>
+            <script>
+              var $elRace = document.getElementById('race');
+              var perfRace = new puzzlersRace();
+              perfRace.bindCanvas($elRace);
+              perfRace.fixRaces([
+                    {
+                      color: 'rgb(0, 138, 53)',
+                      img: images.horse.green,
+                      label: "For",
+                      value: 1054
+                    },
+                    {
+                      color: 'rgb(0, 102, 204)',
+                      img: images.horse.blue,
+                      label: "While",
+                      value: 182
+                    },
+                    {
+                      color: 'rgb(255, 0, 0)',
+                      img: images.horse.red,
+                      label: "For in",
+                      value: 6
+                    },
+                    {
+                      color: 'rgb(255, 211, 25)',
+                      img: images.horse.yellow,
+                      label: "For each",
+                      value: 16
+                    }
+                  ],
+                  5000,
+                  function() {
+                    setTimeout(function() {
+                      perfRace.set();
+                    }, 500);
+                    $elRace.addEventListener('click', function() {
+                      if (perfRace.done()) {
+                        perfRace.reset();
+                      }
+                      else {
+                        perfRace.go();
+                      }
+                    });
+                  });
+            </script>
+          </section>
+  
+          <section class='lessons-learned'>
+            <h3>Lessons learned:</h3>
+            <ul class="build">
+              <li>Decrementing
+                <ul>
+                  <li>Slows down for loops by 1.5%</li>
+                  <li>Slows down while loops by almost 6 times</li>
+                </ul>
+              </li>
+              <li class="fragment">Caching a for loop slows it down
+                <pre><code class="language-javascript" data-trim>
+for (var i = 0, len = a.len; i < len; i++) { ... };
+                </code></pre>
+              </li>
+              <li class="fragment">"ForEach" and "For-in" loops are really slow</li>
+            </ul>
+          </section>
+        </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <section>
                     <pre><code class="language-javascript" data-trim>
 var a = 1 + 2;
 alert(a);
@@ -123,26 +630,26 @@ var a = 1 + 2;
 alert(a);
                     </code></pre>
 
-					<div poll="test3">
-						<h4>What will this alert?</h4>
-						<ul>
-							<li option="A">A</li>
-							<li option="B" answer>B</li>
-							<li option="C">asdfadsf asdf asdfasdf asdf asdf asdf asdfasdf asdfasdf asdfasdfs</li>
-							<li option="D" answer>another option</li>
-						</ul>
-					</div>
-				</section><section>
+          <div poll="test3">
+            <h4>What will this alert?</h4>
+            <ul>
+              <li option="A">A</li>
+              <li option="B" answer>B</li>
+              <li option="C">asdfadsf asdf asdfasdf asdf asdf asdf asdfasdf asdfasdf asdfasdfs</li>
+              <li option="D" answer>another option</li>
+            </ul>
+          </div>
+        </section><section>
                     <pre><code class="language-javascript" data-trim>
 var a = 1 + 2;
 alert(a);
                     </code></pre>
-				</section><section>
+        </section><section>
                     <pre><code class="language-javascript" data-trim>
 var a = 1 + 2;
 alert(a);
                     </code></pre>
-				</section><section>
+        </section><section>
                     <pre><code class="language-javascript" data-trim>
 var a = 1 + 2;
 alert(a);
@@ -166,52 +673,52 @@ alert(a);
                     one
                 </section>
 
-				</section>
+        </section>
 
-			</div>
+      </div>
 
-		</div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
-		<script src="lib/js/lodash.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script src="lib/js/lodash.min.js"></script>
 
-		<script>
+    <script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-//				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				theme: 'custom',
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+//        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        theme: 'custom',
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
                 parallaxBackgroundImage: 'img/saturn.jpg',
                 parallaxBackgroundSize: '3000px 1300px',
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'http://d3js.org/d3.v3.min.js', async: true},
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'http://d3js.org/d3.v3.min.js', async: true},
                     { src: 'socket.io/socket.io.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/vote/vote.js', async: true, callback: function(){Poller.init()}, condition: function() { return !!document.body.classList; } }
-				]
-			});
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/vote/vote.js', async: true, callback: function(){Poller.init()}, condition: function() { return !!document.body.classList; } }
+        ]
+      });
 
 
-		</script>
+    </script>
 
-        <script src="js/prism.js"></script>
-	</body>
+    <script src="js/prism.js"></script>
+  </body>
 </html>
