@@ -1,2 +1,5 @@
-.idea/*
+.idea
 logs
+node_modules
+.sass-cache
+.DS_Store

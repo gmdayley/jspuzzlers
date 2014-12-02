@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="/css/vote.css">
+    <style>
+        body {
+            background-image: url('/img/kindajean.png');
+            font-family: 'Nunito';
+            font-size: 1.8em;
+            /*zoom: 1;*/
+            user-select: none;
+        }
+
+        #poll {
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            transition: opacity .2s ease-in;
+            opacity: 0;
+        }
+
+        div[poll] ul > li {
+            display: inline-block;
+            float: left;
+            border-radius: 50%;
+            background-color: rgba(0,255,0,1);
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: white;
+            font-size: 50px;
+            margin: 5px;
+            padding: 0;
+            cursor: pointer;
+            transition: .5s ease-in-out;
+        }
+
+        div[poll] ul > li:nth-child(1n) {
+            background-color: rgba(136,168,37,1);
+        }
+
+        div[poll] ul > li:nth-child(2n) {
+            background-color: rgba(53,32,59,1);
+        }
+
+        div[poll] ul > li:nth-child(3n) {
+            background-color: rgba(145,17,70,1);
+        }
+
+        div[poll] ul > li:nth-child(4n) {
+            background-color: rgba(207,74,48,1);
+        }
+
+        div[poll] ul > li:nth-child(5n) {
+            background-color: rgba(237,140,43,1);
+        }
+
+        @media only screen and (min-width: 300px) {
+            #poll { width: 220px;}
+        }
+
+        @media only screen and (min-width: 480px) {
+            #poll { width: 440px;}
+        }
+
+        #poll.show {
+            opacity: 1;
+        }
+
+        [selected] {
+            transform: rotateZ(-360deg);
+        }
+    </style>
+</head>
+<body>
+
+<div id="poll" poll></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+//    var socketId = '{{socketId}}';
+    var socket = io.connect(window.location.origin);
+
+    socket.on('polldata', function(data) {
+        buildPoll(data);
+    });
+
+    function vote(pollId, option) {
+        socket.emit('vote', { pollId: pollId, option: option});
+    }
+
+    function buildPoll(data) {
+        var currentPoll = document.querySelector('#poll');
+        
+        var ul = document.createElement('ul');
+        currentPoll.classList.remove('show');
+
+        data.data.forEach(function(option) {
+            var li = document.createElement('li');
+            li.innerText = option.option;
+
+            li.addEventListener('click', function(evt) {
+                evt.srcElement.setAttribute('selected', 'true');
+                vote(data.pollId, option.option);
+            });
+
+            ul.appendChild(li);
+        });
+
+        currentPoll.setAttribute('data-pollid', data.pollId);
+
+        setTimeout(function() {
+            currentPoll.innerHTML = "";
+            currentPoll.appendChild(ul);
+            currentPoll.classList.add('show');
+        }, 200);
+
+    }
+</script>
+
+</body>
+</html>

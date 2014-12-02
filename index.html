@@ -1,124 +1,1350 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <script src="js/lib/jquery.min.js"></script>
-    <script src="js/lib/socket.io/socket.io.min.js"></script>
+<!doctype html>
+<html lang="en">
 
+  <head>
+    <meta charset="utf-8">
+
+    <title>reveal.js - The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/vote.css">
+
+    <!-- For syntax highlighting -->
+    <!--<link rel="stylesheet" href="lib/css/zenburn.css">-->
+
+        <link href="css/prism.css" rel="stylesheet" />
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script src="js/puzzlers.js"></script>
     <script>
-        var socket;
-        var connect = function() {
-//            socket = io.connect('http://10.109.37.189:3000');
-//            socket = io.connect('http://localhost:3000');
-            socket = io.connect('http://rwx.yelyad.com:3000');
-//            socket = io.connect('http://10.0.0.99:3000');
-
-            socket.on('ack', function(data) {
-                $("#container").removeClass("notconnected");
-            });
-
-
-            socket.on('setenabled', function(enable) {
-                console.log(enable);
-                setEnabled(enable);
-            });
-
-
-//            socket.on('right', function(msg){
-//                console.log(msg);
-//            });
-        };
-
-        function send(answer) {
-            socket.emit('vote', { answer: answer });
-        }
-        connect();
-
-        function setEnabled(en) {
-            if (en) {
-                $("#mask").css('z-index', "-1");
-            }
-            else {
-                $("#mask").css('z-index', "10");
-            }
-        }
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
     </script>
     <style>
-        body {
-            background: #666;
-        }
-
-        #container{
-            position: relative;
-            margin: 0 auto;
-            width: 380px
-        }
-
-        .button.green {
-            background-color: rgb(0, 138, 53);
-        }
-
-        .button.blue {
-            background-color: rgb(0, 102, 204);
-        }
-
-        .button.red {
-            background-color: rgb(255, 0, 0);
-        }
-
-        .button.yellow {
-            background-color: rgb(255, 211, 25);
-        }
-
-        .button {
-            display: inline-block;
-            padding: 25px 35px;
-            font-size: 22px;
-            border-radius: 5px;
-            color: white;
-            text-shadow: -1px 1px 0px #333;
-            border: 3px solid #333;
-            /*-webkit-box-reflect: below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.70, transparent), to(white));*/
-            text-decoration: none;
-            font-family: 'Droid Sans Mono', sans-serif;
-        }
-
-        .button:active {
-            box-shadow: inset 0px 0px 15px white;
-            border: 3px solid white;
-        }
-
-        .button.disabled {
-            opacity: .2;
-        }
-
-        #mask {
-            z-index: 5;
-            opacity: .7;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #777;
-        }
-
-
-         #container.notconnected .button{
-            background: gray;
-        }
-
+      .block-right {
+        display: block;
+        float: right;
+        text-align: right;
+        width: 230px;
+      }
+      .lessons-learned {
+        background-color:rgba(0, 0, 0, 0.5); 
+        padding: 15px; 
+        border-radius: 5px; 
+        color: #ffffff;
+      }
     </style>
-</head>
-<body>
-<div id="mask"></div>
-<div id="container" class="notconnected">
-    <a href="#" class="button green" onclick="send('A')">A</a>
-    <a href="#" class="button blue" onclick="send('B')">B</a>
-    <a href="#" class="button red" onclick="send('C')">C</a>
-    <a href="#" class="button yellow" onclick="send('D')">D</a>
-</div>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>JS Puzzlers</h1>
+          <h3>How well do you know JavaScript?</h3>
+          <!--<p>-->
+            <!--<small>Created by <a href="http://hakim.se">Gabriel Dayley & Thomas Valletta</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>-->
+          <!--</p>-->
+        </section>
+
+        <section>
+          <section>
+            <h3>Test, Test 123</h3>
+
+            <pre><code class="language-javascript" data-trim>
+              alert("A");
+            </code></pre>
+
+            <div class="poll" poll="test1">
+              <h4>What will this alert?</h4>
+              <ul>
+                <li option="A" class="answer">A</li>
+                <li option="B">B</li>
+                <li option="C">C</li>
+                <li option="D">D</li>
+                <li option="E">Not quite sure what is going on.</li>
+              </ul>
+            </div>
+
+          </section>
+        </section>
+
+        <section>
+                    <section>
+                    <h3>Basically Wrong</h3>
+                    <pre><code class="language-javascript" data-trim>
+var x = parseInt("5");
+var y = parseInt("05");
+var z = parseInt("08");
+
+alert((x + y) * z);
+                    </code></pre>
 
 
-<script>setEnabled(false);</script>
-</body>
+                        <div class="poll" poll="basically_wrong">
+                            <h4>What will this alert?</h4>
+                            <ul>
+                                <li option="A">80</li>
+                                <li option="B" answer>20</li>
+                                <li option="C">undefined</li>
+                                <li option="D">error</li>
+                                <li option="E">huh</li>
+                            </ul>
+                        </div>
+
+
+                    </section>
+
+                    <section class="lessons-learned">
+                        <h3>Lessons learned: Basically wrong</h3>
+
+                        <ul>
+                            <li>parseInt() takes two parameters: number, base</li>
+                            <li>Omitting the second parameter assumes base-10 as the default</li>
+                            <li>Numbers starting with <strong>0x</strong> assumed as radix 16 (hex)</li>
+                            <li>Numbers starting with <strong>0</strong>, assumed as radix 8 (oct)</li>
+                            <li>There is no 8 (or 9) in octal so parseInt() just returns 0</li>
+                            <li>Specifying the intended base as the second parameter removes the ambiguity</li>
+            <pre><code class="language-javascript">
+parseInt("08", 10) // 8
+            </code></pre>
+                        </ul>
+
+                    </section>
+        </section>
+
+        <!-- You're not my type-->
+        <section>
+          <section>
+            <h3>Not my type</h3>
+            <pre><code class="language-javascript" data-trim>
+              alert([
+                typeof(NaN),
+                typeof(Number(123)),
+                typeof(null),
+                typeof([1,2,3])
+              ].join());
+            </code></pre>
+            <div class="poll" poll="not_my_type">
+              <h4>What will this alert?</h4>
+              <ul>
+                <li option="A">undefined, object, undefined, array</li>
+                <li option="B">undefined, number, object, array</li>
+                <li option="C" class="answer">number, number, object, object</li>
+                <li option="D">number, object, undefined, object</li>
+                <li option="E">huh</li>
+              </ul>
+            </div>
+          </section>
+  
+          <section class="lessons-learned">
+            <h3>Lessons learned: You're not my type</h3>
+            <ul class='build'>
+              <li><code>typeof</code> is not very helpful</li>
+              <li>Use:
+                <pre><code class="language-javascript" data-trim>
+                  var toType = function(obj) {
+                    return ({}).toString.call(obj)
+                    .match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+                  }
+                </code></pre>
+              </li>
+              <li>
+                <code class="block-right">"object"</code>
+                <code>toType({a: 4});</code>
+              </li>
+              <li>
+                <code class="block-right">"array"</code>
+                <code>toType([1, 2, 3]);</code>
+              </li>
+              <li>
+                <code class="block-right">"arguments"</code>
+                <code>toType(arguments);</code>
+              </li>
+              <li>
+                <code class="block-right">"error"</code>
+                <code>toType(new ReferenceError);</code>
+              </li>
+              <li>
+                <code class="block-right">"date"</code>
+                <code>toType(new Date);</code>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- Who do we appreciate-->
+        <section>
+          <section id="code14">
+            <h3>Who do we appreciate?</h3>
+            <pre><code class="language-javascript" data-trim>
+              var $2 = 0.2;
+              var $4 = $2 + $2;
+              var $6 = $4 + $2;
+              var $8 = $6 + $2;
+              
+              if      ($4 !== .4) { alert("A"); }
+              else if ($6 !== .6) { alert("B"); }
+              else if ($8 !== .8) { alert("C"); }
+              else                { alert("D"); }
+            </code></pre>
+            <div class="poll" poll="appreciate">
+              <h4>What will this alert?</h4>
+              <ul>
+                <li option="A" class="answer">A</li>
+                <li option="B">B</li>
+                <li option="C">C</li>
+                <li option="D">D</li>
+              </ul>
+            </div>
+          </section>
+  
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul>
+              <li>Number is the only numerical type</li>
+              <li class="fragment">Number is an IEEE floating point with double precision</li>
+              <li class="fragment">As a result:
+                <pre><code class="language-javascript">
+                  0.0 === 0;  //TRUE, unlike Java or C#
+                </code></pre>
+              </li>
+              <li class="fragment">Number exhibits the floating point rounding error</li>
+              <li class="fragment">Numerical calculations can be slow (no integer)</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section id="round">
+            <h3>A round-about<br/>way to round</h3>
+            <pre style="line-height: 23px;"><code class="language-javascript">
+              A.  var rounded = Math.round(num);
+              B.  var rounded = ~~ (0.5 + num);
+              C.  var rounded = ~~ (num + (num > 0 ? .5 : -.5));
+              D.  var rounded = (0.5 + num) << 0;
+            </code></pre>
+
+            <div class="poll" poll="round">
+              <h4>Which is the fastest?</h4>
+              <ul class="poll">
+                <li option="A" class="answer">A</li>
+                <li option="B" class="answer">B</li>
+                <li option="C">C</li>
+                <li option="D">D</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h3>A round-about<br/>way to round</h3>
+            <canvas id='roundRaceOld' width='760' height='560'></canvas>
+            <script>
+              var $elOld = document.getElementById('roundRaceOld');
+              var roundRaceOld = new puzzlersRace();
+              roundRaceOld.bindCanvas($elOld);
+              roundRaceOld.fixRaces([
+                    {
+                      color: 'rgb(0, 138, 53)',
+                      img: images.horse.green,
+                      label: "Math.round()",
+                      value: 23
+                    },
+                    {
+                      color: 'rgb(0, 102, 204)',
+                      img: images.horse.blue,
+                      label: "Double tilde",
+                      value: 49
+                    },
+                    {
+                      color: 'rgb(255, 0, 0)',
+                      img: images.horse.red,
+                      label: "Safe tilde",
+                      value: 43
+                    },
+                    {
+                      color: 'rgb(255, 211, 25)',
+                      img: images.horse.yellow,
+                      label: "Shift hack",
+                      value: 48
+                    }
+                  ],
+                  5000,
+                  function() {
+                    setTimeout(function() {
+                      roundRaceOld.set();
+                    }, 500);
+                    $elOld.addEventListener('click', function() {
+                      if (roundRaceOld.done()) {
+                        roundRaceOld.reset();
+                      }
+                      else {
+                        roundRaceOld.go();
+                      }
+                    });
+                  });
+            </script>
+          </section>
+          
+          <section>
+            <h3>A round-about<br/>way to round</h3>
+            <canvas id='roundRace' width='760' height='560'></canvas>
+            <script>
+              var $el = document.getElementById('roundRace');
+              var roundRace = new puzzlersRace();
+              roundRace.bindCanvas($el);
+              roundRace.fixRaces([
+                    {
+                      color: 'rgb(0, 138, 53)',
+                      img: images.horse.green,
+                      label: "Math.round()",
+                      value: 1250
+                    },
+                    {
+                      color: 'rgb(0, 102, 204)',
+                      img: images.horse.blue,
+                      label: "Double tilde",
+                      value: 1250
+                    },
+                    {
+                      color: 'rgb(255, 0, 0)',
+                      img: images.horse.red,
+                      label: "Safe tilde",
+                      value: 665
+                    },
+                    {
+                      color: 'rgb(255, 211, 25)',
+                      img: images.horse.yellow,
+                      label: "Shift hack",
+                      value: 1248
+                    }
+                  ],
+                  5000,
+                  function() {
+                    setTimeout(function() {
+                      roundRace.set();
+                    }, 500);
+                    $el.addEventListener('click', function() {
+                      if (roundRace.done()) {
+                        roundRace.reset();
+                      }
+                      else {
+                        roundRace.go();
+                      }
+                    });
+                  });
+            </script>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul>
+              <li>Don't use dumb performance tricks in production</li>
+              <li class="fragment">Math.round() is more than 50 times faster<br />than it was four years ago</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <!-- Loopy Eventing -->
+        <section>
+          <section id="eventing">
+            <h3>Loopy Eventing</h3>
+            <pre style="line-height: 23px;"><code class="language-javascript">
+              var ee = new (require('events').EventEmitter);
+              var die = false;
+
+              ee.on('die', function() { die = true; });
+              setTimeout(function() { ee.emit('die'); }, 100);
+
+              while (!die) {}
+              console.log('done');
+            </code></pre>
+            <div class="poll" poll="eventing">
+              <h4>Which is the outcome?</h4>
+              <ul class="poll">
+                <li option="A">Constructor Error on line 1</li>
+                <li option="B">TypeError on line 4</li>
+                <li option="C" class="answer">No output. No exit.</li>
+                <li option="D">Wait 100ms, then log 'done';</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul>
+              <li>The JavaScript Event Loop does not yield</li>
+              <li class="fragment">New events go to the end of the queue</li>
+              <li class="fragment">
+                Three ways to add events to the queue:
+                <ul>
+                  <li>setTimeout(fn, ms) / setInterval(fn, ms)</li>
+                  <li>process.nextTick(fn)  (node only)</li>
+                  <li>setImmediate(fn)</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <!--Maxed out-->
+        <section>
+          <section id="maxedOut">
+            <h3>Maxed out</h3>
+            
+            <pre><code class="language-javascript" data-trim>
+              if (Math.min() < Math.max()) {
+                alert('Of course');
+              }
+              else {
+                alert('Yikes');
+              }
+            </code></pre>
+            <div class="poll" poll="maxed-out">
+              <h4>Which is the outcome?</h4>
+              <ul class="poll">
+                <li option="A">alerts: <strong>Of course</strong></li>
+                <li option="B" class="answer">alerts: <strong>Yikes</strong></li>
+                <li option="C">Throws error</li>
+                <li option="D">None of the above</li>
+              </ul>
+            </div>
+          </section>
+            
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+  
+            <ul class='build'>
+              <li><code>Math.min()</code> & <code>Math.max()</code> takes a list of numbers to compare</li>
+              <li><code>Math.min()</code> === -Infinity</li>
+              <li><code>Math.max()</code> === Infinity</li>
+              <pre><code class="language-javascript" data-trim>
+                //One way to find it
+                var x = Math.pow(2, 53) //9007199254740092
+                x === x + 1 //true
+                
+                //Better way
+                Number.MAX_VALUE;
+                Number.MIN_VALUE;
+              </code></pre>
+            </ul>
+          </section>
+        </section>
+
+        <!--A-for-scope-ic-->
+        <section>
+          <section id="code4">
+            <h3>A-for-scope-ic surgery</h3>
+            <pre><code class="language-javascript" data-trim>
+              for(var i = 0; i < 3; i++) {
+                setTimeout(function() {
+                  console.log(i);
+                }, 0);
+              }
+            </code></pre>
+
+            <div class="poll" poll="maxed-out">
+              <h4>Which is output in the console?</h4>
+              <ul class="poll">
+                <li option="A">0, 1, 2</li>
+                <li option="B">1, 2, 3</li>
+                <li option="C">2, 2, 2</li>
+                <li option="D">3, 3, 3</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned:</h3>
+            <ul class="build">
+              <li>JavaScript has only function scope</li>
+              <li class="fragment">
+                Self executing functions can create scope
+                <pre><code class="language-javascript" data-trim>
+      for(var i = 0; i < 3; i++) {
+        (function(x) {
+          setTimeout(function() {
+            console.log(x);
+          }, 0);
+        })(i);
+      }
+                </code></pre>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- Loopy Performance -->
+        <section>
+          <section id="loopy-performance">
+            <h3>Loopy Performance</h3>
+            <pre><code class="language-javascript" data-trim>
+              var a = [...];
+              
+              A.  for (var i = 0; i < a.len; i++) { ... };
+              B.  var i = a.length; while (i--) { ... };
+              C.  for (var i in a) { ... };
+              D.  a.forEach(function(i) { ... });
+            </code></pre>
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">A. Uncached for loop</li>
+                <li option="B">B. Decrementing while loop</li>
+                <li option="C">C. For in loop</li>
+                <li option="D">D. For each loop</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h3>Loopy Performance Race</h3>
+            <canvas id='race' width='760' height='560'></canvas>
+            <script>
+              var $elRace = document.getElementById('race');
+              var perfRace = new puzzlersRace();
+              perfRace.bindCanvas($elRace);
+              perfRace.fixRaces([
+                    {
+                      color: 'rgb(0, 138, 53)',
+                      img: images.horse.green,
+                      label: "For",
+                      value: 1054
+                    },
+                    {
+                      color: 'rgb(0, 102, 204)',
+                      img: images.horse.blue,
+                      label: "While",
+                      value: 182
+                    },
+                    {
+                      color: 'rgb(255, 0, 0)',
+                      img: images.horse.red,
+                      label: "For in",
+                      value: 6
+                    },
+                    {
+                      color: 'rgb(255, 211, 25)',
+                      img: images.horse.yellow,
+                      label: "For each",
+                      value: 16
+                    }
+                  ],
+                  5000,
+                  function() {
+                    setTimeout(function() {
+                      perfRace.set();
+                    }, 500);
+                    $elRace.addEventListener('click', function() {
+                      if (perfRace.done()) {
+                        perfRace.reset();
+                      }
+                      else {
+                        perfRace.go();
+                      }
+                    });
+                  });
+            </script>
+          </section>
+  
+          <section class='lessons-learned'>
+            <h3>Lessons learned:</h3>
+            <ul class="build">
+              <li>Decrementing
+                <ul>
+                  <li>Slows down for loops by 1.5%</li>
+                  <li>Slows down while loops by almost 6 times</li>
+                </ul>
+              </li>
+              <li class="fragment">Caching a for loop slows it down
+                <pre><code class="language-javascript" data-trim>
+for (var i = 0, len = a.len; i < len; i++) { ... };
+                </code></pre>
+              </li>
+              <li class="fragment">"ForEach" and "For-in" loops are really slow</li>
+            </ul>
+          </section>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--Malpractice-->
+        <section>
+          <section>
+            <h3>Malpractice</h3>
+            <pre><code class="language-javascript" data-trim>
+              var x = 2;
+              var y = 3;
+              (function (){
+                  alert(x + y);
+                  x = 0;
+                  var y = 2;
+              }());
+            </code></pre>
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: <strong>NaN</strong></li>
+                <li option="B">alerts: 5</li>
+                <li option="C">alerts: 2</li>
+                <li option="D">alerts: 0</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Malpractice</h3>
+            <ul class="build">
+              <li>Re-declaring <strong>y</strong> inside the function causes unexpected behavior from the interpreter</li>
+              <li>The interpreter moves <strong>var</strong> statements to the beginning, causing <strong>y</strong> to be
+                undefined:
+              </li>
+                <pre><code class="language-javascript" data-trim>
+                var x = 2;
+                var y = 3;
+                (function (){
+                    var y;
+                    alert(x + y);
+                    x = 0;
+                    y = 2;
+                }());
+              </code></pre>
+            </ul>
+  
+          </section>
+        </section>
+
+
+        <!--Great Lengths-->
+        <section>
+          <section id="code10">
+            <h3>Great Lengths</h3>
+              <pre><code class="language-javascript" data-trim>
+              function fn(length, width) {
+                  this.length = length;
+                  this.width = width;
+              }
+
+              alert(fn.length + new fn(3, 4).length);
+            </code></pre>
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: NaN</li>
+                <li option="B">alerts: 6</li>
+                <li option="C">alerts: ReferenceError: fn is not defined</li>
+                <li option="D">alerts: 5</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Great Lengths</h3>
+              <pre><code class="language-javascript" data-trim>
+              function fn(l, w) {
+                this.length = l;
+                this.width = w;
+              }
+  
+              alert(fn.length + new fn(3, 4).length);
+            </code></pre>
+            <ul class='build'>
+              <li><code>new fn(3, 4).length => 3</code></li>
+              <li><code>fn.length => 2</code></li>
+              <li><code>function.lenth</code> => number of args in function signature.</li>
+            </ul>
+          </section>
+        </section>
+
+        <!--Semi-colonoscopy-->
+        <section>
+          <section id="code6">
+            <h3>Semi-colonoscopy</h3>
+              <pre><code class="language-javascript" data-trim>
+              var background = function()
+              {
+                  return
+                  {
+                      color : 'blue'
+                  };
+              };
+              alert(background().color);
+            </code></pre>
+
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+              <ul class="poll">
+                <li option="A">alerts: <strong>blue</strong></li>
+                <li option="B">alerts: <strong>undefined</strong></li>
+                <li option="C">throws a TypeError</li>
+                <li option="D">alerts: <strong>[Object]</strong></li>
+              </ul>
+            </ul>
+          </div>
+        </section>
+
+        <section class="lessons-learned">
+          <h3>Lessons learned: Semi-colonoscopy</h3>
+          <ul class="build">
+            <li>Semicolon's in JavaScript are optional</li>
+            <li>The interpreter tries to guess where there should go</li>
+            <li>This causes undesired results:</li>
+              <pre><code class="language-javascript" data-trim>
+              var background = function()
+              {
+                  return; //Thanks, but no thanks!
+                  {
+                      color : 'blue'
+                  };
+              }
+            </code></pre>
+            <li>So, instead of returning the object, undefined is returned, causing a TypeError to be thrown</li>
+          </ul>
+        </section>
+
+        <!--Join with me-->
+        <section class="puzzle-tiger">
+          <h3>Come Join With Me</h3>
+          <section id="joinWithMe">
+
+            <pre><code class="language-javascript" data-trim>
+            var a = new Array(1, 2, 3);
+            var b = new Array(4, 5);
+            var c = new Array(6);
+            var d = a.concat(b, c);
+
+            alert(d.toString());
+          </code></pre>
+
+          <div class="poll" poll="loopy-performance">
+            <h4>Which is the slowest?</h4>
+            <ul class="poll">
+              <li option="A">alerts: <strong>1,2,3</strong></li>
+              <li option="B">alerts: <strong>1,2,3,4,5</strong></li>
+              <li option="C">alerts: <strong>1,2,3,4,5,6</strong></li>
+              <li option="D">None of the above</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="lessons-learned">
+          <h3>Lessons learned: Come Join With Me</h3>
+
+          <ul class='build'>
+            <li>Calling <code>new Array()</code> with multiple arguments, interprets them as members of the Array</li>
+            <li>Calling <code>new Array()</code> with a single Integer argument(n) initializes an array with n undefined items</li>
+              <pre><code class="language-javascript" data-trim>
+              var x = new Array(3);
+
+              //Produces this
+              [undefined, undefined, undefined].join();
+
+              //Which looks like this
+              "" + String(undefined) + "," + String(undefined) + "," + String(undefined);
+
+              //Resulting in
+              ',,' === x;  //true
+            </code></pre>
+          </ul>
+        </section>
+      </section>
+
+
+
+
+
+        <!-- JS++ -->
+        <section>
+          <section id="code8">
+            <h3>JS++</h3>
+              <pre><code class="language-javascript" data-trim>
+            alert(+[]+ +'0XE'+ +true+ +'1E1');
+            </code></pre>
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: NaN</li>
+                <li option="B">alerts: "14110"</li>
+                <li option="C">alerts: 90210</li>
+                <li option="D">alerts: 25</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: JS++</h3>
+            <ul class='build'>
+              <li>"Unary + is the fastest and preferred way of converting something into a number, because it does not perform
+                any other operations on the number." -MDN
+              </li>
+              <li><code>toNumber(getValue(expr))</code></li>
+              <li><code>+[] &nbsp;&nbsp; == 0</code></li>
+              <li><code>+'0xE' == 14</code></li>
+              <li><code>+true&nbsp; == 1</code></li>
+              <li><code>+'1e1' == 10</code></li>
+            </ul>
+          </section>
+  
+          <section class="lessons-learned">
+            <h3>Lessons learned: JS++ Extra Credit</h3>
+              <pre><code class="language-javascript" data-trim>+new Date</code></pre>
+            <ul class='build'>
+              <li><code>getValue() => getTime()</code></li>
+              <li><code>1317653638027</code></li>
+            </ul>
+          </section>
+  
+          <section class="lessons-learned">
+            <h3>Lessons learned: JS++ (cont.)</h3>
+            <ul class='build'>
+              <li>A. NaN</li>
+              <li>B. "14110" &nbsp;<code>[]+ +'0XE'+ +true+ +'1E1'</code></li>
+              <li>C. 90210 &nbsp; <code>+[]+ +'OXD1'+ +true+ +'9E4'</code></li>
+              <li>D. 25 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>+[]+ +'0XE'+ +true+ +'1E1'</code></li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- To infinity and beyond-->
+        <section>
+          <section id="code3">
+            <h3>To infinity and beyond</h3>
+              <pre><code class="language-javascript" data-trim>
+              var a = 0;
+              var b = 0 * -1;
+
+              if(a === b){
+                  if(1/a === 1/b){
+                      alert("Of course! You can't defy the laws of mathematics");
+                  }
+                  else{ alert("Einstein can't even explain this"); }
+              }
+              else{ alert('Well duh, -0 is not the same as 0'); }
+            </code></pre>
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: <strong>Of course! You can't defy the laws of
+                  mathematics</strong></li>
+                <li option="B">alerts: <strong>Well duh, -0 is not the same as 0</strong></li>
+                <li option="C">throws an error because -0 is NaN</li>
+                <li option="D">alerts: <strong>Einstein can't even explain this</strong></li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: To infinity and beyond</h3>
+            <ul class="build">
+              <li>Number allows for both positive and negative zero values</li>
+              <li>+0 equals -0</li>
+              <li>However +infinity does <strong>not</strong> equal -infinity</li>
+            </ul>
+          </section>
+  
+  
+          <section>
+            <section id="code11a">
+              <h3>Defunct-ion, Part A</h3>
+                <pre><code class="language-javascript" data-trim>
+                var user = {
+                  name: 'Mike',
+                  hello: function(thing) {
+                    alert(this + " says hello " + thing);
+                  }
+                }
+                user.hello('World');
+              </code></pre>
+              <div class="poll" poll="loopy-performance">
+                <h4>Which is the slowest?</h4>
+                <ul class="poll">
+                  <li option="A">alerts: [object Object] says hello World</li>
+                  <li option="B">alerts: Mike says hello World</li>
+                  <li option="C">alerts: user says hello World</li>
+                  <li option="D">alerts: World says hello undefined</li>
+                </ul>
+              </div>
+            </section>
+  
+            <section class="lessons-learned">
+              <h3>Lessons learned: Defunct-ion, Part A</h3>
+                <pre><code class="language-javascript" data-trim>
+                var user = {
+                  name: 'Mike',
+                  hello: function(thing) {
+                    alert(this + " says hello " + thing);
+                  }
+                }
+                user.hello('World');
+              </code></pre>
+              <ul class='build'>
+                <li><code>name: 'Mike'</code> is a distraction.</li>
+                <li><code>this => user</code></li>
+                <li><code>user.toString() => [object Object]</code></li>
+              </ul>
+            </section>
+          </section>
+
+
+        <section>
+          <section id="code11b">
+            <h3>Defunct-ion, Part B</h3>
+              <pre><code class="language-javascript" data-trim>
+            var user = {
+              name: 'Mike',
+              hello: function(thing) {
+                alert(this + " says hello " + thing);
+              }
+            }
+            function pass(fn) {
+              fn('World');
+            }
+            pass(user.hello);
+            </code></pre>
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: [object Object] says hello World</li>
+                <li option="B">alerts: [object DOMWindow] says hello World</li>
+                <li option="C">alerts: undefined says hello World</li>
+                <li option="D">alerts: World says hello undefined</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Defunct-ion, Part B</h3>
+              <pre><code class="language-javascript" data-trim>
+              var user = {
+                name: 'Mike',
+                hello: function(thing) {
+                  return (this + " says hello " + thing);
+                }
+              }
+              function pass(fn) {
+                fn('World');
+              }
+              pass(user.hello);
+            </code></pre>
+            <ul class='build'>
+              <li>JavaScript functions are first class</li>
+              <li><code>user.hello('World')</code> told hello its context.</li>
+              <li><code>pass(user.hello) => fn('World')</code> the context is <code>DOMWindow</code>.</li>
+            </ul>
+          </section>
+        </section>
+
+
+        <section>
+          <section id="code11c">
+            <h3>Defunct-ion, Part C</h3>
+              <pre><code class="language-javascript" data-trim>
+              var user = {
+                name: 'Mike',
+                hello: function(thing) {
+                  alert(this + " says hello " + thing);
+                }
+              }
+              user.hello.call('World');
+            </code></pre>
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: [object Object] says hello World</li>
+                <li option="B">TypeError: undefined_method</li>
+                <li option="C">alerts: undefined says hello World</li>
+                <li option="D">alerts: World says hello undefined</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Defunct-ion, Part C</h3>
+              <pre><code class="language-javascript" data-trim>
+              var user = {
+                name: 'Mike',
+                hello: function(thing) {
+                  alert(this + " says hello " + thing);
+                }
+              }
+              user.hello.call('World');
+            </code></pre>
+            <ul class='build'>
+              <li><code>call</code> passes context in the first parameter.</li>
+              <li><code>user.hello.call(user, 'World') == user.hello('World')</code></li>
+              <li><code>user.hello.call(user.name, 'World') =></code></li>
+              <li>Mike says hello World</li>
+            </ul>
+          </section>
+        </section>
+
+        <!--Guilt by Association-->
+        <section>
+          <h3>Guilty by Association</h3>
+          <section>
+
+            <pre><code class="language-javascript" data-trim>
+            function Playlist(name) {
+                this.name = name;
+                this.songs = [];
+                this.addSong = function(id, song) {
+                    this.songs[id] = song;
+                }
+                this.showPlaylist = function() {
+                    alert(this.songs.join(','));
+                }
+            }
+          </code></pre>
+          </section>
+
+          <section>
+            <h3>Guilty by Association</h3>
+
+              <pre><code class="language-javascript" data-trim>
+              var plist = new Playlist("90s");
+
+              plist.addSong('311', 'Beautiful Disaster');
+              plist.addSong('join', 'Scratch');
+              plist.addSong('U2', 'Numb');
+
+              plist.showPlaylist();
+            </code></pre>
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">Throws a TypeError</li>
+                <li option="B">alerts: <strong>Beautiful Disaster, Scratch, Numb</strong></li>
+                <li option="C">alerts: <strong>Numb, Scratch, Beautiful Disaster</strong></li>
+                <li option="D">alerts: <strong>311, join, U2</strong></li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Guilty by Association</h3>
+
+            <ul class='build'>
+              <li>The problem is <code>songs</code> is an associative array</li>
+              <li>When we used 'join' as one of the keys, we effectively modified the built-in join method of Array</li>
+              <li>Don't use arrays in these situations, instead use an object:</li>
+                <pre><code class="language-javascript" data-trim>
+                this.songs = {};
+              </code></pre>
+            </ul>
+          </section>
+        </section>
+
+
+
+
+        <!--Inside the box-->
+        <section>
+          <section id="code9">
+            <h3>Thinking Inside the Box</h3>
+              <pre><code class="language-javascript" data-trim>
+              alert(++[[]][+[]]+[+[]]);
+            </code></pre>
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: NaN</li>
+                <li option="B">alerts: "10"</li>
+                <li option="C">alerts: "0+0+0"</li>
+                <li option="D">Don't be ridiculous. That will not evaluate!</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Thinking Inside the Box</h3>
+              <pre><code class="language-javascript" data-trim>
+              alert(++[[]][+[]]+[+[]]);
+            </code></pre>
+            <ul class='build'>
+              <li>Unary + operator</li>
+              <li><code>ToValue()</code> converts empty array to empty string</li>
+              <li><code>ToNumber()</code> converts empty array to 0</li>
+              <li><code>++[[]][+[]]+[+[]] => ++[[]][0]+[0]</code></li>
+            </ul>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Thinking Inside the Box (cont.)</h3>
+              <pre><code class="language-javascript" data-trim>
+              alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);
+            </code></pre>
+            <ul class='build'>
+              <li><code>ToValue()</code> converts empty array to empty string</li>
+              <li><code>++[[]][0]+[0] => ++[""][0]+[0]</code></li>
+              <li><code>++</code> increments and stores</li>
+              <li><code>++[""][0]+[0] => 1+[0]</code></li>
+              <li><code>ToValue()</code> converts 0 array to "0" string</li>
+              <li><code>1+[0] => 1+"0" => "10"</code></li>
+            </ul>
+          </section>
+        </section>
+
+        <!--Never judge a book by it's cover-->
+        <section>
+          <section id="abc">
+            <h3>Never Judge a Book by it's Cover</h3>
+
+              <pre><code class="language-javascript" data-trim>
+              function Book(title){
+                  this.title = title;
+                  return { title: 'JavaScript: The Good Parts'};
+              }
+              function ZipCode(zip){
+                  this.zip = zip;
+                  return 84043;
+              }
+              var book = new Book('Twilight'), zip = new ZipCode(07849);
+
+              if(book instanceof Book){ alert('Book')};
+              if(zip instanceof ZipCode){ alert('ZipCode')};
+            </code></pre>
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: <strong>Book</strong> and <strong>ZipCode</strong></li>
+                <li option="B">alerts: <strong>Book</strong></li>
+                <li option="C">alerts: <strong>ZipCode</strong></li>
+                <li option="D">Does not alert anything</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
+
+            <ul class='build'>
+              <li>Return values in constructor functions can be overridden</li>
+              <li>Unless...you return a primative type: string, number, date</li>
+              <li>Returning a primative is ignored and the original initialized object is returned</li>
+            </ul>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Never Judge a Book by it's Cover</h3>
+
+            <ul class='build'>
+              <li>This is often used to implement private and public members:</li>
+            <pre><code class="language-javascript" data-trim>
+            function Foo() {
+                var privateVar = 'World';
+
+                function privateMethod() {}
+
+                return {
+                    publicVar : 'Hello',
+
+                    getString : function() {
+                        return publicVar + ' ' + privateVar;
+                    }
+                };
+            }</code></pre>
+              <li>However, you can not use <strong>instanceof</strong> to check if its of type Foo</li>
+            </ul>
+          </section>
+        </section>
+
+
+        <!--Double Agent-->
+        <section class="lessons-learned">
+          <h3>Double Agent</h3>
+          <section id="code1">
+              <pre><code class="language-javascript" data-trim>
+              if("1" == 1) {
+                  if("" == 0) {
+                      if("" == "0") {
+                          alert("A");
+                      }
+                      else { alert("B"); }
+                  }
+                  else { alert("C"); }
+              }
+              else { alert("D"); }
+            </code></pre>
+
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: <strong>A</strong></li>
+                <li option="B">alerts: <strong>B</strong></li>
+                <li option="C">alerts: <strong>C</strong></li>
+                <li option="D">alerts: <strong>D</strong></li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="lessons-learned">
+            <h3>Lessons learned: Double Agent</h3>
+
+            <ul class="build">
+              <li>
+                The double equals (==) performs comparisons after type coercion. With the == operator you can
+                compare
+                objects of
+                different types.
+              </li>
+
+              <li>
+                This is often not what you intended and can lead to undesired results.
+              </li>
+
+              <li>
+                Instead you should make sure that your operands are of the right type before doing comparisons or
+                use the
+                triple
+                equals operator (===) to do the comparisons.
+              </li>
+                <pre><code class="language-javascript" data-trim>
+                "1" === 1 // false
+                Number("5") === 5  // true
+              </code></pre>
+            </ul>
+          </section>
+        </section>
+
+        <!--Getting Closure-->
+        <section>
+          <section id="code12">
+            <h3>Getting Closure</h3>
+              <pre><code class="language-javascript" data-trim>
+              var fn = null, x = 'globalX', y = 'globalY';
+              function outer() {
+                this.x = 'funcX';
+                var y = 'funcY';
+                function inner() {
+                  alert(x + ":" + y);
+                }
+                fn = inner;
+              }
+              new outer();
+              fn();
+            </code></pre>
+            <div class="poll" poll="loopy-performance">
+              <h4>Which is the slowest?</h4>
+              <ul class="poll">
+                <li option="A">alerts: globalX:globalY</li>
+                <li option="B">alerts: globalX:funcY</li>
+                <li option="C">alerts: funcX:globalY</li>
+                <li option="D">alerts: funcX:funcY</li>
+              </ul>
+            </div>
+          </section>
+        </section>
+
+        <section class="lessons-learned">
+          <h3>Lessons learned: Getting Closure</h3>
+            <pre><code class="language-javascript" data-trim>
+            var fn = null, x = 'globalX', y = 'globalY';
+            function outer() {
+              this.x = 'funcX';
+              var y = 'funcY';
+              function inner() {
+                alert(x + ":" + y);
+              }
+              fn = inner;
+            }
+            outer();
+            fn();
+          </code></pre>
+          <ul class='build'>
+            <li>Scope of <code>fn() => inner()</code> is DOMWindow</li>
+            <li>There is no way to reach this.x from fn()</li>
+            <li><code>var instance = this; ... instance.x</code></li>
+          </ul>
+        </section>
+      </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script src="lib/js/lodash.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+//        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        theme: 'custom',
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+                parallaxBackgroundImage: 'img/saturn.jpg',
+                parallaxBackgroundSize: '3000px 1300px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'http://d3js.org/d3.v3.min.js', async: true},
+                    { src: 'socket.io/socket.io.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/vote/vote.js', async: true, callback: function(){Poller.init()}, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+
+    </script>
+
+    <script src="js/prism.js"></script>
+  </body>
 </html>
