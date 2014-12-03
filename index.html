@@ -85,7 +85,7 @@
 
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
-        <section id="title">
+        <section id="welcome">
           <h1>JS Puzzlers</h1>
           <h3>How well do you know JavaScript?</h3>
           <!--<p>-->
@@ -210,7 +210,7 @@ alert((x + y) * z);</code></pre>
 
         <!-- Who do we appreciate-->
         <section>
-          <section id="code14">
+          <section id="two-four-six-eight">
             <h3>Who do we appreciate?</h3>
 <pre><code class="language-javascript" data-trim>var $2 = 0.2;
 var $4 = 0.2 + 0.2;
@@ -1239,15 +1239,12 @@ fn();</code></pre>
 
         height: 1000,
 
-//        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         theme: 'custom',
         transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
         // Parallax scrolling
-        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-        // parallaxBackgroundSize: '2100px 900px',
-                parallaxBackgroundImage: 'img/two.jpg',
-                parallaxBackgroundSize: '3914px 766px',
+        parallaxBackgroundImage: 'img/two.jpg',
+        parallaxBackgroundSize: '3914px 766px',
 
         // Optional libraries used to extend on reveal.js
         dependencies: [
@@ -1256,7 +1253,7 @@ fn();</code></pre>
           { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
           { src: 'http://d3js.org/d3.v3.min.js', async: true},
-                    { src: 'socket.io/socket.io.js', async: true },
+          { src: 'socket.io/socket.io.js', async: true },
           { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
           { src: 'plugin/vote/vote.js', async: true, callback: function(){Poller.init()}, condition: function() { return !!document.body.classList; } }
         ]
