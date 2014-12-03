@@ -55,6 +55,12 @@
         width: initial;
         margin-bottom: 90px;
       }
+      .reveal pre code {
+        font-size: 1.6em;
+      }
+      .reveal pre code:first-child {
+        margin-left: -5px;
+      }
     </style>
 
     <!--[if lt IE 9]>
@@ -196,14 +202,14 @@ alert((x + y) * z);</code></pre>
           <section id="code14">
             <h3>Who do we appreciate?</h3>
 <pre><code class="language-javascript" data-trim>var $2 = 0.2;
-  var $4 = 0.2 + 0.2;
-  var $6 = 0.2 + 0.2 + 0.2;
-  var $8 = 0.2 + 0.2 + 0.2 + 0.2;
+var $4 = 0.2 + 0.2;
+var $6 = 0.2 + 0.2 + 0.2;
+var $8 = 0.2 + 0.2 + 0.2 + 0.2;
 
-  if      ($4 !== .4) { alert("A"); }
-  else if ($6 !== .6) { alert("B"); }
-  else if ($8 !== .8) { alert("C"); }
-  else                { alert("D"); }</code></pre>
+if      ($4 !== .4) { alert("A"); }
+else if ($6 !== .6) { alert("B"); }
+else if ($8 !== .8) { alert("C"); }
+else                { alert("D"); }</code></pre>
             <div class="poll" poll="appreciate">
               <h4>What will this alert?</h4>
               <ul>
