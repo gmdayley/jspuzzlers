@@ -59,10 +59,14 @@ var Poller = (function () {
   }
 
   function socketListener() {
-    socket = io.connect(window.location.origin);
-    socket.on('vote', function (v) {
-      vote(v);
-    });
+    try {
+      socket = io.connect(window.location.origin);
+      socket.on('vote', function (v) {
+        vote(v);
+      });
+    } catch(e) {
+      console.log('don\'t care');
+    }
   }
 
   function vote(vote) {
