@@ -30,6 +30,8 @@ var Poller = (function () {
     Reveal.addEventListener('slidechanged', function (event) {
       emitCurrentPoll();
     });
+
+    hideAnswer();
   }
 
   function emitCurrentPoll() {
@@ -54,6 +56,7 @@ var Poller = (function () {
         emitCurrentPoll();
       } else if (event.keyCode == 67) { // 'c'
         allowVotes = false;
+        showAnswer();
       }
     }, false);
   }
@@ -197,6 +200,16 @@ var Poller = (function () {
 
   function getCurrentPoll() {
     return Reveal.getCurrentSlide().querySelector('div[poll]');
+  }
+
+  function showAnswer() {
+    var $el = Reveal.getCurrentSlide().querySelector('.answer');
+    if ($el) $el.classList.add('show');
+  }
+
+  function hideAnswer() {
+    var $el = Reveal.getCurrentSlide().querySelector('.answer');
+    if ($el) $el.classList.remove('show');
   }
 
   return {
