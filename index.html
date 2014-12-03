@@ -69,6 +69,8 @@
 
       .answer.show {
         background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 32px;
+        padding-right: 60px;
       }
     </style>
 
@@ -124,7 +126,7 @@ alert((x + y) * z);</code></pre>
                             <h4>What will this alert?</h4>
                             <ul>
                                 <li option="A">80</li>
-                                <li option="B" answer>20</li>
+                                <li option="B" class="answer">20</li>
                                 <li option="C">undefined</li>
                                 <li option="D">error</li>
                                 <li option="E">huh</li>
@@ -469,7 +471,7 @@ Number.MIN_VALUE;</code></pre>
                 <li option="A">0, 1, 2</li>
                 <li option="B">1, 2, 3</li>
                 <li option="C">2, 2, 2</li>
-                <li option="D">3, 3, 3</li>
+                <li option="D" class="answer">3, 3, 3</li>
               </ul>
             </div>
           </section>
@@ -507,7 +509,7 @@ D.  a.forEach(function(i) { ... });</code></pre>
               <ul class="poll">
                 <li option="A">A. Uncached for loop</li>
                 <li option="B">B. Decrementing while loop</li>
-                <li option="C">C. For in loop</li>
+                <li option="C" class="answer">C. For in loop</li>
                 <li option="D">D. For each loop</li>
               </ul>
             </div>
@@ -595,7 +597,7 @@ var y = 3;
             <div class="poll" poll="malpractice">
               <h4>Which is true?</h4>
               <ul class="poll">
-                <li option="A">alerts: <strong>NaN</strong></li>
+                <li option="A" class="answer">alerts: <strong>NaN</strong></li>
                 <li option="B">alerts: 5</li>
                 <li option="C">alerts: 2</li>
                 <li option="D">alerts: 0</li>
@@ -641,7 +643,7 @@ alert(fn.length + new fn(3, 4).length);</code></pre>
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: 6</li>
                 <li option="C">alerts: ReferenceError: fn is not defined</li>
-                <li option="D">alerts: 5</li>
+                <li option="D" class="answer">alerts: 5</li>
               </ul>
             </div>
           </section>
@@ -681,7 +683,7 @@ alert(background().color);</code></pre>
             <ul class="poll">
               <li option="A">alerts: <strong>blue</strong></li>
               <li option="B">alerts: <strong>undefined</strong></li>
-              <li option="C">throws a TypeError</li>
+              <li option="C" class="answer">throws a TypeError</li>
               <li option="D">alerts: <strong>[Object]</strong></li>
             </ul>
           </div>
@@ -723,7 +725,7 @@ alert(d.toString());</code></pre>
               <li option="A">alerts: <strong>1,2,3</strong></li>
               <li option="B">alerts: <strong>1,2,3,4,5</strong></li>
               <li option="C">alerts: <strong>1,2,3,4,5,6</strong></li>
-              <li option="D">None of the above</li>
+              <li option="D" class="answer">None of the above</li>
             </ul>
           </div>
         </section>
@@ -764,7 +766,7 @@ alert(d.toString());</code></pre>
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: "14110"</li>
                 <li option="C">alerts: 90210</li>
-                <li option="D">alerts: 25</li>
+                <li option="D" class="answer">alerts: 25</li>
               </ul>
             </div>
           </section>
@@ -822,7 +824,7 @@ else { alert("D"); }</code></pre>
                 <li option="A">alerts: A</li>
                 <li option="B">alerts: B</li>
                 <li option="C">throws an error because -0 is NaN</li>
-                <li option="D">alerts: D</li>
+                <li option="D" class="answer">alerts: D</li>
               </ul>
             </div>
           </section>
@@ -850,7 +852,7 @@ user.hello('World');</code></pre>
               <div class="poll" poll="defunction">
                 <h4>Which is true?</h4>
                 <ul class="poll">
-                  <li option="A">alerts: [object Object] says hello World</li>
+                  <li option="A" class="answer">alerts: [object Object] says hello World</li>
                   <li option="B">alerts: Mike says hello World</li>
                   <li option="C">alerts: user says hello World</li>
                   <li option="D">alerts: World says hello undefined</li>
@@ -893,7 +895,7 @@ pass(user.hello);</code></pre>
               <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: [object Object] says hello World</li>
-                <li option="B">alerts: [object DOMWindow] says hello World</li>
+                <li option="B" class="answer">alerts: [object DOMWindow] says hello World</li>
                 <li option="C">alerts: undefined says hello World</li>
                 <li option="D">alerts: World says hello undefined</li>
               </ul>
@@ -937,7 +939,7 @@ user.hello.call('World');</code></pre>
                 <li option="A">alerts: [object Object] says hello World</li>
                 <li option="B">TypeError: undefined_method</li>
                 <li option="C">alerts: undefined says hello World</li>
-                <li option="D">alerts: World says hello undefined</li>
+                <li option="D" class="answer">alerts: World says hello undefined</li>
               </ul>
             </div>
           </section>
@@ -991,7 +993,7 @@ plist.showPlaylist();</code></pre>
             <div class="poll" poll="guilty">
               <h4>Which is true?</h4>
               <ul class="poll">
-                <li option="A">Throws a TypeError</li>
+                <li option="A" class="answer">Throws a TypeError</li>
                 <li option="B">alerts: <strong>Beautiful Disaster, Scratch, Numb</strong></li>
                 <li option="C">alerts: <strong>Numb, Scratch, Beautiful Disaster</strong></li>
                 <li option="D">alerts: <strong>311, join, U2</strong></li>
@@ -1023,7 +1025,7 @@ plist.showPlaylist();</code></pre>
               <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: NaN</li>
-                <li option="B">alerts: "10"</li>
+                <li option="B" class="answer">alerts: "10"</li>
                 <li option="C">alerts: "0+0+0"</li>
                 <li option="D">Don't be ridiculous. That will not evaluate!</li>
               </ul>
@@ -1078,7 +1080,7 @@ if(zip instanceof ZipCode){ alert('ZipCode')};</code></pre>
               <ul class="poll">
                 <li option="A">alerts: <strong>Book</strong> and <strong>ZipCode</strong></li>
                 <li option="B">alerts: <strong>Book</strong></li>
-                <li option="C">alerts: <strong>ZipCode</strong></li>
+                <li option="C" class="answer">alerts: <strong>ZipCode</strong></li>
                 <li option="D">Does not alert anything</li>
               </ul>
             </div>
@@ -1137,7 +1139,7 @@ else { alert("D"); }</code></pre>
               <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: <strong>A</strong></li>
-                <li option="B">alerts: <strong>B</strong></li>
+                <li option="B" class="answer">alerts: <strong>B</strong></li>
                 <li option="C">alerts: <strong>C</strong></li>
                 <li option="D">alerts: <strong>D</strong></li>
               </ul>
@@ -1190,7 +1192,7 @@ fn();</code></pre>
               <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: globalX:globalY</li>
-                <li option="B">alerts: globalX:funcY</li>
+                <li option="B" class="answer">alerts: globalX:funcY</li>
                 <li option="C">alerts: funcX:globalY</li>
                 <li option="D">alerts: funcX:funcY</li>
               </ul>

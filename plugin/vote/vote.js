@@ -203,13 +203,17 @@ var Poller = (function () {
   }
 
   function showAnswer() {
-    var $el = Reveal.getCurrentSlide().querySelector('.answer');
-    if ($el) $el.classList.add('show');
+    var $el = Reveal.getCurrentSlide().querySelectorAll('.answer');
+    for (var i = 0; i < $el.length; ++i) {
+      $el[i].classList.add('show');
+    }
   }
 
   function hideAnswer() {
-    var $el = Reveal.getCurrentSlide().querySelector('.answer');
-    if ($el) $el.classList.remove('show');
+    var $el = Reveal.getCurrentSlide().querySelectorAll('.answer');
+    for (var i = 0; i < $el.length; ++i) {
+      $el[i].classList.remove('show');
+    }
   }
 
   return {
