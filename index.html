@@ -41,11 +41,25 @@
         text-align: right;
         width: 230px;
       }
-      .lessons-learned {
-        background-color:rgba(0, 0, 0, 0.5); 
-        padding: 15px; 
+      .reveal .slides>section {
+        left: -55%;
+      }
+      .reveal .slides>section>section.present {
+        background-color:rgba(0, 0, 0, 0.85);
+        padding: 60px;
         border-radius: 5px; 
         color: #ffffff;
+      }
+
+      .reveal pre {
+        width: initial;
+        margin-bottom: 90px;
+      }
+      .reveal pre code {
+        font-size: 1.6em;
+      }
+      .reveal pre code:first-child {
+        margin-left: -5px;
       }
     </style>
 
@@ -72,9 +86,7 @@
           <section>
             <h3>Test, Test 123</h3>
 
-            <pre><code class="language-javascript" data-trim>
-              alert("A");
-            </code></pre>
+            <pre><code class="language-javascript" data-trim>alert("A");</code></pre>
 
             <div class="poll" poll="test1">
               <h4>What will this alert?</h4>
@@ -93,14 +105,11 @@
         <section>
                     <section>
                     <h3>Basically Wrong</h3>
-                    <pre><code class="language-javascript" data-trim>
-var x = parseInt("5");
+<pre><code class="language-javascript" data-trim>var x = parseInt("5");
 var y = parseInt("05");
 var z = parseInt("08");
 
-alert((x + y) * z);
-                    </code></pre>
-
+alert((x + y) * z);</code></pre>
 
                         <div class="poll" poll="basically_wrong">
                             <h4>What will this alert?</h4>
@@ -126,9 +135,7 @@ alert((x + y) * z);
                             <li>Numbers starting with <strong>0</strong>, assumed as radix 8 (oct)</li>
                             <li>There is no 8 (or 9) in octal so parseInt() just returns 0</li>
                             <li>Specifying the intended base as the second parameter removes the ambiguity</li>
-            <pre><code class="language-javascript">
-parseInt("08", 10) // 8
-            </code></pre>
+            <pre><code class="language-javascript">parseInt("08", 10) // 8</code></pre>
                         </ul>
 
                     </section>
@@ -138,14 +145,12 @@ parseInt("08", 10) // 8
         <section>
           <section>
             <h3>Not my type</h3>
-            <pre><code class="language-javascript" data-trim>
-              alert([
-                typeof(NaN),
-                typeof(Number(123)),
-                typeof(null),
-                typeof([1,2,3])
-              ].join());
-            </code></pre>
+<pre><code class="language-javascript" data-trim>alert([
+    typeof(NaN),
+    typeof(Number(123)),
+    typeof(null),
+    typeof([1,2,3])
+  ].join());</code></pre>
             <div class="poll" poll="not_my_type">
               <h4>What will this alert?</h4>
               <ul>
@@ -163,12 +168,10 @@ parseInt("08", 10) // 8
             <ul class='build'>
               <li><code>typeof</code> is not very helpful</li>
               <li>Use:
-                <pre><code class="language-javascript" data-trim>
-                  var toType = function(obj) {
-                    return ({}).toString.call(obj)
-                    .match(/\s([a-zA-Z]+)/)[1].toLowerCase()
-                  }
-                </code></pre>
+<pre><code class="language-javascript" data-trim>var toType = function(obj) {
+    return ({}).toString.call(obj)
+    .match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+  }</code></pre>
               </li>
               <li>
                 <code class="block-right">"object"</code>
@@ -198,17 +201,15 @@ parseInt("08", 10) // 8
         <section>
           <section id="code14">
             <h3>Who do we appreciate?</h3>
-            <pre><code class="language-javascript" data-trim>
-              var $2 = 0.2;
-              var $4 = $2 + $2;
-              var $6 = $4 + $2;
-              var $8 = $6 + $2;
-              
-              if      ($4 !== .4) { alert("A"); }
-              else if ($6 !== .6) { alert("B"); }
-              else if ($8 !== .8) { alert("C"); }
-              else                { alert("D"); }
-            </code></pre>
+<pre><code class="language-javascript" data-trim>var $2 = 0.2;
+var $4 = 0.2 + 0.2;
+var $6 = 0.2 + 0.2 + 0.2;
+var $8 = 0.2 + 0.2 + 0.2 + 0.2;
+
+if      ($4 !== .4) { alert("A"); }
+else if ($6 !== .6) { alert("B"); }
+else if ($8 !== .8) { alert("C"); }
+else                { alert("D"); }</code></pre>
             <div class="poll" poll="appreciate">
               <h4>What will this alert?</h4>
               <ul>
@@ -226,9 +227,7 @@ parseInt("08", 10) // 8
               <li>Number is the only numerical type</li>
               <li class="fragment">Number is an IEEE floating point with double precision</li>
               <li class="fragment">As a result:
-                <pre><code class="language-javascript">
-                  0.0 === 0;  //TRUE, unlike Java or C#
-                </code></pre>
+<pre><code class="language-javascript">0.0 === 0;  //TRUE, unlike Java or C#</code></pre>
               </li>
               <li class="fragment">Number exhibits the floating point rounding error</li>
               <li class="fragment">Numerical calculations can be slow (no integer)</li>
@@ -239,12 +238,10 @@ parseInt("08", 10) // 8
         <section>
           <section id="round">
             <h3>A round-about<br/>way to round</h3>
-            <pre style="line-height: 23px;"><code class="language-javascript">
-              A.  var rounded = Math.round(num);
-              B.  var rounded = ~~ (0.5 + num);
-              C.  var rounded = ~~ (num + (num > 0 ? .5 : -.5));
-              D.  var rounded = (0.5 + num) << 0;
-            </code></pre>
+<pre style="line-height: 23px;"><code class="language-javascript">A.  var rounded = Math.round(num);
+B.  var rounded = ~~ (0.5 + num);
+C.  var rounded = ~~ (num + (num > 0 ? .5 : -.5));
+D.  var rounded = (0.5 + num) << 0;</code></pre>
 
             <div class="poll" poll="round">
               <h4>Which is the fastest?</h4>
@@ -371,16 +368,14 @@ parseInt("08", 10) // 8
         <section>
           <section id="eventing">
             <h3>Loopy Eventing</h3>
-            <pre style="line-height: 23px;"><code class="language-javascript">
-              var ee = new (require('events').EventEmitter);
-              var die = false;
+<pre style="line-height: 23px;"><code class="language-javascript">var ee = new (require('events').EventEmitter);
+var die = false;
 
-              ee.on('die', function() { die = true; });
-              setTimeout(function() { ee.emit('die'); }, 100);
+ee.on('die', function() { die = true; });
+setTimeout(function() { ee.emit('die'); }, 100);
 
-              while (!die) {}
-              console.log('done');
-            </code></pre>
+while (!die) {}
+console.log('done');</code></pre>
             <div class="poll" poll="eventing">
               <h4>Which is the outcome?</h4>
               <ul class="poll">
@@ -414,14 +409,12 @@ parseInt("08", 10) // 8
           <section id="maxedOut">
             <h3>Maxed out</h3>
             
-            <pre><code class="language-javascript" data-trim>
-              if (Math.min() < Math.max()) {
-                alert('Of course');
-              }
-              else {
-                alert('Yikes');
-              }
-            </code></pre>
+<pre><code class="language-javascript" data-trim>if (Math.min() < Math.max()) {
+  alert('Of course');
+}
+else {
+  alert('Yikes');
+}</code></pre>
             <div class="poll" poll="maxed-out">
               <h4>Which is the outcome?</h4>
               <ul class="poll">
@@ -440,15 +433,13 @@ parseInt("08", 10) // 8
               <li><code>Math.min()</code> & <code>Math.max()</code> takes a list of numbers to compare</li>
               <li><code>Math.min()</code> === -Infinity</li>
               <li><code>Math.max()</code> === Infinity</li>
-              <pre><code class="language-javascript" data-trim>
-                //One way to find it
-                var x = Math.pow(2, 53) //9007199254740092
-                x === x + 1 //true
-                
-                //Better way
-                Number.MAX_VALUE;
-                Number.MIN_VALUE;
-              </code></pre>
+<pre><code class="language-javascript" data-trim>//One way to find it
+var x = Math.pow(2, 53) //9007199254740092
+x === x + 1 //true
+
+//Better way
+Number.MAX_VALUE;
+Number.MIN_VALUE;</code></pre>
             </ul>
           </section>
         </section>
@@ -457,13 +448,11 @@ parseInt("08", 10) // 8
         <section>
           <section id="code4">
             <h3>A-for-scope-ic surgery</h3>
-            <pre><code class="language-javascript" data-trim>
-              for(var i = 0; i < 3; i++) {
-                setTimeout(function() {
-                  console.log(i);
-                }, 0);
-              }
-            </code></pre>
+<pre><code class="language-javascript" data-trim>for(var i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i);
+  }, 0);
+}</code></pre>
 
             <div class="poll" poll="maxed-out">
               <h4>Which is output in the console?</h4>
@@ -482,15 +471,13 @@ parseInt("08", 10) // 8
               <li>JavaScript has only function scope</li>
               <li class="fragment">
                 Self executing functions can create scope
-                <pre><code class="language-javascript" data-trim>
-      for(var i = 0; i < 3; i++) {
-        (function(x) {
-          setTimeout(function() {
-            console.log(x);
-          }, 0);
-        })(i);
-      }
-                </code></pre>
+<pre><code class="language-javascript" data-trim>for(var i = 0; i < 3; i++) {
+  (function(x) {
+    setTimeout(function() {
+      console.log(x);
+    }, 0);
+  })(i);
+}</code></pre>
               </li>
             </ul>
           </section>
@@ -500,14 +487,12 @@ parseInt("08", 10) // 8
         <section>
           <section id="loopy-performance">
             <h3>Loopy Performance</h3>
-            <pre><code class="language-javascript" data-trim>
-              var a = [...];
-              
-              A.  for (var i = 0; i < a.len; i++) { ... };
-              B.  var i = a.length; while (i--) { ... };
-              C.  for (var i in a) { ... };
-              D.  a.forEach(function(i) { ... });
-            </code></pre>
+<pre><code class="language-javascript" data-trim>var a = [...];
+
+A.  for (var i = 0; i < a.len; i++) { ... };
+B.  var i = a.length; while (i--) { ... };
+C.  for (var i in a) { ... };
+D.  a.forEach(function(i) { ... });</code></pre>
             <div class="poll" poll="loopy-performance">
               <h4>Which is the slowest?</h4>
               <ul class="poll">
@@ -579,47 +564,27 @@ parseInt("08", 10) // 8
                 </ul>
               </li>
               <li class="fragment">Caching a for loop slows it down
-                <pre><code class="language-javascript" data-trim>
-for (var i = 0, len = a.len; i < len; i++) { ... };
-                </code></pre>
+<pre><code class="language-javascript" data-trim>for (var i = 0, len = a.len; i < len; i++) { ... };</code></pre>
               </li>
               <li class="fragment">"ForEach" and "For-in" loops are really slow</li>
             </ul>
           </section>
         </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <!--Malpractice-->
         <section>
           <section>
             <h3>Malpractice</h3>
-            <pre><code class="language-javascript" data-trim>
-              var x = 2;
-              var y = 3;
-              (function (){
-                  alert(x + y);
-                  x = 0;
-                  var y = 2;
-              }());
-            </code></pre>
+<pre><code class="language-javascript" data-trim>var x = 2;
+var y = 3;
+(function (){
+    alert(x + y);
+    x = 0;
+    var y = 2;
+}());</code></pre>
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+            <div class="poll" poll="malpractice">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: <strong>NaN</strong></li>
                 <li option="B">alerts: 5</li>
@@ -636,16 +601,14 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
               <li>The interpreter moves <strong>var</strong> statements to the beginning, causing <strong>y</strong> to be
                 undefined:
               </li>
-                <pre><code class="language-javascript" data-trim>
-                var x = 2;
-                var y = 3;
-                (function (){
-                    var y;
-                    alert(x + y);
-                    x = 0;
-                    y = 2;
-                }());
-              </code></pre>
+<pre><code class="language-javascript" data-trim>var x = 2;
+var y = 3;
+(function (){
+    var y;
+    alert(x + y);
+    x = 0;
+    y = 2;
+}());</code></pre>
             </ul>
   
           </section>
@@ -654,19 +617,17 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!--Great Lengths-->
         <section>
-          <section id="code10">
+          <section id="great_lengths">
             <h3>Great Lengths</h3>
-              <pre><code class="language-javascript" data-trim>
-              function fn(length, width) {
-                  this.length = length;
-                  this.width = width;
-              }
+<pre><code class="language-javascript" data-trim>function fn(length, width) {
+    this.length = length;
+    this.width = width;
+}
 
-              alert(fn.length + new fn(3, 4).length);
-            </code></pre>
+alert(fn.length + new fn(3, 4).length);</code></pre>
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+            <div class="poll" poll="loopy-great_lengths">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: 6</li>
@@ -678,14 +639,12 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
           <section class="lessons-learned">
             <h3>Lessons learned: Great Lengths</h3>
-              <pre><code class="language-javascript" data-trim>
-              function fn(l, w) {
-                this.length = l;
-                this.width = w;
-              }
-  
-              alert(fn.length + new fn(3, 4).length);
-            </code></pre>
+<pre><code class="language-javascript" data-trim>function fn(l, w) {
+  this.length = l;
+  this.width = w;
+}
+
+alert(fn.length + new fn(3, 4).length);</code></pre>
             <ul class='build'>
               <li><code>new fn(3, 4).length => 3</code></li>
               <li><code>fn.length => 2</code></li>
@@ -696,29 +655,25 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!--Semi-colonoscopy-->
         <section>
-          <section id="code6">
+          <section id="semi_colonoscopy">
             <h3>Semi-colonoscopy</h3>
-              <pre><code class="language-javascript" data-trim>
-              var background = function()
-              {
-                  return
-                  {
-                      color : 'blue'
-                  };
-              };
-              alert(background().color);
-            </code></pre>
+<pre><code class="language-javascript" data-trim>var background = function()
+{
+    return
+    {
+        color : 'blue'
+    };
+};
+alert(background().color);</code></pre>
 
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
-              <ul class="poll">
-              <ul class="poll">
-                <li option="A">alerts: <strong>blue</strong></li>
-                <li option="B">alerts: <strong>undefined</strong></li>
-                <li option="C">throws a TypeError</li>
-                <li option="D">alerts: <strong>[Object]</strong></li>
-              </ul>
+          <div class="poll" poll="semi_colonoscopy">
+            <h4>Which is true?</h4>
+            <ul class="poll">
+              <li option="A">alerts: <strong>blue</strong></li>
+              <li option="B">alerts: <strong>undefined</strong></li>
+              <li option="C">throws a TypeError</li>
+              <li option="D">alerts: <strong>[Object]</strong></li>
             </ul>
           </div>
         </section>
@@ -729,35 +684,32 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
             <li>Semicolon's in JavaScript are optional</li>
             <li>The interpreter tries to guess where there should go</li>
             <li>This causes undesired results:</li>
-              <pre><code class="language-javascript" data-trim>
-              var background = function()
-              {
-                  return; //Thanks, but no thanks!
-                  {
-                      color : 'blue'
-                  };
-              }
-            </code></pre>
+<pre><code class="language-javascript" data-trim>var background = function()
+{
+    return; //Thanks, but no thanks!
+    {
+        color : 'blue'
+    };
+}</code></pre>
             <li>So, instead of returning the object, undefined is returned, causing a TypeError to be thrown</li>
           </ul>
         </section>
+      </section>
 
         <!--Join with me-->
-        <section class="puzzle-tiger">
-          <h3>Come Join With Me</h3>
+        <section class="join_with_me">
           <section id="joinWithMe">
+            <h3>Come Join With Me</h3>
 
-            <pre><code class="language-javascript" data-trim>
-            var a = new Array(1, 2, 3);
-            var b = new Array(4, 5);
-            var c = new Array(6);
-            var d = a.concat(b, c);
+<pre><code class="language-javascript" data-trim>var a = new Array(1, 2, 3);
+var b = new Array(4, 5);
+var c = new Array(6);
+var d = a.concat(b, c);
 
-            alert(d.toString());
-          </code></pre>
+alert(d.toString());</code></pre>
 
-          <div class="poll" poll="loopy-performance">
-            <h4>Which is the slowest?</h4>
+          <div class="poll" poll="join_with_me">
+            <h4>Which is true?</h4>
             <ul class="poll">
               <li option="A">alerts: <strong>1,2,3</strong></li>
               <li option="B">alerts: <strong>1,2,3,4,5</strong></li>
@@ -773,18 +725,16 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
           <ul class='build'>
             <li>Calling <code>new Array()</code> with multiple arguments, interprets them as members of the Array</li>
             <li>Calling <code>new Array()</code> with a single Integer argument(n) initializes an array with n undefined items</li>
-              <pre><code class="language-javascript" data-trim>
-              var x = new Array(3);
+<pre><code class="language-javascript" data-trim>var x = new Array(3);
 
-              //Produces this
-              [undefined, undefined, undefined].join();
+//Produces this
+[undefined, undefined, undefined].join();
 
-              //Which looks like this
-              "" + String(undefined) + "," + String(undefined) + "," + String(undefined);
+//Which looks like this
+"" + String(undefined) + "," + String(undefined) + "," + String(undefined);
 
-              //Resulting in
-              ',,' === x;  //true
-            </code></pre>
+//Resulting in
+',,' === x;  //true</code></pre>
           </ul>
         </section>
       </section>
@@ -795,14 +745,12 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!-- JS++ -->
         <section>
-          <section id="code8">
+          <section id="js">
             <h3>JS++</h3>
-              <pre><code class="language-javascript" data-trim>
-            alert(+[]+ +'0XE'+ +true+ +'1E1');
-            </code></pre>
+<pre><code class="language-javascript" data-trim>alert(+[]+ +'0XE'+ +true+ +'1E1');</code></pre>
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+            <div class="poll" poll="js">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: "14110"</li>
@@ -848,29 +796,24 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!-- To infinity and beyond-->
         <section>
-          <section id="code3">
+          <section id="infinity">
             <h3>To infinity and beyond</h3>
-              <pre><code class="language-javascript" data-trim>
-              var a = 0;
-              var b = 0 * -1;
+<pre><code class="language-javascript" data-trim>var a = 0;
+var b = 0 * -1;
 
-              if(a === b){
-                  if(1/a === 1/b){
-                      alert("Of course! You can't defy the laws of mathematics");
-                  }
-                  else{ alert("Einstein can't even explain this"); }
-              }
-              else{ alert('Well duh, -0 is not the same as 0'); }
-            </code></pre>
+if (a === b) {
+  if (1 / a === 1 / b) { alert("A"); }
+  else { alert("B"); }
+}
+else { alert("D"); }</code></pre>
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+            <div class="poll" poll="infinity">
+              <h4>Which is true?</h4>
               <ul class="poll">
-                <li option="A">alerts: <strong>Of course! You can't defy the laws of
-                  mathematics</strong></li>
-                <li option="B">alerts: <strong>Well duh, -0 is not the same as 0</strong></li>
+                <li option="A">alerts: A</li>
+                <li option="B">alerts: B</li>
                 <li option="C">throws an error because -0 is NaN</li>
-                <li option="D">alerts: <strong>Einstein can't even explain this</strong></li>
+                <li option="D">alerts: D</li>
               </ul>
             </div>
           </section>
@@ -883,22 +826,20 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
               <li>However +infinity does <strong>not</strong> equal -infinity</li>
             </ul>
           </section>
-  
-  
+        </section>
+
           <section>
-            <section id="code11a">
+            <section id="defunction">
               <h3>Defunct-ion, Part A</h3>
-                <pre><code class="language-javascript" data-trim>
-                var user = {
-                  name: 'Mike',
-                  hello: function(thing) {
-                    alert(this + " says hello " + thing);
-                  }
-                }
-                user.hello('World');
-              </code></pre>
-              <div class="poll" poll="loopy-performance">
-                <h4>Which is the slowest?</h4>
+<pre><code class="language-javascript" data-trim>var user = {
+  name: 'Mike',
+  hello: function(thing) {
+    alert(this + " says hello " + thing);
+  }
+}
+user.hello('World');</code></pre>
+              <div class="poll" poll="defunction">
+                <h4>Which is true?</h4>
                 <ul class="poll">
                   <li option="A">alerts: [object Object] says hello World</li>
                   <li option="B">alerts: Mike says hello World</li>
@@ -910,15 +851,13 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
   
             <section class="lessons-learned">
               <h3>Lessons learned: Defunct-ion, Part A</h3>
-                <pre><code class="language-javascript" data-trim>
-                var user = {
-                  name: 'Mike',
-                  hello: function(thing) {
-                    alert(this + " says hello " + thing);
-                  }
-                }
-                user.hello('World');
-              </code></pre>
+<pre><code class="language-javascript" data-trim>var user = {
+  name: 'Mike',
+  hello: function(thing) {
+    alert(this + " says hello " + thing);
+  }
+}
+user.hello('World');</code></pre>
               <ul class='build'>
                 <li><code>name: 'Mike'</code> is a distraction.</li>
                 <li><code>this => user</code></li>
@@ -929,22 +868,20 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
 
         <section>
-          <section id="code11b">
+          <section id="defunctionb">
             <h3>Defunct-ion, Part B</h3>
-              <pre><code class="language-javascript" data-trim>
-            var user = {
-              name: 'Mike',
-              hello: function(thing) {
-                alert(this + " says hello " + thing);
-              }
-            }
-            function pass(fn) {
-              fn('World');
-            }
-            pass(user.hello);
-            </code></pre>
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+<pre><code class="language-javascript" data-trim>var user = {
+  name: 'Mike',
+  hello: function(thing) {
+    alert(this + " says hello " + thing);
+  }
+}
+function pass(fn) {
+  fn('World');
+}
+pass(user.hello);</code></pre>
+            <div class="poll" poll="defunctionb">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: [object Object] says hello World</li>
                 <li option="B">alerts: [object DOMWindow] says hello World</li>
@@ -956,18 +893,16 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
           <section class="lessons-learned">
             <h3>Lessons learned: Defunct-ion, Part B</h3>
-              <pre><code class="language-javascript" data-trim>
-              var user = {
-                name: 'Mike',
-                hello: function(thing) {
-                  return (this + " says hello " + thing);
-                }
-              }
-              function pass(fn) {
-                fn('World');
-              }
-              pass(user.hello);
-            </code></pre>
+<pre><code class="language-javascript" data-trim>var user = {
+  name: 'Mike',
+  hello: function(thing) {
+    return (this + " says hello " + thing);
+  }
+}
+function pass(fn) {
+  fn('World');
+}
+pass(user.hello);</code></pre>
             <ul class='build'>
               <li>JavaScript functions are first class</li>
               <li><code>user.hello('World')</code> told hello its context.</li>
@@ -978,19 +913,17 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
 
         <section>
-          <section id="code11c">
+          <section id="defunctionc">
             <h3>Defunct-ion, Part C</h3>
-              <pre><code class="language-javascript" data-trim>
-              var user = {
-                name: 'Mike',
-                hello: function(thing) {
-                  alert(this + " says hello " + thing);
-                }
-              }
-              user.hello.call('World');
-            </code></pre>
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+<pre><code class="language-javascript" data-trim>var user = {
+  name: 'Mike',
+  hello: function(thing) {
+    alert(this + " says hello " + thing);
+  }
+}
+user.hello.call('World');</code></pre>
+            <div class="poll" poll="defunctionc">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: [object Object] says hello World</li>
                 <li option="B">TypeError: undefined_method</li>
@@ -1002,15 +935,13 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
           <section class="lessons-learned">
             <h3>Lessons learned: Defunct-ion, Part C</h3>
-              <pre><code class="language-javascript" data-trim>
-              var user = {
-                name: 'Mike',
-                hello: function(thing) {
-                  alert(this + " says hello " + thing);
-                }
-              }
-              user.hello.call('World');
-            </code></pre>
+<pre><code class="language-javascript" data-trim>var user = {
+  name: 'Mike',
+  hello: function(thing) {
+    alert(this + " says hello " + thing);
+  }
+}
+user.hello.call('World');</code></pre>
             <ul class='build'>
               <li><code>call</code> passes context in the first parameter.</li>
               <li><code>user.hello.call(user, 'World') == user.hello('World')</code></li>
@@ -1022,38 +953,34 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!--Guilt by Association-->
         <section>
+          <section id="guilty">
           <h3>Guilty by Association</h3>
-          <section>
 
-            <pre><code class="language-javascript" data-trim>
-            function Playlist(name) {
-                this.name = name;
-                this.songs = [];
-                this.addSong = function(id, song) {
-                    this.songs[id] = song;
-                }
-                this.showPlaylist = function() {
-                    alert(this.songs.join(','));
-                }
-            }
-          </code></pre>
+<pre><code class="language-javascript" data-trim>function Playlist(name) {
+    this.name = name;
+    this.songs = [];
+    this.addSong = function(id, song) {
+        this.songs[id] = song;
+    }
+    this.showPlaylist = function() {
+        alert(this.songs.join(','));
+    }
+}</code></pre>
           </section>
 
           <section>
             <h3>Guilty by Association</h3>
 
-              <pre><code class="language-javascript" data-trim>
-              var plist = new Playlist("90s");
+<pre><code class="language-javascript" data-trim>var plist = new Playlist("90s");
 
-              plist.addSong('311', 'Beautiful Disaster');
-              plist.addSong('join', 'Scratch');
-              plist.addSong('U2', 'Numb');
+plist.addSong('311', 'Beautiful Disaster');
+plist.addSong('join', 'Scratch');
+plist.addSong('U2', 'Numb');
 
-              plist.showPlaylist();
-            </code></pre>
+plist.showPlaylist();</code></pre>
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+            <div class="poll" poll="guilty">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">Throws a TypeError</li>
                 <li option="B">alerts: <strong>Beautiful Disaster, Scratch, Numb</strong></li>
@@ -1070,9 +997,7 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
               <li>The problem is <code>songs</code> is an associative array</li>
               <li>When we used 'join' as one of the keys, we effectively modified the built-in join method of Array</li>
               <li>Don't use arrays in these situations, instead use an object:</li>
-                <pre><code class="language-javascript" data-trim>
-                this.songs = {};
-              </code></pre>
+<pre><code class="language-javascript" data-trim>this.songs = {};</code></pre>
             </ul>
           </section>
         </section>
@@ -1082,13 +1007,11 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!--Inside the box-->
         <section>
-          <section id="code9">
+          <section id="inside_the_box">
             <h3>Thinking Inside the Box</h3>
-              <pre><code class="language-javascript" data-trim>
-              alert(++[[]][+[]]+[+[]]);
-            </code></pre>
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+<pre><code class="language-javascript" data-trim>alert(++[[]][+[]]+[+[]]);</code></pre>
+            <div class="poll" poll="inside_the_box">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: "10"</li>
@@ -1100,9 +1023,7 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
           <section class="lessons-learned">
             <h3>Lessons learned: Thinking Inside the Box</h3>
-              <pre><code class="language-javascript" data-trim>
-              alert(++[[]][+[]]+[+[]]);
-            </code></pre>
+<pre><code class="language-javascript" data-trim>alert(++[[]][+[]]+[+[]]);</code></pre>
             <ul class='build'>
               <li>Unary + operator</li>
               <li><code>ToValue()</code> converts empty array to empty string</li>
@@ -1113,9 +1034,7 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
           <section class="lessons-learned">
             <h3>Lessons learned: Thinking Inside the Box (cont.)</h3>
-              <pre><code class="language-javascript" data-trim>
-              alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);
-            </code></pre>
+<pre><code class="language-javascript" data-trim>alert(++[[]][+[]]+[+[]]); => alert(++[[]][0]+[0]);</code></pre>
             <ul class='build'>
               <li><code>ToValue()</code> converts empty array to empty string</li>
               <li><code>++[[]][0]+[0] => ++[""][0]+[0]</code></li>
@@ -1129,26 +1048,24 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!--Never judge a book by it's cover-->
         <section>
-          <section id="abc">
+          <section id="book">
             <h3>Never Judge a Book by it's Cover</h3>
 
-              <pre><code class="language-javascript" data-trim>
-              function Book(title){
-                  this.title = title;
-                  return { title: 'JavaScript: The Good Parts'};
-              }
-              function ZipCode(zip){
-                  this.zip = zip;
-                  return 84043;
-              }
-              var book = new Book('Twilight'), zip = new ZipCode(07849);
+<pre><code class="language-javascript" data-trim>function Book(title){
+    this.title = title;
+    return { title: 'JavaScript: The Good Parts'};
+}
+function ZipCode(zip){
+    this.zip = zip;
+    return 84043;
+}
+var book = new Book('Twilight'), zip = new ZipCode(07849);
 
-              if(book instanceof Book){ alert('Book')};
-              if(zip instanceof ZipCode){ alert('ZipCode')};
-            </code></pre>
+if(book instanceof Book){ alert('Book')};
+if(zip instanceof ZipCode){ alert('ZipCode')};</code></pre>
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+            <div class="poll" poll="book">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: <strong>Book</strong> and <strong>ZipCode</strong></li>
                 <li option="B">alerts: <strong>Book</strong></li>
@@ -1173,20 +1090,19 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
             <ul class='build'>
               <li>This is often used to implement private and public members:</li>
-            <pre><code class="language-javascript" data-trim>
-            function Foo() {
-                var privateVar = 'World';
+<pre><code class="language-javascript" data-trim>function Foo() {
+    var privateVar = 'World';
 
-                function privateMethod() {}
+    function privateMethod() {}
 
-                return {
-                    publicVar : 'Hello',
+    return {
+        publicVar : 'Hello',
 
-                    getString : function() {
-                        return publicVar + ' ' + privateVar;
-                    }
-                };
-            }</code></pre>
+        getString : function() {
+            return publicVar + ' ' + privateVar;
+        }
+    };
+}</code></pre>
               <li>However, you can not use <strong>instanceof</strong> to check if its of type Foo</li>
             </ul>
           </section>
@@ -1195,23 +1111,21 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
 
         <!--Double Agent-->
         <section class="lessons-learned">
-          <h3>Double Agent</h3>
-          <section id="code1">
-              <pre><code class="language-javascript" data-trim>
-              if("1" == 1) {
-                  if("" == 0) {
-                      if("" == "0") {
-                          alert("A");
-                      }
-                      else { alert("B"); }
-                  }
-                  else { alert("C"); }
-              }
-              else { alert("D"); }
-            </code></pre>
+          <section id="double">
+            <h3>Double Agent</h3>
+<pre><code class="language-javascript" data-trim>if("1" == 1) {
+    if("" == 0) {
+        if("" == "0") {
+            alert("A");
+        }
+        else { alert("B"); }
+    }
+    else { alert("C"); }
+}
+else { alert("D"); }</code></pre>
 
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+            <div class="poll" poll="double">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: <strong>A</strong></li>
                 <li option="B">alerts: <strong>B</strong></li>
@@ -1242,33 +1156,29 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
                 triple
                 equals operator (===) to do the comparisons.
               </li>
-                <pre><code class="language-javascript" data-trim>
-                "1" === 1 // false
-                Number("5") === 5  // true
-              </code></pre>
+<pre><code class="language-javascript" data-trim>"1" === 1 // false
+Number("5") === 5  // true</code></pre>
             </ul>
           </section>
         </section>
 
         <!--Getting Closure-->
         <section>
-          <section id="code12">
+          <section id="closure">
             <h3>Getting Closure</h3>
-              <pre><code class="language-javascript" data-trim>
-              var fn = null, x = 'globalX', y = 'globalY';
-              function outer() {
-                this.x = 'funcX';
-                var y = 'funcY';
-                function inner() {
-                  alert(x + ":" + y);
-                }
-                fn = inner;
-              }
-              new outer();
-              fn();
-            </code></pre>
-            <div class="poll" poll="loopy-performance">
-              <h4>Which is the slowest?</h4>
+<pre><code class="language-javascript" data-trim>var fn = null, x = 'globalX', y = 'globalY';
+function outer() {
+  this.x = 'funcX';
+  var y = 'funcY';
+  function inner() {
+    alert(x + ":" + y);
+  }
+  fn = inner;
+}
+new outer();
+fn();</code></pre>
+            <div class="poll" poll="closure">
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: globalX:globalY</li>
                 <li option="B">alerts: globalX:funcY</li>
@@ -1277,30 +1187,27 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
               </ul>
             </div>
           </section>
-        </section>
 
-        <section class="lessons-learned">
-          <h3>Lessons learned: Getting Closure</h3>
-            <pre><code class="language-javascript" data-trim>
-            var fn = null, x = 'globalX', y = 'globalY';
-            function outer() {
-              this.x = 'funcX';
-              var y = 'funcY';
-              function inner() {
-                alert(x + ":" + y);
-              }
-              fn = inner;
-            }
-            outer();
-            fn();
-          </code></pre>
-          <ul class='build'>
-            <li>Scope of <code>fn() => inner()</code> is DOMWindow</li>
-            <li>There is no way to reach this.x from fn()</li>
-            <li><code>var instance = this; ... instance.x</code></li>
-          </ul>
+          <section class="lessons-learned">
+            <h3>Lessons learned: Getting Closure</h3>
+<pre><code class="language-javascript" data-trim>var fn = null, x = 'globalX', y = 'globalY';
+function outer() {
+  this.x = 'funcX';
+  var y = 'funcY';
+  function inner() {
+    alert(x + ":" + y);
+  }
+  fn = inner;
+}
+outer();
+fn();</code></pre>
+            <ul class='build'>
+              <li>Scope of <code>fn() => inner()</code> is DOMWindow</li>
+              <li>There is no way to reach this.x from fn()</li>
+              <li><code>var instance = this; ... instance.x</code></li>
+            </ul>
+          </section>
         </section>
-      </section>
 
       </div>
     </div>
@@ -1319,15 +1226,7 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
         history: true,
         center: true,
 
-        width: 960,
-        height: 700,
-
-        // Factor of the display size that should remain empty around the content
-        margin: 0.1,
-
-        // Bounds for smallest/largest possible scale to apply to content
-        minScale: 0.2,
-        maxScale: 1.0,
+        height: 1000,
 
 //        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         theme: 'custom',
@@ -1336,8 +1235,8 @@ for (var i = 0, len = a.len; i < len; i++) { ... };
         // Parallax scrolling
         // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
         // parallaxBackgroundSize: '2100px 900px',
-                parallaxBackgroundImage: 'img/saturn.jpg',
-                parallaxBackgroundSize: '3000px 1300px',
+                parallaxBackgroundImage: 'img/two.jpg',
+                parallaxBackgroundSize: '7827px 1532px',
 
         // Optional libraries used to extend on reveal.js
         dependencies: [
