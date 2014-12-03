@@ -157,11 +157,11 @@ alert((x + y) * z);</code></pre>
           <section>
             <h3>Not my type</h3>
 <pre><code class="language-javascript" data-trim>alert([
-    typeof(NaN),
-    typeof(Number(123)),
-    typeof(null),
-    typeof([1,2,3])
-  ].join());</code></pre>
+  typeof(NaN),
+  typeof(Number(123)),
+  typeof(null),
+  typeof([1,2,3])
+].join());</code></pre>
             <div class="poll" poll="not_my_type">
               <h4>What will this alert?</h4>
               <ul>
@@ -742,7 +742,9 @@ alert(d.toString());</code></pre>
 [undefined, undefined, undefined].join();
 
 //Which looks like this
-"" + String(undefined) + "," + String(undefined) + "," + String(undefined);
+"" + String(undefined) +
+  "," + String(undefined) +
+  "," + String(undefined);
 
 //Resulting in
 ',,' === x;  //true</code></pre>
@@ -822,9 +824,9 @@ else { alert("D"); }</code></pre>
               <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: A</li>
-                <li option="B">alerts: B</li>
+                <li option="B" class="answer">alerts: B</li>
                 <li option="C">throws an error because -0 is NaN</li>
-                <li option="D" class="answer">alerts: D</li>
+                <li option="D">alerts: D</li>
               </ul>
             </div>
           </section>
@@ -895,7 +897,7 @@ pass(user.hello);</code></pre>
               <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: [object Object] says hello World</li>
-                <li option="B" class="answer">alerts: [object DOMWindow] says hello World</li>
+                <li option="B" class="answer">alerts: [object Window] says hello World</li>
                 <li option="C">alerts: undefined says hello World</li>
                 <li option="D">alerts: World says hello undefined</li>
               </ul>
@@ -915,9 +917,14 @@ function pass(fn) {
 }
 pass(user.hello);</code></pre>
             <ul class='build'>
-              <li>JavaScript functions are first class</li>
-              <li><code>user.hello('World')</code> told hello its context.</li>
-              <li><code>pass(user.hello) => fn('World')</code> the context is <code>DOMWindow</code>.</li>
+              <li>Calling hello with user context:
+                <ul>
+                  <li><code>user.hello('World')</code></li>
+                  <li><code>hello.call(user, 'World')</code></li>
+                </ul>
+              </li>
+              <li>But passing a function will lose context</li>
+              <li>So use <code>hello.bind(user)</code></li>
             </ul>
           </section>
         </section>
@@ -956,8 +963,7 @@ user.hello.call('World');</code></pre>
             <ul class='build'>
               <li><code>call</code> passes context in the first parameter.</li>
               <li><code>user.hello.call(user, 'World') == user.hello('World')</code></li>
-              <li><code>user.hello.call(user.name, 'World') =></code></li>
-              <li>Mike says hello World</li>
+              <li><code>user.hello.call(user.name, 'World') =></code> "Mike says hello World"</li>
             </ul>
           </section>
         </section>
@@ -1069,8 +1075,12 @@ plist.showPlaylist();</code></pre>
 function ZipCode(zip){
     this.zip = zip;
     return 84043;
-}
-var book = new Book('Twilight'), zip = new ZipCode(07849);
+}</code></pre>
+            </section>
+
+            <section>
+<pre><code class="language-javascript" data-trim>var book = new Book('Twilight');
+var zip = new ZipCode(07849);
 
 if(book instanceof Book){ alert('Book')};
 if(zip instanceof ZipCode){ alert('ZipCode')};</code></pre>
@@ -1103,12 +1113,10 @@ if(zip instanceof ZipCode){ alert('ZipCode')};</code></pre>
               <li>This is often used to implement private and public members:</li>
 <pre><code class="language-javascript" data-trim>function Foo() {
     var privateVar = 'World';
-
     function privateMethod() {}
 
     return {
         publicVar : 'Hello',
-
         getString : function() {
             return publicVar + ' ' + privateVar;
         }
@@ -1126,14 +1134,12 @@ if(zip instanceof ZipCode){ alert('ZipCode')};</code></pre>
             <h3>Double Agent</h3>
 <pre><code class="language-javascript" data-trim>if("1" == 1) {
     if("" == 0) {
-        if("" == "0") {
-            alert("A");
-        }
-        else { alert("B"); }
+        if("" == "0") alert("A");
+        else alert("B");
     }
-    else { alert("C"); }
+    else alert("C");
 }
-else { alert("D"); }</code></pre>
+else alert("D");</code></pre>
 
             <div class="poll" poll="double">
               <h4>Which is true?</h4>
@@ -1177,17 +1183,15 @@ Number("5") === 5  // true</code></pre>
         <section>
           <section id="closure">
             <h3>Getting Closure</h3>
-<pre><code class="language-javascript" data-trim>var fn = null, x = 'globalX', y = 'globalY';
+<pre><code class="language-javascript" data-trim>var x = 'globalX', y = 'globalY';
 function outer() {
   this.x = 'funcX';
   var y = 'funcY';
-  function inner() {
+  this.inner = function() {
     alert(x + ":" + y);
   }
-  fn = inner;
 }
-new outer();
-fn();</code></pre>
+new outer().inner();</code></pre>
             <div class="poll" poll="closure">
               <h4>Which is true?</h4>
               <ul class="poll">
@@ -1201,21 +1205,19 @@ fn();</code></pre>
 
           <section class="lessons-learned">
             <h3>Lessons learned: Getting Closure</h3>
-<pre><code class="language-javascript" data-trim>var fn = null, x = 'globalX', y = 'globalY';
+<pre><code class="language-javascript" data-trim>var x = 'globalX', y = 'globalY';
 function outer() {
   this.x = 'funcX';
   var y = 'funcY';
-  function inner() {
+  this.inner = function() {
     alert(x + ":" + y);
   }
-  fn = inner;
 }
-outer();
-fn();</code></pre>
+new outer().inner();</code></pre>
             <ul class='build'>
-              <li>Scope of <code>fn() => inner()</code> is DOMWindow</li>
-              <li>There is no way to reach this.x from fn()</li>
-              <li><code>var instance = this; ... instance.x</code></li>
+              <li><code>this.x</code> can be explicitly called from inner</li>
+              <li>this is not explicitly used</li>
+              <li><code>this.x</code> cannot be used without context</li>
             </ul>
           </section>
         </section>
