@@ -584,7 +584,7 @@ var y = 3;
 }());</code></pre>
 
             <div class="poll" poll="malpractice">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: <strong>NaN</strong></li>
                 <li option="B">alerts: 5</li>
@@ -627,7 +627,7 @@ var y = 3;
 alert(fn.length + new fn(3, 4).length);</code></pre>
 
             <div class="poll" poll="loopy-great_lengths">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: 6</li>
@@ -668,7 +668,7 @@ alert(background().color);</code></pre>
 
 
           <div class="poll" poll="semi_colonoscopy">
-            <h4>Which is the slowest?</h4>
+            <h4>Which is true?</h4>
             <ul class="poll">
               <li option="A">alerts: <strong>blue</strong></li>
               <li option="B">alerts: <strong>undefined</strong></li>
@@ -709,7 +709,7 @@ var d = a.concat(b, c);
 alert(d.toString());</code></pre>
 
           <div class="poll" poll="join_with_me">
-            <h4>Which is the slowest?</h4>
+            <h4>Which is true?</h4>
             <ul class="poll">
               <li option="A">alerts: <strong>1,2,3</strong></li>
               <li option="B">alerts: <strong>1,2,3,4,5</strong></li>
@@ -750,7 +750,7 @@ alert(d.toString());</code></pre>
 <pre><code class="language-javascript" data-trim>alert(+[]+ +'0XE'+ +true+ +'1E1');</code></pre>
 
             <div class="poll" poll="js">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: "14110"</li>
@@ -801,22 +801,19 @@ alert(d.toString());</code></pre>
 <pre><code class="language-javascript" data-trim>var a = 0;
 var b = 0 * -1;
 
-if(a === b){
-  if(1/a === 1/b){
-      alert("Of course! You can't defy the laws of mathematics");
-  }
-  else{ alert("Einstein can't even explain this"); }
+if (a === b) {
+  if (1 / a === 1 / b) { alert("A"); }
+  else { alert("B"); }
 }
-else{ alert('Well duh, -0 is not the same as 0'); }</code></pre>
+else { alert("D"); }</code></pre>
 
             <div class="poll" poll="infinity">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
-                <li option="A">alerts: <strong>Of course! You can't defy the laws of
-                  mathematics</strong></li>
-                <li option="B">alerts: <strong>Well duh, -0 is not the same as 0</strong></li>
+                <li option="A">alerts: A</li>
+                <li option="B">alerts: B</li>
                 <li option="C">throws an error because -0 is NaN</li>
-                <li option="D">alerts: <strong>Einstein can't even explain this</strong></li>
+                <li option="D">alerts: D</li>
               </ul>
             </div>
           </section>
@@ -842,7 +839,7 @@ else{ alert('Well duh, -0 is not the same as 0'); }</code></pre>
 }
 user.hello('World');</code></pre>
               <div class="poll" poll="defunction">
-                <h4>Which is the slowest?</h4>
+                <h4>Which is true?</h4>
                 <ul class="poll">
                   <li option="A">alerts: [object Object] says hello World</li>
                   <li option="B">alerts: Mike says hello World</li>
@@ -884,7 +881,7 @@ function pass(fn) {
 }
 pass(user.hello);</code></pre>
             <div class="poll" poll="defunctionb">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: [object Object] says hello World</li>
                 <li option="B">alerts: [object DOMWindow] says hello World</li>
@@ -926,7 +923,7 @@ pass(user.hello);</code></pre>
 }
 user.hello.call('World');</code></pre>
             <div class="poll" poll="defunctionc">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: [object Object] says hello World</li>
                 <li option="B">TypeError: undefined_method</li>
@@ -983,7 +980,7 @@ plist.addSong('U2', 'Numb');
 plist.showPlaylist();</code></pre>
 
             <div class="poll" poll="guilty">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">Throws a TypeError</li>
                 <li option="B">alerts: <strong>Beautiful Disaster, Scratch, Numb</strong></li>
@@ -1014,7 +1011,7 @@ plist.showPlaylist();</code></pre>
             <h3>Thinking Inside the Box</h3>
 <pre><code class="language-javascript" data-trim>alert(++[[]][+[]]+[+[]]);</code></pre>
             <div class="poll" poll="inside_the_box">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: NaN</li>
                 <li option="B">alerts: "10"</li>
@@ -1068,7 +1065,7 @@ if(book instanceof Book){ alert('Book')};
 if(zip instanceof ZipCode){ alert('ZipCode')};</code></pre>
 
             <div class="poll" poll="book">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: <strong>Book</strong> and <strong>ZipCode</strong></li>
                 <li option="B">alerts: <strong>Book</strong></li>
@@ -1128,7 +1125,7 @@ if(zip instanceof ZipCode){ alert('ZipCode')};</code></pre>
 else { alert("D"); }</code></pre>
 
             <div class="poll" poll="double">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: <strong>A</strong></li>
                 <li option="B">alerts: <strong>B</strong></li>
@@ -1181,7 +1178,7 @@ function outer() {
 new outer();
 fn();</code></pre>
             <div class="poll" poll="closure">
-              <h4>Which is the slowest?</h4>
+              <h4>Which is true?</h4>
               <ul class="poll">
                 <li option="A">alerts: globalX:globalY</li>
                 <li option="B">alerts: globalX:funcY</li>
